@@ -14,22 +14,22 @@ extension MessageToChatMessage on openapi.Message {
     final metadata = {
       'reactions': reactions.toReactionsMapWithCount(),
     };
-
-    if (images != null && images!.isNotEmpty) {
-      final firstImage = images?.first;
-      if (firstImage?.image != null) {
-        return types.ImageMessage(
-            id: id!,
-            metadata: metadata,
-            uri: firstImage!.image,
-            name: firstImage.name ?? '',
-            size: firstImage.size ?? 0,
-            height: firstImage.height?.toDouble(),
-            width: firstImage.width?.toDouble(),
-            createdAt: created?.millisecondsSinceEpoch,
-            author: author?.toChatUser() ?? kAnonymousChatUser);
-      }
-    }
+    // TODO enable image message
+    // if (images != null && images!.isNotEmpty) {
+    //   final firstImage = images?.first;
+    //   if (firstImage?.image != null) {
+    //     return types.ImageMessage(
+    //         id: id!,
+    //         metadata: metadata,
+    //         uri: firstImage!.image,
+    //         name: firstImage.name ?? '',
+    //         size: firstImage.size ?? 0,
+    //         height: firstImage.height?.toDouble(),
+    //         width: firstImage.width?.toDouble(),
+    //         createdAt: created?.millisecondsSinceEpoch,
+    //         author: author?.toChatUser() ?? kAnonymousChatUser);
+    //   }
+    // }
     return types.TextMessage(
       id: id!,
       text: body ?? '',
