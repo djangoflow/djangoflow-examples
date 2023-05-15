@@ -16,7 +16,10 @@ dependencies:
   openapi:
     path: ../openapi
   djangoflow_chat:
-    path: /Users/saifulislam/Development/apexlabs/djangoflow/flutter-djangoflow/packages/djangoflow_chat
+    git:
+      url: https://github.com/djangoflow/flutter-djangoflow.git
+      ref: implement/djangoflow_chat
+      path: packages/djangoflow_chat
   auto_route: ^5.0.4
   bloc: ^8.1.0
   cached_network_image: ^3.2.3
