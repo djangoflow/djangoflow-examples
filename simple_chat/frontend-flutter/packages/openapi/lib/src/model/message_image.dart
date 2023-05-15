@@ -31,6 +31,8 @@ class MessageImage {
      this.width,
 
      this.name,
+
+     this.size,
   });
 
   @JsonKey(
@@ -117,6 +119,18 @@ class MessageImage {
 
 
 
+  @JsonKey(
+    
+    name: r'size',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final int? size;
+
+
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is MessageImage &&
      other.id == id &&
@@ -125,7 +139,8 @@ class MessageImage {
      other.image == image &&
      other.height == height &&
      other.width == width &&
-     other.name == name;
+     other.name == name &&
+     other.size == size;
 
   @override
   int get hashCode =>
@@ -135,7 +150,8 @@ class MessageImage {
     image.hashCode +
     height.hashCode +
     width.hashCode +
-    name.hashCode;
+    name.hashCode +
+    (size == null ? 0 : size.hashCode);
 
   factory MessageImage.fromJson(Map<String, dynamic> json) => _$MessageImageFromJson(json);
 
