@@ -1,0 +1,22 @@
+version: '3'
+
+volumes:
+  local_postgres_data: {}
+  local_postgres_data_backups: {}
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: df-chat
+      POSTGRES_PASSWORD: postgres
+
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data:Z
+      - local_postgres_data_backups:/backups:z
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis
+    ports:
+      - '6379:6379'

@@ -1,0 +1,85 @@
+<!-- chat/templates/chat/room.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+</head>
+<body>
+    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+    <input id="chat-message-input" type="text" size="100"><br>
+    <input id="chat-message-submit" type="button" value="Send">
+    <input id="chat-reaction-submit" type="button" value="Like">
+    {{ room_name|json_script:"room-name" }}
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+        const csrftoken = '{{ csrf_token }}';
+        const chatSocket = new WebSocket(
+            (location.protocol === 'http:' ? 'ws://' : 'wss://')
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+            + location.search
+        );
+
+
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (JSON.stringify(data) + '\n');
+        };
+
+        chatSocket.onclose = function(e) {
+            console.log(e)
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+
+            fetch(`/api/v1/chat/rooms/${roomName}/messages/`, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({body: message})
+            })
+
+            messageInputDom.value = '';
+        };
+
+        document.querySelector('#chat-reaction-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+
+            fetch(`/api/v1/chat/rooms/${roomName}/messages/`, {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+                'Authorization': `Bearer ${token}`
+              },
+              body: JSON.stringify({body: '+', parent_id: message, is_reaction: true})
+            })
+
+            messageInputDom.value = '';
+        };
+    </script>
+</body>
+</html>

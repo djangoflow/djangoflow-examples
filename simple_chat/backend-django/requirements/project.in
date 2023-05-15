@@ -1,0 +1,14 @@
+-r base.in
+
+django-hashid-field
+django-simple-history
+django-countries
+django-fsm
+pandas
+drf-nested-routers
+djangorestframework-recursive
+
+# Remove when this will be merged
+# https://github.com/django-otp/django-otp/pull/112
+git+https://github.com/djangoflow/django-otp.git@master
+git+https://github.com/djangoflow/django-df-chat@main

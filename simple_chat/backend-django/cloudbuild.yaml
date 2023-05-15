@@ -1,0 +1,11 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: [ '-c', 'docker pull gcr.io/$PROJECT_ID/django:latest || exit 0' ]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/django:$BRANCH_NAME', '--build-arg',
+            'BRANCH_NAME=$BRANCH_NAME', '--build-arg', 'PROJECT_ID=$PROJECT_ID', '-f', 'Dockerfile',
+            '--cache-from', 'gcr.io/$PROJECT_ID/django:latest', '.' ]
+images:
+  - 'gcr.io/$PROJECT_ID/django:$BRANCH_NAME'

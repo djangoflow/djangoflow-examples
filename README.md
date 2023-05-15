@@ -6,4 +6,4 @@ A  collection of samle djangoflow projects showcasing the framework
 /simple_chat - A simple chat app with djangoflow backend
 - frontend-flutter - Flutter frontend
 - backend-dango - Django backend
-- 
+-

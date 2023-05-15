@@ -1,0 +1,8 @@
+{% extends 'emails/button_email.html' %}
+{% load auth_magic_link %}
+
+{% block title %}Hello!{% endblock %}
+{% block description %}It looks like you requested to log into djangoflow-df-chat. Click the button below to log in. <br><br>
+  Alternatively you can use this single-time login code <b>{{ token }}</b>  {% endblock %}
+{% block button_link %}{% auth_magic_link %}{% endblock %}
+{% block button_text %}Sign in{% endblock %}
