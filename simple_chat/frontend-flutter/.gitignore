@@ -153,3 +153,4 @@ packages/openapi/.dart_tool/package_config.json
 **/*.g.dart
 **/*.freezed.dart
 **/*.gr.dart
+pubspec_overrides.yaml
