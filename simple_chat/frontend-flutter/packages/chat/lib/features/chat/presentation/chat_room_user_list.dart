@@ -54,7 +54,7 @@ class ChatRoomsUserList extends StatelessWidget {
               child: UserAvatar(
                 imageLink: null,
                 placeHolder: PlaceholderText(
-                  text: item.displayName?.toInitialString() ?? '',
+                  text: item.firstName?.toInitialString() ?? '',
                 ),
               ),
             ),
@@ -62,7 +62,7 @@ class ChatRoomsUserList extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    item.displayName ?? '- private -',
+                    item.firstName ?? '- private -',
                     maxLines: 1,
                   ),
                 ),
