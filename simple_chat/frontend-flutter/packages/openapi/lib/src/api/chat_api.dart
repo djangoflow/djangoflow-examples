@@ -108,10 +108,11 @@ class ChatApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    MessageImage _responseData;
+    MessageImage? _responseData;
 
     try {
-_responseData = deserialize<MessageImage, MessageImage>(_response.data!, 'MessageImage', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<MessageImage, MessageImage>(rawData, 'MessageImage', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -189,10 +190,11 @@ _responseData = deserialize<MessageImage, MessageImage>(_response.data!, 'Messag
       onReceiveProgress: onReceiveProgress,
     );
 
-    Object _responseData;
+    Object? _responseData;
 
     try {
-_responseData = deserialize<Object, Object>(_response.data!, 'Object', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Object, Object>(rawData, 'Object', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -278,10 +280,11 @@ _responseData = deserialize<Object, Object>(_response.data!, 'Object', growable:
       onReceiveProgress: onReceiveProgress,
     );
 
-    PaginatedMessageImageList _responseData;
+    PaginatedMessageImageList? _responseData;
 
     try {
-_responseData = deserialize<PaginatedMessageImageList, PaginatedMessageImageList>(_response.data!, 'PaginatedMessageImageList', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<PaginatedMessageImageList, PaginatedMessageImageList>(rawData, 'PaginatedMessageImageList', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -383,10 +386,11 @@ _responseData = deserialize<PaginatedMessageImageList, PaginatedMessageImageList
       onReceiveProgress: onReceiveProgress,
     );
 
-    MessageImage _responseData;
+    MessageImage? _responseData;
 
     try {
-_responseData = deserialize<MessageImage, MessageImage>(_response.data!, 'MessageImage', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<MessageImage, MessageImage>(rawData, 'MessageImage', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -464,10 +468,11 @@ _responseData = deserialize<MessageImage, MessageImage>(_response.data!, 'Messag
       onReceiveProgress: onReceiveProgress,
     );
 
-    MessageImage _responseData;
+    MessageImage? _responseData;
 
     try {
-_responseData = deserialize<MessageImage, MessageImage>(_response.data!, 'MessageImage', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<MessageImage, MessageImage>(rawData, 'MessageImage', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -569,10 +574,11 @@ _responseData = deserialize<MessageImage, MessageImage>(_response.data!, 'Messag
       onReceiveProgress: onReceiveProgress,
     );
 
-    MessageImage _responseData;
+    MessageImage? _responseData;
 
     try {
-_responseData = deserialize<MessageImage, MessageImage>(_response.data!, 'MessageImage', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<MessageImage, MessageImage>(rawData, 'MessageImage', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -668,10 +674,11 @@ _bodyData=jsonEncode(roomRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Room _responseData;
+    Room? _responseData;
 
     try {
-_responseData = deserialize<Room, Room>(_response.data!, 'Room', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Room, Room>(rawData, 'Room', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -749,10 +756,11 @@ _responseData = deserialize<Room, Room>(_response.data!, 'Room', growable: true)
       onReceiveProgress: onReceiveProgress,
     );
 
-    Object _responseData;
+    Object? _responseData;
 
     try {
-_responseData = deserialize<Object, Object>(_response.data!, 'Object', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Object, Object>(rawData, 'Object', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -838,10 +846,11 @@ _responseData = deserialize<Object, Object>(_response.data!, 'Object', growable:
       onReceiveProgress: onReceiveProgress,
     );
 
-    PaginatedRoomList _responseData;
+    PaginatedRoomList? _responseData;
 
     try {
-_responseData = deserialize<PaginatedRoomList, PaginatedRoomList>(_response.data!, 'PaginatedRoomList', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<PaginatedRoomList, PaginatedRoomList>(rawData, 'PaginatedRoomList', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -939,10 +948,11 @@ _bodyData=jsonEncode(messageRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Message _responseData;
+    Message? _responseData;
 
     try {
-_responseData = deserialize<Message, Message>(_response.data!, 'Message', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Message, Message>(rawData, 'Message', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1090,10 +1100,11 @@ _responseData = deserialize<Message, Message>(_response.data!, 'Message', growab
       onReceiveProgress: onReceiveProgress,
     );
 
-    PaginatedMessageList _responseData;
+    PaginatedMessageList? _responseData;
 
     try {
-_responseData = deserialize<PaginatedMessageList, PaginatedMessageList>(_response.data!, 'PaginatedMessageList', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<PaginatedMessageList, PaginatedMessageList>(rawData, 'PaginatedMessageList', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1193,10 +1204,11 @@ _bodyData=jsonEncode(patchedMessageRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Message _responseData;
+    Message? _responseData;
 
     try {
-_responseData = deserialize<Message, Message>(_response.data!, 'Message', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Message, Message>(rawData, 'Message', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1276,10 +1288,11 @@ _responseData = deserialize<Message, Message>(_response.data!, 'Message', growab
       onReceiveProgress: onReceiveProgress,
     );
 
-    Message _responseData;
+    Message? _responseData;
 
     try {
-_responseData = deserialize<Message, Message>(_response.data!, 'Message', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Message, Message>(rawData, 'Message', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1377,10 +1390,11 @@ _bodyData=jsonEncode(messageSeenRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    MessageSeen _responseData;
+    MessageSeen? _responseData;
 
     try {
-_responseData = deserialize<MessageSeen, MessageSeen>(_response.data!, 'MessageSeen', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<MessageSeen, MessageSeen>(rawData, 'MessageSeen', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1480,10 +1494,11 @@ _bodyData=jsonEncode(messageRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Message _responseData;
+    Message? _responseData;
 
     try {
-_responseData = deserialize<Message, Message>(_response.data!, 'Message', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Message, Message>(rawData, 'Message', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1639,10 +1654,11 @@ _bodyData=jsonEncode(patchedRoomRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Room _responseData;
+    Room? _responseData;
 
     try {
-_responseData = deserialize<Room, Room>(_response.data!, 'Room', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Room, Room>(rawData, 'Room', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1720,10 +1736,11 @@ _responseData = deserialize<Room, Room>(_response.data!, 'Room', growable: true)
       onReceiveProgress: onReceiveProgress,
     );
 
-    Room _responseData;
+    Room? _responseData;
 
     try {
-_responseData = deserialize<Room, Room>(_response.data!, 'Room', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Room, Room>(rawData, 'Room', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1879,10 +1896,11 @@ _bodyData=jsonEncode(roomRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Room _responseData;
+    Room? _responseData;
 
     try {
-_responseData = deserialize<Room, Room>(_response.data!, 'Room', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Room, Room>(rawData, 'Room', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1960,10 +1978,11 @@ _responseData = deserialize<Room, Room>(_response.data!, 'Room', growable: true)
       onReceiveProgress: onReceiveProgress,
     );
 
-    RoomUser _responseData;
+    RoomUser? _responseData;
 
     try {
-_responseData = deserialize<RoomUser, RoomUser>(_response.data!, 'RoomUser', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<RoomUser, RoomUser>(rawData, 'RoomUser', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -2043,10 +2062,11 @@ _responseData = deserialize<RoomUser, RoomUser>(_response.data!, 'RoomUser', gro
       onReceiveProgress: onReceiveProgress,
     );
 
-    Object _responseData;
+    Object? _responseData;
 
     try {
-_responseData = deserialize<Object, Object>(_response.data!, 'Object', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Object, Object>(rawData, 'Object', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -2124,10 +2144,11 @@ _responseData = deserialize<Object, Object>(_response.data!, 'Object', growable:
       onReceiveProgress: onReceiveProgress,
     );
 
-    List<RoomUser> _responseData;
+    List<RoomUser>? _responseData;
 
     try {
-_responseData = deserialize<List<RoomUser>, RoomUser>(_response.data!, 'List<RoomUser>', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<List<RoomUser>, RoomUser>(rawData, 'List<RoomUser>', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -2205,10 +2226,11 @@ _responseData = deserialize<List<RoomUser>, RoomUser>(_response.data!, 'List<Roo
       onReceiveProgress: onReceiveProgress,
     );
 
-    List<UserName> _responseData;
+    List<UserName>? _responseData;
 
     try {
-_responseData = deserialize<List<UserName>, UserName>(_response.data!, 'List<UserName>', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<List<UserName>, UserName>(rawData, 'List<UserName>', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -2288,10 +2310,11 @@ _responseData = deserialize<List<UserName>, UserName>(_response.data!, 'List<Use
       onReceiveProgress: onReceiveProgress,
     );
 
-    RoomUser _responseData;
+    RoomUser? _responseData;
 
     try {
-_responseData = deserialize<RoomUser, RoomUser>(_response.data!, 'RoomUser', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<RoomUser, RoomUser>(rawData, 'RoomUser', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -2371,10 +2394,11 @@ _responseData = deserialize<RoomUser, RoomUser>(_response.data!, 'RoomUser', gro
       onReceiveProgress: onReceiveProgress,
     );
 
-    RoomUser _responseData;
+    RoomUser? _responseData;
 
     try {
-_responseData = deserialize<RoomUser, RoomUser>(_response.data!, 'RoomUser', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<RoomUser, RoomUser>(rawData, 'RoomUser', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -2454,10 +2478,11 @@ _responseData = deserialize<RoomUser, RoomUser>(_response.data!, 'RoomUser', gro
       onReceiveProgress: onReceiveProgress,
     );
 
-    RoomUser _responseData;
+    RoomUser? _responseData;
 
     try {
-_responseData = deserialize<RoomUser, RoomUser>(_response.data!, 'RoomUser', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<RoomUser, RoomUser>(rawData, 'RoomUser', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,

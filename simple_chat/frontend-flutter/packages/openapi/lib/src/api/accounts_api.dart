@@ -95,10 +95,11 @@ _bodyData=jsonEncode(patchedUserRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    User _responseData;
+    User? _responseData;
 
     try {
-_responseData = deserialize<User, User>(_response.data!, 'User', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<User, User>(rawData, 'User', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -176,10 +177,11 @@ _responseData = deserialize<User, User>(_response.data!, 'User', growable: true)
       onReceiveProgress: onReceiveProgress,
     );
 
-    User _responseData;
+    User? _responseData;
 
     try {
-_responseData = deserialize<User, User>(_response.data!, 'User', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<User, User>(rawData, 'User', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -277,10 +279,11 @@ _bodyData=jsonEncode(userRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    User _responseData;
+    User? _responseData;
 
     try {
-_responseData = deserialize<User, User>(_response.data!, 'User', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<User, User>(rawData, 'User', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,

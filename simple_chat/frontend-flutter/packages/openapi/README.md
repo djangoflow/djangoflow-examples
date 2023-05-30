@@ -155,13 +155,14 @@ Class | Method | HTTP request | Description
 ## Documentation For Authorization
 
 
-## cookieAuth
+Authentication schemes defined for the API:
+### cookieAuth
 
 - **Type**: API key
 - **API key parameter name**: sessionid
 - **Location**: 
 
-## jwtAuth
+### jwtAuth
 
 - **Type**: HTTP basic authentication
 

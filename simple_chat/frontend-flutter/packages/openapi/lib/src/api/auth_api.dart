@@ -107,10 +107,11 @@ _bodyData=jsonEncode(changeRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Change _responseData;
+    Change? _responseData;
 
     try {
-_responseData = deserialize<Change, Change>(_response.data!, 'Change', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Change, Change>(rawData, 'Change', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -206,10 +207,11 @@ _bodyData=jsonEncode(connectRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Connect _responseData;
+    Connect? _responseData;
 
     try {
-_responseData = deserialize<Connect, Connect>(_response.data!, 'Connect', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Connect, Connect>(rawData, 'Connect', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -305,10 +307,11 @@ _bodyData=jsonEncode(inviteRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Invite _responseData;
+    Invite? _responseData;
 
     try {
-_responseData = deserialize<Invite, Invite>(_response.data!, 'Invite', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Invite, Invite>(rawData, 'Invite', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -480,10 +483,11 @@ _bodyData=jsonEncode(signupRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Signup _responseData;
+    Signup? _responseData;
 
     try {
-_responseData = deserialize<Signup, Signup>(_response.data!, 'Signup', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Signup, Signup>(rawData, 'Signup', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -579,10 +583,11 @@ _bodyData=jsonEncode(socialTokenObtainRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Token _responseData;
+    Token? _responseData;
 
     try {
-_responseData = deserialize<Token, Token>(_response.data!, 'Token', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -678,10 +683,11 @@ _bodyData=jsonEncode(socialTokenObtainRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Token _responseData;
+    Token? _responseData;
 
     try {
-_responseData = deserialize<Token, Token>(_response.data!, 'Token', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -777,10 +783,11 @@ _bodyData=jsonEncode(tokenBlacklistRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Token _responseData;
+    Token? _responseData;
 
     try {
-_responseData = deserialize<Token, Token>(_response.data!, 'Token', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -876,10 +883,11 @@ _bodyData=jsonEncode(tokenObtainRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Token _responseData;
+    Token? _responseData;
 
     try {
-_responseData = deserialize<Token, Token>(_response.data!, 'Token', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -975,10 +983,11 @@ _bodyData=jsonEncode(tokenRefreshSlidingRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Token _responseData;
+    Token? _responseData;
 
     try {
-_responseData = deserialize<Token, Token>(_response.data!, 'Token', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1074,10 +1083,11 @@ _bodyData=jsonEncode(tokenVerifyRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Token _responseData;
+    Token? _responseData;
 
     try {
-_responseData = deserialize<Token, Token>(_response.data!, 'Token', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1173,10 +1183,11 @@ _bodyData=jsonEncode(unlinkRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    Unlink _responseData;
+    Unlink? _responseData;
 
     try {
-_responseData = deserialize<Unlink, Unlink>(_response.data!, 'Unlink', growable: true);
+final rawData = _response.data;
+_responseData = rawData == null ? null : deserialize<Unlink, Unlink>(rawData, 'Unlink', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,

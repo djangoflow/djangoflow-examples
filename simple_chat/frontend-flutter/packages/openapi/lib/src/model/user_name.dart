@@ -20,7 +20,7 @@ class UserName {
 
      this.id,
 
-     this.displayName,
+     this.firstName,
   });
 
   @JsonKey(
@@ -37,25 +37,25 @@ class UserName {
 
   @JsonKey(
     
-    name: r'display_name',
+    name: r'first_name',
     required: false,
     includeIfNull: false
   )
 
 
-  final String? displayName;
+  final String? firstName;
 
 
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is UserName &&
      other.id == id &&
-     other.displayName == displayName;
+     other.firstName == firstName;
 
   @override
   int get hashCode =>
     id.hashCode +
-    displayName.hashCode;
+    firstName.hashCode;
 
   factory UserName.fromJson(Map<String, dynamic> json) => _$UserNameFromJson(json);
 
