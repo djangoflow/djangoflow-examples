@@ -1,5 +1,7 @@
 # simple_chat
 
+simple_chat is a project that includes both a backend and frontend component. It showcases the usage of [https://github.com/djangoflow/django-df-chat](django-df-chat) and [https://pub.dev/packages/djangoflow_chat](djangoflow_chat) libraries to efficiently build a complete chat application.
+
 ## HOW TO RUN
 
 ### backend-django
