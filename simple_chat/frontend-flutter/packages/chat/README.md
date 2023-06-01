@@ -9,8 +9,11 @@ This example uses [flutter_chat_ui](https://pub.dev/packages/flutter_chat_ui) as
 - [x] Install and run local backend server for [django-df-chat](https://github.com/djangoflow/django-df-chat), please follow steps in [README](https://github.com/djangoflow/djangoflow-examples/tree/main/simple_chat/backend-django#readme) to run the example backend for django. **It is very important to [create superusers](https://github.com/djangoflow/djangoflow-examples/tree/main/simple_chat/backend-django#readme) to login via the email, password in this example app.**
 - [x] (**Skip if already generated**) Generate OpenAPI client repository from local server by using the following command `sh ./tools/generate-openapi.sh -l` and this will create a `openapi` package in [openapi package](../openapi/) directory. Add `openapi` package in `pubspec.yaml`, Also make sure you've added `openapi` package in `dependency_overrides:` section to override it. (Note: You must re-generate this everytime schema/endpoint changes from backend/server side)
 - [x] Install melos if you haven't yet by running `dart pub global activate melos`
-- [x] Generate api_repository,freezed, json_serializable, auto_route etc files by running `melos bs` at root directory (you must regenerate this whenever openapi changes).
-- [x] Follow TODO comments for [auth_cubit.dart](packages/chat/lib/features/authentication/blocs/auth_cubit.dart)
+- [x] Generate api_repository,freezed, json_serializable, auto_route etc files by running `melos bs` at root directory of frontend-flutter (you must regenerate this whenever openapi changes).
+
+## RUNNING THE APP
+
+Run `flutter pub get` and after that `flutter pub run` to run the project.
 
 ## Organising
 
@@ -22,10 +25,6 @@ The way this project is organised inside the `packages/chat/lib` folder is as fo
   - `blocs` is responsible for communicating with `data` and `presentation` layer. For specific events triggered from `presentation` layer, `blocs` layer will communicate with `data` layer to update information and perhapse update `state` of the `presentation` layer. The `state` should be immutable.
   - `presentation` is directly related to the UI of the app. It will send event to the `blocs` layer and listen to `state` dispatched from `blocs` layer to modify the UI.
 - `utils` provides handy functionality that may be useful manipulate data and other useful functionalities.
-
-## RUNNING THE APP
-
-Run `flutter pub get` and after that `flutter pub run` to run the project.
 
 ## SETUP
 
