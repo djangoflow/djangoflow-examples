@@ -2,20 +2,17 @@ import 'package:chat/configurations/router/router.dart';
 import 'package:chat/features/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:upgrader/upgrader.dart';
 
 class HomePage extends StatelessWidget with AutoRouteWrapper {
   const HomePage({super.key});
 
   @override
-  Widget wrappedRoute(BuildContext context) => UpgradeAlert(
-        child: BlocProvider<ChatRoomsListBloc>(
-          create: (context) => ChatRoomsListBloc()
-            ..load(
-              const ChatRoomsListFilter(),
-            ),
-          child: this,
-        ),
+  Widget wrappedRoute(BuildContext context) => BlocProvider<ChatRoomsListBloc>(
+        create: (context) => ChatRoomsListBloc()
+          ..load(
+            const ChatRoomsListFilter(),
+          ),
+        child: this,
       );
 
   @override

@@ -13,11 +13,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  djangoflow_chat:
-    git:
-      url: https://github.com/djangoflow/flutter-djangoflow.git
-      ref: implement/djangoflow_chat
-      path: packages/djangoflow_chat
+  djangoflow_chat: ^0.0.1
   auto_route: ^5.0.4
   bloc: ^8.1.0
   cached_network_image: ^3.2.3
@@ -40,7 +36,6 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.7.0
   list_bloc: ^3.1.0
-  modal_bottom_sheet: ^3.0.0-pre
   openapi_repository_annotations: ^1.1.0
   package_info_plus: ^3.0.2
   path_provider: ^2.0.11
@@ -48,7 +43,6 @@ dependencies:
   reactive_forms: ^14.1.0
   responsive_framework: ^0.2.0
   shimmer: ^2.0.0
-  upgrader: ^6.2.0
 
 dev_dependencies:
   flutter_test:
@@ -77,6 +71,7 @@ dependency_overrides:
       url: "https://github.com/djangoflow/auto_route_library.git"
       ref: master
       path: "auto_route_generator"
+  # Override to use the locally generated one
   djangoflow_openapi:
     path: ../djangoflow_openapi
 
