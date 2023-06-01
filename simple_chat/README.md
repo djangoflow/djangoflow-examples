@@ -23,6 +23,7 @@ Before using this Makefile, ensure you have the following dependencies installed
 1. Clone the repository and navigate to its root directory.
 2. You can run all the available commands together using the following command
    It will setup everything and will launch the app in web browser.
+   Open a terminal and run:
 
    ```bash
    make run
@@ -30,7 +31,7 @@ Before using this Makefile, ensure you have the following dependencies installed
 
    Or you can follow the next steps to run them separately
 
-3. Open a terminal and run the following commands:
+3. Run the following commands:
 
    ```bash
    make install-melos
