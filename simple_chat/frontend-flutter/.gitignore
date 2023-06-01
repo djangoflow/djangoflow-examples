@@ -144,8 +144,8 @@ fabric.properties
 
 # Misc
 ######
-packages/openapi/.packages
-packages/openapi/.dart_tool/package_config.json
+packages/djangoflow_openapi/.packages
+packages/djangoflow_openapi/.dart_tool/package_config.json
 **/.firebase/
 **/fastlane/report.xml
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:openapi/openapi.dart';
+import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 
 import 'login_listener.dart';
 

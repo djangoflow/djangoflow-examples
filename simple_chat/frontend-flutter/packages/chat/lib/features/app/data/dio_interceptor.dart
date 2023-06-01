@@ -5,7 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:dio/dio.dart';
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/foundation.dart';
-import 'package:openapi/openapi.dart';
+import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 
 class DioInterceptor extends Interceptor {
   @override

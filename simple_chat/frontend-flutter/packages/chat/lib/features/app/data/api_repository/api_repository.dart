@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:list_bloc/list_bloc.dart';
-import 'package:openapi/openapi.dart';
+import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 import 'package:openapi_repository_annotations/openapi_repository_annotations.dart';
 
 import '../dio_interceptor.dart';
@@ -14,7 +14,7 @@ part 'api_repository.g.dart';
 part 'api_repository.openapi.dart';
 
 @OpenapiRepository(
-  buildFor: Openapi,
+  buildFor: DjangoflowOpenapi,
   blocMixins: [BlocMixin(CubitMaybeEmit)],
   builderList: [
     RepositoryBuilder(AccountsApi),

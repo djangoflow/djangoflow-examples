@@ -1,6 +1,6 @@
 import 'package:chat/configurations/configurations.dart';
 import 'package:djangoflow_chat/utils/extensions/message_extension.dart';
-import 'package:openapi/openapi.dart' as openapi;
+import 'package:djangoflow_openapi/djangoflow_openapi.dart' as openapi;
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 import 'room_user_extensions.dart';

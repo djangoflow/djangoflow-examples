@@ -26,12 +26,12 @@ class ApiRepository {
     _openapi.dio.options.baseUrl = baseUrl;
   }
 
-  static final Openapi _openapi = Openapi(
+  static final DjangoflowOpenapi _openapi = DjangoflowOpenapi(
     basePathOverride: kReleaseMode ? liveBasePath : null,
     interceptors: [],
   );
 
-  Openapi get api => _openapi;
+  DjangoflowOpenapi get api => _openapi;
   AccountsApi get accounts => api.getAccountsApi();
   AuthApi get auth => api.getAuthApi();
   ChatApi get chat => api.getChatApi();

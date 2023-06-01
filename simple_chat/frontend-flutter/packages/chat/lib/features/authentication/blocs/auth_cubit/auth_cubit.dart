@@ -2,7 +2,7 @@ import 'package:chat/features/app/app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:openapi/openapi.dart';
+import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 
 part 'auth_cubit.freezed.dart';
 

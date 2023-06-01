@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_list_bloc/flutter_list_bloc.dart';
 import 'package:list_bloc/list_bloc.dart';
-import 'package:openapi/openapi.dart';
+import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 
 import 'package:progress_builder/progress_builder.dart';
 
