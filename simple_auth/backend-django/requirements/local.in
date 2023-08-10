@@ -1,1 +1,1 @@
-drf-spectacular[sidecar]
+-r project.txt

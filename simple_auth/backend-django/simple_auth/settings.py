@@ -121,3 +121,101 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+########################################################################################################################
+# drf-spectacular
+SPECTACULAR_SETTINGS = {
+    "TITLE": "djangoflow-examples-simple-auth API",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
+    "SCHEMA_PATH_PREFIX": "/api/v1",
+    "COMPONENT_SPLIT_REQUEST": True,
+    "COMPONENT_NO_READ_ONLY_REQUIRED": True,
+    "ENUM_NAME_OVERRIDES": {"SocialProviderEnum": "accounts.models.Gender"},
+    "ENUM_ADD_EXPLICIT_BLANK_NULL_CHOICE": False,
+}
+
+from datetime import timedelta
+
+from twilio.rest import Client
+
+import environ
+
+env = environ.Env(
+    DJANGO_READ_ENV_FILE=(bool, False),
+)
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent.parent
+
+if env("DJANGO_READ_ENV_FILE"):
+    env.read_env(str(BASE_DIR / ".env"))
+
+# simple-jwt
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=14),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.SlidingToken",),
+    "BLACKLIST_AFTER_ROTATION": False,
+    "JTI_CLAIM": "jti",
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=14),
+    "ROTATE_REFRESH_TOKENS": True,
+    "SLIDING_TOKEN_LIFETIME": timedelta(days=14),
+    "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
+    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=14),
+    "TOKEN_TYPE_CLAIM": "sliding",
+    "USER_ID_CLAIM": "user_id",
+    "USER_ID_FIELD": "id",
+    "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
+    "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
+}
+
+# otp
+OTP_TWILIO_ACCOUNT = env.str("OTP_TWILIO_ACCOUNT", default=None)
+OTP_TWILIO_AUTH = env.str("OTP_TWILIO_AUTH", default=None)
+OTP_TWILIO_FROM = env.str("OTP_TWILIO_FROM", default=None)
+OTP_TWILIO_TOKEN_VALIDITY = 300
+
+OTP_EMAIL_TOKEN_VALIDITY = 300
+OTP_EMAIL_BODY_TEMPLATE_PATH = "otp/email/token.txt"
+OTP_EMAIL_BODY_HTML_TEMPLATE_PATH = "otp/email/token.html"
+OTP_EMAIL_SUBJECT = "Your secret link to login to "
+
+# twilio
+TWILIO_CLIENT = (
+    Client(OTP_TWILIO_ACCOUNT, OTP_TWILIO_AUTH)
+    if OTP_TWILIO_ACCOUNT and OTP_TWILIO_AUTH
+    else None
+)
+
+# auth
+SOCIAL_AUTH_URL_NAMESPACE = "v1:social"
+
+AUTHENTICATION_BACKENDS = [
+    "simple_auth.backends.EmailOTPBackend",
+    "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.google.GoogleOAuth2",
+    "social_core.backends.facebook.FacebookOAuth2",
+]
+
+from df_auth.djangoflow.settings import * # noqa
+
+# djangoflow
+DF_APPS = [
+    *DF_AUTH_APPS,
+]
+
+INSTALLED_APPS += [
+    "rest_framework",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
+    *DF_APPS
+]
+
+REST_FRAMEWORK = {
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.NamespaceVersioning",
+    "COERCE_DECIMAL_TO_STRING": False,
+    "DEFAULT_SCHEMA_CLASS": "simple_auth.openapi.AutoSchema",
+}
