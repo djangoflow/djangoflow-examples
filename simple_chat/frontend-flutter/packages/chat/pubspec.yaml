@@ -6,7 +6,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.3 <3.0.0"
+  sdk: ">=2.17.3 <4.0.0"
 
 dependencies:
   flutter:
@@ -22,23 +22,22 @@ dependencies:
   countdown_widget: ^2.0.2
   dio: ^5.0.2
   djangoflow_app: ^3.0.0
-  djangoflow_app_links: ^1.1.3
+
   djangoflow_openapi: ^0.0.12
   djangoflow_websocket: ^0.0.1
   flutter_bloc: ^8.1.1
   flutter_chat_types: ^3.6.0
   flutter_chat_ui: ^1.6.6
-  firebase_core: ^2.4.1
+  firebase_core: ^2.15.0
   flex_color_scheme: ^6.1.2
   flutter_list_bloc: ^4.0.1
   freezed_annotation: ^2.2.0
   hydrated_bloc: ^9.0.0
-  intl: ^0.17.0
+  intl: ^0.18.0
   json_annotation: ^4.7.0
   list_bloc: ^3.1.0
   openapi_repository_annotations: ^1.1.0
   package_info_plus: ^3.0.2
-  path_provider: ^2.0.11
   progress_builder: ^1.1.3
   reactive_forms: ^14.1.0
   responsive_framework: ^0.2.0
@@ -56,10 +55,6 @@ dev_dependencies:
   openapi_repository: ^2.0.1
 
 dependency_overrides:
-  # Conflict for icons_launcher and flutter_test
-  path: 1.8.2
-  # Conflict with flutter_test and test packages
-  test_api: 0.4.18
   # Until null check error fixed pushed https://github.com/Milad-Akarie/auto_route_library/pull/1301
   auto_route:
     git:
