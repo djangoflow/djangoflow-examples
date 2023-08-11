@@ -1,7 +1,0 @@
--r base.in
-
-django
-django-df-auth
-django-otp-twilio
-drf-spectacular[sidecar]
-django-environ
