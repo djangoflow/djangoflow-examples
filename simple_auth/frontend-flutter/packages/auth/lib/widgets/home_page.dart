@@ -41,8 +41,13 @@ class HomePage extends StatelessWidget {
                 if (!isAuthenticated)
                   ReactiveFormBuilder(
                     form: () => _form,
-                    builder: (context, formGroup, child) =>
-                        const _OtpLoginInputs(),
+                    builder: (context, formGroup, child) => const Column(
+                      children: [
+                        _OtpLoginInputs(),
+                        SizedBox(height: kPadding),
+                        _SocialLoginButtons(),
+                      ],
+                    ),
                   )
                 else ...[
                   const Text('Authenticated'),
@@ -160,10 +165,16 @@ class _OtpLoginInputsState extends State<_OtpLoginInputs> {
                 )
               : LinearProgressBuilder(
                   action: (_) async {
-                    final email = form.control('email').value;
-                    if (email != null) {
-                      await context.read<AuthCubit>().requestOTP(email: email);
-                      _hasRequestedOtp.value = true;
+                    if (form.valid) {
+                      final email = form.control('email').value;
+                      if (email != null) {
+                        await context
+                            .read<AuthCubit>()
+                            .requestOTP(email: email);
+                        _hasRequestedOtp.value = true;
+                      }
+                    } else {
+                      form.markAllAsTouched();
                     }
                   },
                   builder: (context, action, error) => ElevatedButton(
@@ -250,11 +261,8 @@ class _SocialLoginButtons extends StatelessWidget {
                   );
                 }
               },
-              builder: (context, action, error) => SizedBox(
-                width: double.infinity,
-                child: GoogleSignInButton(
-                  onPressed: action,
-                ),
+              builder: (context, action, error) => GoogleSignInButton(
+                onPressed: action,
               ),
             ),
           const SizedBox(
@@ -284,6 +292,7 @@ class _SocialLoginButtons extends StatelessWidget {
                   if (accessToken == null) {
                     throw Exception('Facebook Sign In failed - no token');
                   }
+
                   await authCubit.loginWithSocialProvider(
                     socialTokenObtainRequest: SocialTokenObtainRequest(
                       provider: socialLogin.type.provider,

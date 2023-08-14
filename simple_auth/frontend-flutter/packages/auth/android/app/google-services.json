@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "130766043566",
+    "project_id": "djangoflow-examples",
+    "storage_bucket": "djangoflow-examples.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130766043566:android:5b69f9e9bca4aeb5a9b03f",
+        "android_client_info": {
+          "package_name": "com.djangoflow.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130766043566-bdj469jd8u9r5qrq9jbg24nau228nj9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmDlD3OZuxjPEiZ6pqPV2LRK8l-FFbgJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130766043566-bdj469jd8u9r5qrq9jbg24nau228nj9d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

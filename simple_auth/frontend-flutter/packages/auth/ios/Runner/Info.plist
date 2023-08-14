@@ -53,9 +53,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<!-- TODO Replace [REVERSED_CLIENT_ID] with actual value -->
-				<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
-				<string>[REVERSED_CLIENT_ID]</string>
+				<string>com.googleusercontent.apps.130766043566-h7rloh4pma8ph7r3o5h8d506ql23tpfp</string>
 			</array>
 		</dict>
 		<!-- End of the Google Sign-in Section -->

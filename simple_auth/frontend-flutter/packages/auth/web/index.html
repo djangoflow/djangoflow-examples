@@ -31,8 +31,8 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
 
-  <!-- Need to add client id here -->
-  <meta name="google-signin-client_id" content="YOUR_GOOGLE_SIGN_IN_OAUTH_CLIENT_ID">
+  <meta name="google-signin-client_id"
+    content="130766043566-bdj469jd8u9r5qrq9jbg24nau228nj9d.apps.googleusercontent.com">
 
   <title>DFAuth</title>
   <style>
@@ -110,14 +110,6 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
 
-  <script>
-    // TODO Need to configure this using firebase console data for push notification
-    // if ("serviceWorker" in navigator) {
-    //   window.addEventListener("load", function () {
-    //     navigator.serviceWorker.register("/firebase-messaging-sw.js");
-    //   });
-    // }
-  </script>
   <script>
     window.addEventListener('load', function () {
       var loading = document.querySelector('#loading');

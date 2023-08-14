@@ -1,24 +1,36 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:auth/data/api_repository/api_repository.dart';
 import 'package:auth/router/router.dart';
 import 'package:djangoflow_app_links/djangoflow_app_links.dart';
 import 'package:djangoflow_auth/djangoflow_auth.dart';
+import 'package:djangoflow_auth_apple/djangoflow_auth_apple.dart';
+import 'package:djangoflow_auth_google/djangoflow_auth_google.dart';
+import 'package:djangoflow_auth_facebook/djangoflow_auth_facebook.dart';
+import 'package:djangoflow_openapi/djangoflow_openapi.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'blocs/bloc_exception_observer.dart';
-// TODO uncomment after firebase integration
-// import 'firebase_options.dart';
+import 'constants.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+
+      await Firebase.initializeApp(
+        name: 'djangoflow',
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
 
       // Does not support web https://docs.flutter.dev/testing/errors#handling-all-types-of-errors
       // https://github.com/flutter/flutter/issues/100277
@@ -60,10 +72,36 @@ Future<void> main() async {
 
       final appRouter = AppRouter();
 
+      ApiRepository.instance.updateBaseUrl(
+        kIsWeb || Platform.isIOS ? baseUrl : baseUrlForAndroid,
+      );
+
       runApp(
         BlocProvider<AuthCubit>(
-          create: (context) =>
-              AuthCubit.instance..authApi = ApiRepository.instance.auth,
+          create: (context) => AuthCubit.instance
+            ..authApi = ApiRepository.instance.auth
+            ..socialLogins = [
+              GoogleSocialLogin(
+                googleSignIn: GoogleSignIn(
+                  scopes: [
+                    'email',
+                  ],
+                ),
+                type: SocialLoginType.fromProvider(
+                  ProviderEnum.googleOauth2,
+                ),
+              ),
+              AppleSocialLogin(
+                type: SocialLoginType.fromProvider(
+                  ProviderEnum.appleId,
+                ),
+              ),
+              FacebookSocialLogin(
+                type: SocialLoginType.fromProvider(
+                  ProviderEnum.facebook,
+                ),
+              ),
+            ],
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
             title: 'DF Auth',
