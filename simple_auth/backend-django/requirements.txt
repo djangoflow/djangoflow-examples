@@ -2,3 +2,4 @@ django
 django-rest-framework
 django-df-api==0.0.3
 django-df-auth==0.28
+django-cors-headers
