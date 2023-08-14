@@ -3,7 +3,8 @@ import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 
 // tests for SocialTokenObtainRequest
 void main() {
-  final SocialTokenObtainRequest? instance = /* SocialTokenObtainRequest(...) */ null;
+  final SocialTokenObtainRequest? instance = /* SocialTokenObtainRequest(...) */
+      null;
   // TODO add properties to the entity
 
   group(SocialTokenObtainRequest, () {
@@ -17,7 +18,7 @@ void main() {
       // TODO
     });
 
-    // SocialTokenObtainProviderEnum provider
+    // ProviderEnum provider
     test('to test the property `provider`', () async {
       // TODO
     });
@@ -26,6 +27,5 @@ void main() {
     test('to test the property `accessToken`', () async {
       // TODO
     });
-
   });
 }

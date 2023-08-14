@@ -1,9 +1,7 @@
 import 'package:test/test.dart';
 import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 
-// tests for SocialTokenObtainProviderEnum
+// tests for ProviderEnum
 void main() {
-
-  group(SocialTokenObtainProviderEnum, () {
-  });
+  group(ProviderEnum, () {});
 }
