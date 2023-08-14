@@ -1,0 +1,53 @@
+name: auth
+description: DFAuth demonstration
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  auto_route: ^7.8.0
+  bloc: ^8.1.2
+  dio: ^5.2.1+1
+  djangoflow_app_links: ^1.2.0
+  djangoflow_auth: ^0.1.0
+  djangoflow_auth_google: ^0.0.1
+  djangoflow_openapi: ^0.0.14
+  flutter_bloc: ^8.1.3
+  firebase_core: ^2.14.0
+  flutter_facebook_auth: ^6.0.0
+  freezed_annotation: ^2.2.0
+  google_sign_in: ^6.1.4
+  hydrated_bloc: ^9.1.1
+  json_annotation: ^4.8.1
+  openapi_repository_annotations: ^1.1.0
+  path_provider: ^2.0.11
+  progress_builder: ^1.1.3
+  reactive_forms: ^15.0.0
+  sign_in_with_apple: ^5.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  auto_route_generator: ^7.1.1
+  build_runner: ^2.4.5
+  flutter_lints: ^2.0.1
+  freezed: ^2.3.5
+  icons_launcher: ^2.1.1
+  json_serializable: ^6.7.0
+  openapi_repository: ^3.0.0
+
+# Uncomment to override djangoflow_openapi from generated local lib
+dependency_overrides:
+  djangoflow_openapi:
+    path: ../djangoflow_openapi
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/app_logo/
