@@ -1,9 +1,3 @@
 # frontend-flutter
 
-A flutter frontend demonstrating djangoflow_auth usage
- 
- ### Initialize git
-    `git init`
-
- ### Enable pre-commit manually
- After git initialization use `chmod +x tools/install-hook.bash && ./tools/install-hook.bash && chmod ug+x .git/hooks/pre-commit`
+Welcome to the DjangoFlow Auth Flutter Example! This example demonstrates how to use the `djangoflow_auth` and `django-df-auth` packages together. [Read more...](./packages/auth/README.md)
