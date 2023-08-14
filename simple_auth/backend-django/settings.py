@@ -101,6 +101,7 @@ AUTHENTICATION_BACKENDS = [
     "social_core.backends.facebook.FacebookOAuth2",
     "social_core.backends.apple.AppleIdAuth",
     "social_core.backends.twitter.TwitterOAuth",
+    "social_core.backends.discord.DiscordOAuth2",
 ]
 
 REST_FRAMEWORK = {
