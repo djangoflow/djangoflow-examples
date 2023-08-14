@@ -1,5 +1,4 @@
 import 'package:djangoflow_app/djangoflow_app.dart';
-import 'package:djangoflow_app_links/djangoflow_app_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,27 +14,13 @@ class ChatAppBuilder extends AppBuilder {
     super.key,
     super.onDispose,
     required AppRouter appRouter,
-    required AppLinksRepository appLinksRepository,
-    final String? initialDeepLink,
   }) : super(
-          repositoryProviders: [
-            RepositoryProvider<AppLinksRepository>.value(
-              value: appLinksRepository,
-            ),
-          ],
           providers: [
             BlocProvider<AppCubit>(
               create: (context) => AppCubit.instance,
             ),
             BlocProvider<AuthCubit>(
               create: (context) => AuthCubit.instance,
-            ),
-            BlocProvider<AppLinksCubit>(
-              create: (context) => AppLinksCubit(
-                null,
-                context.read<AppLinksRepository>(),
-              ),
-              lazy: false,
             ),
           ],
           builder: (context) => LoginListenerWrapper(
@@ -52,12 +37,6 @@ class ChatAppBuilder extends AppBuilder {
                 if (authCubit.state.token != null) {
                   await authCubit.logout();
                 }
-
-                final isSandbox = state.environment == AppEnvironment.sandbox;
-                ApiRepository.instance.updateBaseUrl(
-                    isSandbox ? kSandboxBasePath : kLiveBasePath);
-                // setup environment for error reporters
-                // ErrorReporter.instance.updateEnv(describeEnum(state));
               },
               builder: (context, appState) => MaterialApp.router(
                 debugShowCheckedModeBanner: false,
@@ -81,17 +60,11 @@ class ChatAppBuilder extends AppBuilder {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 routerDelegate: appRouter.delegate(
-                  initialDeepLink: initialDeepLink, // only for Android and iOS
-                  // if initialDeepLink found then don't provide initialRoutes
-                  initialRoutes: kIsWeb || initialDeepLink != null
+                  initialRoutes: kIsWeb
                       ? null
                       : [
                           SplashRoute(backgroundColor: Colors.white),
                         ],
-                  // List of global navigation obsersers here
-                  // Firebase Screen event observer
-                  // SentryNavigationObserver
-                  // navigatorObservers: () => {RouteObserver()},
                 ),
                 builder: (context, child) => AppResponsiveLayoutBuilder(
                   background: Container(
@@ -99,26 +72,7 @@ class ChatAppBuilder extends AppBuilder {
                   ),
                   child: SandboxBanner(
                     isSandbox: appState.environment == AppEnvironment.sandbox,
-                    child: child != null
-                        ? kIsWeb
-                            ? child
-                            : AppLinksCubitListener(
-                                listenWhen: (previous, current) =>
-                                    current != null,
-                                listener: (context, appLink) {
-                                  final path = appLink?.path;
-                                  if (path != null) {
-                                    appRouter.navigateNamed(
-                                      path,
-                                      onFailure: (failure) {
-                                        appRouter.navigate(const HomeRoute());
-                                      },
-                                    );
-                                  }
-                                },
-                                child: child,
-                              )
-                        : const Offstage(),
+                    child: child ?? const Offstage(),
                   ),
                 ),
               ),
