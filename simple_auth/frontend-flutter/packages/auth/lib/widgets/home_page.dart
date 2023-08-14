@@ -347,6 +347,34 @@ class _SocialLoginButtons extends StatelessWidget {
           const SizedBox(
             height: kPadding,
           ),
+          LinearProgressBuilder(
+            action: (_) async {
+              const providerEnum = ProviderEnum.discord;
+              final authCubit = context.read<AuthCubit>();
+              final socialLogin =
+                  authCubit.socialLogins.getSocialLoginByProvider(providerEnum);
+              final result =
+                  await authCubit.authenticateWithSocialProvider<String>(
+                socialLogin.type,
+              );
+
+              if (result != null) {
+                await authCubit.loginWithSocialProvider(
+                  socialTokenObtainRequest: SocialTokenObtainRequest(
+                    provider: providerEnum,
+                    accessToken: result,
+                  ),
+                );
+              }
+            },
+            builder: (context, action, error) => ElevatedButton(
+              onPressed: action,
+              child: const Text('Continue with Discord'),
+            ),
+          ),
+          const SizedBox(
+            height: kPadding,
+          ),
         ],
       );
 }

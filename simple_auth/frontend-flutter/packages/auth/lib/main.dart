@@ -6,6 +6,7 @@ import 'package:auth/router/router.dart';
 import 'package:djangoflow_app_links/djangoflow_app_links.dart';
 import 'package:djangoflow_auth/djangoflow_auth.dart';
 import 'package:djangoflow_auth_apple/djangoflow_auth_apple.dart';
+import 'package:djangoflow_auth_discord/djangoflow_auth_discord.dart';
 import 'package:djangoflow_auth_google/djangoflow_auth_google.dart';
 import 'package:djangoflow_auth_facebook/djangoflow_auth_facebook.dart';
 import 'package:djangoflow_openapi/djangoflow_openapi.dart';
@@ -99,6 +100,19 @@ Future<void> main() async {
               FacebookSocialLogin(
                 type: SocialLoginType.fromProvider(
                   ProviderEnum.facebook,
+                ),
+              ),
+              DiscordSocialLoginProvider(
+                type: SocialLoginType.fromProvider(
+                  ProviderEnum.discord,
+                ),
+                oAuth2Configuration: const OAuth2Configuration(
+                  clientId: 'your_discord_client_id',
+                  redirectUri: 'https://your_redirect_uri',
+                  scope: 'identify email', // adjust according to your need
+                  responseType: 'token',
+                  customUriScheme:
+                      'your_custom_uri_scheme', // could https/http, complete custom uri redirect does not support on Discord
                 ),
               ),
             ],
