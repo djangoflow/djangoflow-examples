@@ -8,6 +8,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'social_token_obtain_request.g.dart';
 
+
 @JsonSerializable(
   checked: true,
   createToJson: true,
@@ -17,42 +18,79 @@ part 'social_token_obtain_request.g.dart';
 class SocialTokenObtainRequest {
   /// Returns a new [SocialTokenObtainRequest] instance.
   SocialTokenObtainRequest({
-    this.firstName,
-    this.lastName,
-    required this.provider,
-    required this.accessToken,
+
+     this.firstName,
+
+     this.lastName,
+
+    required  this.provider,
+
+    required  this.accessToken,
   });
 
-  @JsonKey(name: r'first_name', required: false, includeIfNull: false)
+  @JsonKey(
+    
+    name: r'first_name',
+    required: false,
+    includeIfNull: false
+  )
+
+
   final String? firstName;
 
-  @JsonKey(name: r'last_name', required: false, includeIfNull: false)
+
+
+  @JsonKey(
+    
+    name: r'last_name',
+    required: false,
+    includeIfNull: false
+  )
+
+
   final String? lastName;
 
-  @JsonKey(name: r'provider', required: true, includeIfNull: false)
-  final ProviderEnum provider;
 
-  @JsonKey(name: r'access_token', required: true, includeIfNull: false)
+
+  @JsonKey(
+    
+    name: r'provider',
+    required: true,
+    includeIfNull: false
+  )
+
+
+  final SocialTokenObtainProviderEnum provider;
+
+
+
+  @JsonKey(
+    
+    name: r'access_token',
+    required: true,
+    includeIfNull: false
+  )
+
+
   final String accessToken;
 
+
+
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SocialTokenObtainRequest &&
-          other.firstName == firstName &&
-          other.lastName == lastName &&
-          other.provider == provider &&
-          other.accessToken == accessToken;
+  bool operator ==(Object other) => identical(this, other) || other is SocialTokenObtainRequest &&
+     other.firstName == firstName &&
+     other.lastName == lastName &&
+     other.provider == provider &&
+     other.accessToken == accessToken;
 
   @override
   int get hashCode =>
-      firstName.hashCode +
-      lastName.hashCode +
-      provider.hashCode +
-      accessToken.hashCode;
+    firstName.hashCode +
+    lastName.hashCode +
+    provider.hashCode +
+    accessToken.hashCode;
 
-  factory SocialTokenObtainRequest.fromJson(Map<String, dynamic> json) =>
-      _$SocialTokenObtainRequestFromJson(json);
+  factory SocialTokenObtainRequest.fromJson(Map<String, dynamic> json) => _$SocialTokenObtainRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$SocialTokenObtainRequestToJson(this);
 
@@ -60,4 +98,6 @@ class SocialTokenObtainRequest {
   String toString() {
     return toJson().toString();
   }
+
 }
+

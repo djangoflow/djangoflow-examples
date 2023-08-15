@@ -17,7 +17,7 @@ doc/Signup.md
 doc/SignupRequest.md
 doc/SocialOAuth1TokenObtainProviderEnum.md
 doc/SocialOAuth1TokenObtainRequest.md
-doc/ProviderEnum.md
+doc/SocialTokenObtainProviderEnum.md
 doc/SocialTokenObtainRequest.md
 doc/Token.md
 doc/TokenBlacklistRequest.md

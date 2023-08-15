@@ -19,8 +19,8 @@ SocialTokenObtainRequest _$SocialTokenObtainRequestFromJson(
         final val = SocialTokenObtainRequest(
           firstName: $checkedConvert('first_name', (v) => v as String?),
           lastName: $checkedConvert('last_name', (v) => v as String?),
-          provider: $checkedConvert(
-              'provider', (v) => $enumDecode(_$ProviderEnumEnumMap, v)),
+          provider: $checkedConvert('provider',
+              (v) => $enumDecode(_$SocialTokenObtainProviderEnumEnumMap, v)),
           accessToken: $checkedConvert('access_token', (v) => v as String),
         );
         return val;
@@ -44,14 +44,14 @@ Map<String, dynamic> _$SocialTokenObtainRequestToJson(
 
   writeNotNull('first_name', instance.firstName);
   writeNotNull('last_name', instance.lastName);
-  val['provider'] = _$ProviderEnumEnumMap[instance.provider]!;
+  val['provider'] = _$SocialTokenObtainProviderEnumEnumMap[instance.provider]!;
   val['access_token'] = instance.accessToken;
   return val;
 }
 
-const _$ProviderEnumEnumMap = {
-  ProviderEnum.googleOauth2: 'google-oauth2',
-  ProviderEnum.facebook: 'facebook',
-  ProviderEnum.appleId: 'apple-id',
-  ProviderEnum.discord: 'discord',
+const _$SocialTokenObtainProviderEnumEnumMap = {
+  SocialTokenObtainProviderEnum.googleOauth2: 'google-oauth2',
+  SocialTokenObtainProviderEnum.facebook: 'facebook',
+  SocialTokenObtainProviderEnum.appleId: 'apple-id',
+  SocialTokenObtainProviderEnum.discord: 'discord',
 };
