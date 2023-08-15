@@ -46,6 +46,6 @@ Before using this Makefile, ensure you have the following dependencies installed
    make run-flutter-frontend
    ```
 
-   This command navigates to the `frontend-flutter/auth` directory and executes `flutter run -d chrome`.
+   This command navigates to the `frontend-flutter/auth` directory and executes `flutter run`.
 
    Make sure you have an active Chrome instance available for debugging the Flutter app.
