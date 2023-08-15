@@ -35,6 +35,8 @@ Before you start, make sure you have the following installed and configured:
 
 Run `flutter pub get` and after that `flutter pub run` to run the project.
 
+The example app should now be running on your local machine. You can explore the authentication flows for different social providers and test the functionality.
+
 ## Organising
 
 The way this project is organised inside the `packages/chat/lib` folder is as follows:
@@ -45,41 +47,3 @@ The way this project is organised inside the `packages/chat/lib` folder is as fo
   - `blocs` is responsible for communicating with `data` and `presentation` layer. For specific events triggered from `presentation` layer, `blocs` layer will communicate with `data` layer to update information and perhapse update `state` of the `presentation` layer. The `state` should be immutable.
   - `presentation` is directly related to the UI of the app. It will send event to the `blocs` layer and listen to `state` dispatched from `blocs` layer to modify the UI.
 - `utils` provides handy functionality that may be useful manipulate data and other useful functionalities.
-
-## Getting Started
-
-1. Clone the repository:
-
-   ```
-   git clone https://github.com/your-username/your-repo.git
-   ```
-
-2. Navigate to the project directory:
-
-   ```
-   cd your-repo
-   ```
-
-3. Replace the necessary files:
-
-   - **Google Sign-In**: Replace `google-services.json` in the `android/app` directory with your own file from the Firebase project.
-
-   - **Facebook**: Configure the `facebook_app_id` in the Android `res/values/strings.xml` and iOS `Info.plist` files.
-
-   - **Apple**: Configure the `appleAppId` in the iOS `Info.plist` file.
-
-   - **Discord**: Replace the `clientId` and configure the OAuth2 Redirect URI in the `lib/main.dart` file. And for mobile platforms, enable deep linking.
-
-4. Run the app:
-   ```
-   flutter run
-   ```
-
-The example app should now be running on your local machine. You can explore the authentication flows for different social providers and test the functionality.
-
-## Features
-
-- Smooth integration with DjangoFlow and various social authentication providers.
-- Login with Google, Facebook, Apple, and Discord accounts.
-- Customizable permissions and login behavior for each provider.
-- Easy-to-use and consistent APIs for social login.
