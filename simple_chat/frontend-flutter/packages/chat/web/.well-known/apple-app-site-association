@@ -1,13 +1,13 @@
 {
     "webcredentials": {
-        "apps": ["{team_id}.com.djangoflow.chat.dfchat"]
+        "apps": ["{team_id}.com.djangoflow.chat"]
     },
     "applinks": {
         "apps": [],
         "details": [{
-            "appID": "{team_id}.com.djangoflow.chat.dfchat",
+            "appID": "{team_id}.com.djangoflow.chat",
             "paths": ["*"],
-            "appIDs": ["{team_id}.com.djangoflow.chat.dfchat"],
+            "appIDs": ["{team_id}.com.djangoflow.chat"],
             "components": [{
                 "/": "/*"
             }]

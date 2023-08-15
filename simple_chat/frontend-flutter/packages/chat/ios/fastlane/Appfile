@@ -1,4 +1,4 @@
-app_identifier("com.djangoflow.chat.dfchat") # The bundle identifier of your app
+app_identifier("com.djangoflow.chat") # The bundle identifier of your app
 apple_id(ENV['FASTLANE_APPLE_ID']) # The Apple ID you want to use for testing (usually you want to use your own Apple ID here)
 
 itc_team_id("None") # App Store Connect Team ID
