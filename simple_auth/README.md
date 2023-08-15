@@ -13,7 +13,7 @@ Before using this Makefile, ensure you have the following dependencies installed
 
 #### Usage
 
-1. Clone the repository and navigate to its root directory.
+1. Clone the repository and navigate to [simple_auth](../simple_auth/) directory.
 2. You can run all the available commands together using the following command
    It will setup everything and will launch the app in web browser.
    Open a terminal and run:
