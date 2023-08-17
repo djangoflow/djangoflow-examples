@@ -1,10 +1,11 @@
-ACTIVATE=. venv/bin/activate &&
+VENV=../../venv
+ACTIVATE=. $(VENV)/bin/activate &&
 
-init: venv pip-tools requirements.txt
+init: $(VENV) pip-tools requirements.txt
 	$(ACTIVATE) pip install -r requirements.txt
 
-venv:
-	python3.9 -m venv venv
+$(VENV):
+	python -m venv $(VENV)
 
 pip-tools:
 	$(ACTIVATE) pip install --upgrade pip pip-tools
