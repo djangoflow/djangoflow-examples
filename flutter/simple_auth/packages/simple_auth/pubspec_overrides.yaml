@@ -1,8 +1,0 @@
-# melos_managed_dependency_overrides: djangoflow_openapi,oauth2_client
-dependency_overrides:
-  djangoflow_openapi:
-    path: ../djangoflow_openapi
-  oauth2_client:
-    git:
-      url: https://github.com/jheld/oauth2_client.git
-      ref: master
