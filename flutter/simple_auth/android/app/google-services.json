@@ -1,0 +1,126 @@
+{
+  "project_info": {
+    "project_number": "130766043566",
+    "project_id": "djangoflow-examples",
+    "storage_bucket": "djangoflow-examples.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130766043566:android:5b69f9e9bca4aeb5a9b03f",
+        "android_client_info": {
+          "package_name": "com.djangoflow.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130766043566-jlj50duh60ggvtkdpeuqsacg64d307da.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.djangoflow.auth",
+            "certificate_hash": "3a2b8de00a173b1f97e242c9099afe33475851a1"
+          }
+        },
+        {
+          "client_id": "130766043566-bdj469jd8u9r5qrq9jbg24nau228nj9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmDlD3OZuxjPEiZ6pqPV2LRK8l-FFbgJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130766043566-bdj469jd8u9r5qrq9jbg24nau228nj9d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "130766043566-h7rloh4pma8ph7r3o5h8d506ql23tpfp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.djangoflow.auth"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130766043566:android:b0a6ba4eafff9931a9b03f",
+        "android_client_info": {
+          "package_name": "com.djangoflow.simple_auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130766043566-bdj469jd8u9r5qrq9jbg24nau228nj9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmDlD3OZuxjPEiZ6pqPV2LRK8l-FFbgJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130766043566-bdj469jd8u9r5qrq9jbg24nau228nj9d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "130766043566-h7rloh4pma8ph7r3o5h8d506ql23tpfp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.djangoflow.auth"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130766043566:android:dbafaab36e0bd617a9b03f",
+        "android_client_info": {
+          "package_name": "com.example.simple_auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130766043566-bdj469jd8u9r5qrq9jbg24nau228nj9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmDlD3OZuxjPEiZ6pqPV2LRK8l-FFbgJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130766043566-bdj469jd8u9r5qrq9jbg24nau228nj9d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "130766043566-h7rloh4pma8ph7r3o5h8d506ql23tpfp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.djangoflow.auth"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
