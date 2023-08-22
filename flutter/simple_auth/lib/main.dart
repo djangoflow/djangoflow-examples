@@ -22,102 +22,81 @@ import 'constants.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
-  runZonedGuarded(
-    () async {
-      WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
-      await Firebase.initializeApp(
-        name: 'djangoflow',
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // Needed for AuthCubit, as it is a hydrated bloc
+  final storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb
+        ? HydratedStorage.webStorageDirectory
+        : await getTemporaryDirectory(),
+  );
 
-      // Does not support web https://docs.flutter.dev/testing/errors#handling-all-types-of-errors
-      // https://github.com/flutter/flutter/issues/100277
-      FlutterError.onError = (details, {bool forceReport = false}) {
-        debugPrint('>>> ${details.exception}, ${details.stack}');
-      };
+  HydratedBloc.storage = storage;
 
-      if (!kDebugMode) {
-        ErrorWidget.builder = (FlutterErrorDetails error) {
-          Zone.current.handleUncaughtError(error.exception, error.stack!);
+  if (kIsWeb) {
+    // initialiaze the facebook javascript SDK
+    await FacebookAuth.i.webAndDesktopInitialize(
+      appId: '994262658365758',
+      cookie: true,
+      xfbml: true,
+      version: 'v14.0',
+    );
+  }
 
-          return const Offstage();
-        };
-      }
-      final storage = await HydratedStorage.build(
-        storageDirectory: kIsWeb
-            ? HydratedStorage.webStorageDirectory
-            : await getTemporaryDirectory(),
-      );
+  ApiRepository.instance.updateBaseUrl(
+    kIsWeb || Platform.isIOS ? baseUrl : baseUrlForAndroid,
+  );
 
-      HydratedBloc.storage = storage;
-
-      if (kIsWeb) {
-        // initialiaze the facebook javascript SDK
-        await FacebookAuth.i.webAndDesktopInitialize(
-          appId: '994262658365758',
-          cookie: true,
-          xfbml: true,
-          version: 'v14.0',
-        );
-      }
-
-      ApiRepository.instance.updateBaseUrl(
-        kIsWeb || Platform.isIOS ? baseUrl : baseUrlForAndroid,
-      );
-
-      runApp(
-        BlocProvider<AuthCubit>(
-          create: (context) => AuthCubit.instance
-            ..authApi = ApiRepository.instance.auth
-            ..socialLogins = [
-              GoogleSocialLogin(
-                googleSignIn: GoogleSignIn(
-                  scopes: [
-                    'email',
-                  ],
-                ),
-                type: SocialLoginType.fromProvider(
-                  SocialTokenObtainProviderEnum.googleOauth2,
-                ),
-              ),
-              AppleSocialLogin(
-                type: SocialLoginType.fromProvider(
-                  SocialTokenObtainProviderEnum.appleId,
-                ),
-              ),
-              FacebookSocialLogin(
-                type: SocialLoginType.fromProvider(
-                  SocialTokenObtainProviderEnum.facebook,
-                ),
-              ),
-              DiscordSocialLoginProvider(
-                type: SocialLoginType.fromProvider(
-                  SocialTokenObtainProviderEnum.discord,
-                ),
-                oAuth2Configuration: const OAuth2Configuration(
-                  clientId: 'your_discord_client_id',
-                  redirectUri: 'https://your_redirect_uri',
-                  scope: 'identify email', // adjust according to your need
-                  responseType: 'token',
-                  customUriScheme:
-                      'your_custom_uri_scheme', // could https/http, complete custom uri redirect does not support on Discord
-                ),
-              ),
-            ],
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Simple Auth',
-            theme: ThemeData.light(),
-            darkTheme: ThemeData.dark(),
-            themeMode: ThemeMode.system,
-            home: const HomePage(),
+  runApp(
+    BlocProvider<AuthCubit>(
+      create: (context) => AuthCubit.instance
+        ..authApi = ApiRepository.instance.auth
+        ..socialLogins = [
+          GoogleSocialLogin(
+            googleSignIn: GoogleSignIn(
+              scopes: [
+                'email',
+              ],
+            ),
+            type: SocialLoginType.fromProvider(
+              SocialTokenObtainProviderEnum.googleOauth2,
+            ),
           ),
-        ),
-      );
-    },
-    (exception, stackTrace) async {
-      debugPrint('>>> $exception, $stackTrace');
-    },
+          AppleSocialLogin(
+            type: SocialLoginType.fromProvider(
+              SocialTokenObtainProviderEnum.appleId,
+            ),
+          ),
+          FacebookSocialLogin(
+            type: SocialLoginType.fromProvider(
+              SocialTokenObtainProviderEnum.facebook,
+            ),
+          ),
+          DiscordSocialLoginProvider(
+            type: SocialLoginType.fromProvider(
+              SocialTokenObtainProviderEnum.discord,
+            ),
+            oAuth2Configuration: const OAuth2Configuration(
+              clientId: 'your_discord_client_id',
+              redirectUri: 'https://your_redirect_uri',
+              scope: 'identify email', // adjust according to your need
+              responseType: 'token',
+              customUriScheme:
+                  'your_custom_uri_scheme', // could https/http, complete custom uri redirect does not support on Discord
+            ),
+          ),
+        ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Simple Auth',
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        themeMode: ThemeMode.system,
+        home: const HomePage(),
+      ),
+    ),
   );
 }
