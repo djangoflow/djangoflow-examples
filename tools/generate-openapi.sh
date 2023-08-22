@@ -1,5 +1,5 @@
 #!/bin/sh
-export TARGET_DIR=./packages/djangoflow_openapi
+export TARGET_DIR=$(pwd)/packages/djangoflow_openapi
 export DART_POST_PROCESS_FILE="/usr/local/bin/dartfmt -w"
 export API_VERSION=v1
 cd "$(dirname "${BASH_SOURCE[0]}")"/.. || exit
