@@ -107,7 +107,7 @@ Future<void> main() async {
             ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'DF Auth',
+            title: 'Simple Auth',
             theme: ThemeData.light(),
             darkTheme: ThemeData.dark(),
             themeMode: ThemeMode.system,
