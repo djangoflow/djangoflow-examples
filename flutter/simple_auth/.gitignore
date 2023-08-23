@@ -49,3 +49,5 @@ app.*.map.json
 **/*.freezed.dart
 **/*.gr.dart
 **/*.openapi.dart
+
+pubspec.lock
