@@ -14,21 +14,26 @@ for file in $DIR/*.dart; do
 
   # Check if the file contains @JsonSerializable(
   if grep -q "@JsonSerializable(" "$file"; then
-    # Add the CopyWith annotation and import
-    sed -i '' "/@JsonSerializable(/i\\
+    # Add the CopyWith annotation
+    sed -i '' "s/@JsonSerializable(/$ANNOTATION/" "$file"
+
+    # Add the import as the first line of the file
+    sed -i '' "1i\\
 $IMPORT
 " "$file"
-    sed -i '' "s/@JsonSerializable(/$ANNOTATION/" "$file"
+
     echo "Updated $filename"
   fi
 done
 
 # Install copy_with_extension and copy_with_extension_gen
 pushd "packages/djangoflow_openapi" > /dev/null
+which dart
 dart pub add copy_with_extension
-dart pub add --dev copy_with_extension_gen
+dart pub add copy_with_extension_gen --dev
 dart pub get
-dart run build_runner build --delete-conflicting-outputs
+sleep 1
+dart run build_runner build --delete-conflicting-outputs --verbose
 popd > /dev/null
 
 echo "Modification completed."

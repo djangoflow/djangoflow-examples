@@ -16,7 +16,6 @@ class ApiRepository {
       ..connectTimeout = const Duration(milliseconds: 10000)
       ..receiveTimeout = const Duration(milliseconds: 15000)
       ..sendTimeout = const Duration(milliseconds: 15000);
-    _openapi.dio.interceptors.add(DioInterceptor());
   }
 
   static const String liveBasePath = 'https://api.djangoflow.com';
