@@ -1,3 +1,15 @@
+import os
+
+from df_api_drf.defaults import (
+    DF_API_DRF_INSTALLED_APPS,
+    REST_FRAMEWORK,
+    SPECTACULAR_SETTINGS,
+)
+
+from df_auth.defaults import DF_AUTH_INSTALLED_APPS
+
+
+
 DEBUG = True
 
 ROOT_URLCONF = "urls"
@@ -7,6 +19,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 USE_TZ = True
 
+
+AUTH_USER_MODEL = "users.User"
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -15,18 +30,9 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "rest_framework",
-    "drf_spectacular",
-    "drf_spectacular_sidecar",
-    "corsheaders",
-    "django_otp",
-    "django_otp.plugins.otp_email",
-    "django_otp.plugins.otp_totp",
-    "django_otp.plugins.otp_static",
-    "otp_twilio",
-    "social_django",
-    "df_auth",
-    "df_api",
+    *DF_API_DRF_INSTALLED_APPS,
+    *DF_AUTH_INSTALLED_APPS,
+    "users",
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
@@ -104,23 +110,46 @@ AUTHENTICATION_BACKENDS = [
     "social_core.backends.discord.DiscordOAuth2",
 ]
 
-REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "df_api.openapi.AutoSchema",
-}
+REST_FRAMEWORK = {**REST_FRAMEWORK}
+REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] += (
+    "rest_framework.authentication.SessionAuthentication",
+)
 
-SPECTACULAR_SETTINGS = {
-    "TITLE": "DjangoFlow API",
-    "DESCRIPTION": "DjangoFlow API",
-    "VERSION": "1.0.0",
-    "SERVE_INCLUDE_SCHEMA": False,
-    "SWAGGER_UI_DIST": "SIDECAR",
-    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
-    "REDOC_DIST": "SIDECAR",
-    "SCHEMA_PATH_PREFIX": "/api/v1",
-    "COMPONENT_SPLIT_REQUEST": True,
-    "COMPONENT_NO_READ_ONLY_REQUIRED": True,
-    "ENUM_ADD_EXPLICIT_BLANK_NULL_CHOICE": False,
-}
+SPECTACULAR_SETTINGS = {**SPECTACULAR_SETTINGS}
 
 SOCIAL_AUTH_FACEBOOK_KEY = "xxxxxxx"
 SOCIAL_AUTH_FACEBOOK_SECRET = "xxxxxxx"
+
+SOCIAL_AUTH_PIPELINE = [
+    # Get the information we can about the user and return it in a simple
+    # format to create the user instance later. On some cases the details are
+    # already part of the auth response from the provider, but sometimes this
+    # could hit a provider API.
+    "social_core.pipeline.social_auth.social_details",
+    # Get the social uid from whichever service we're authing thru. The uid is
+    # the unique identifier of the given user in the provider.
+    "social_core.pipeline.social_auth.social_uid",
+    # Verifies that the current auth process is valid within the current
+    # project, this is where emails and domains whitelists are applied (if
+    # defined).
+    # 'social_core.pipeline.social_auth.auth_allowed',
+    # Checks if the current social-account is already associated in the site.
+    "social_core.pipeline.social_auth.social_user",
+    # Make up a username for this person, appends a random string at the end if
+    # there's any collision.
+    "social_core.pipeline.user.get_username",
+    # Send a validation email to the user to verify its email address.
+    # 'social_core.pipeline.mail.mail_validation',
+    # Associates the current social details with another user account with
+    # a similar email address.
+    "social_core.pipeline.social_auth.associate_by_email",
+    # Create a user account if we haven't found one yet.
+    "social_core.pipeline.user.create_user",
+    # Create the record that associated the social account with this user.
+    "social_core.pipeline.social_auth.associate_user",
+    # Populate the extra_data field in the social record with the values
+    # specified by settings (and the default ones like access_token, etc).
+    "social_core.pipeline.social_auth.load_extra_data",
+    # Update the user record with any changed info from the auth service.
+    "social_core.pipeline.user.user_details",
+]
