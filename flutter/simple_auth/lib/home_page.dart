@@ -152,7 +152,12 @@ class _OtpLoginInputsState extends State<_OtpLoginInputs> {
 
                     final authCubit = context.read<AuthCubit>();
                     if (email != null && otp != null) {
-                      await authCubit.loginWithEmailOTP(email: email, otp: otp);
+                      await authCubit.loginWithOTP(
+                        tokenObtainRequest: TokenObtainRequest(
+                          email: email,
+                          otp: otp,
+                        ),
+                      );
                     }
                   },
                   builder: (context, action, error) => ElevatedButton(
@@ -165,9 +170,9 @@ class _OtpLoginInputsState extends State<_OtpLoginInputs> {
                     if (form.valid) {
                       final email = form.control('email').value;
                       if (email != null) {
-                        await context
-                            .read<AuthCubit>()
-                            .requestOTP(email: email);
+                        await context.read<AuthCubit>().requestOTP(
+                              otpObtainRequest: OTPObtainRequest(email: email),
+                            );
                         _hasRequestedOtp.value = true;
                       }
                     } else {
