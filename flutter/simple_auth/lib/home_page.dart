@@ -64,9 +64,8 @@ class _HomePageState extends State<HomePage> {
                                   if (email != null && password != null) {
                                     await authCubit.loginWithOTP(
                                         tokenObtainRequest: TokenObtainRequest(
-                                      email: email,
+                                      username: email,
                                       password: password,
-                                      otp: null,
                                     ));
                                   }
                                 },
