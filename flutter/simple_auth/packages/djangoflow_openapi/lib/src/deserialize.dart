@@ -1,24 +1,19 @@
-import 'package:djangoflow_openapi/src/model/change.dart';
-import 'package:djangoflow_openapi/src/model/change_request.dart';
-import 'package:djangoflow_openapi/src/model/connect.dart';
-import 'package:djangoflow_openapi/src/model/connect_request.dart';
 import 'package:djangoflow_openapi/src/model/error.dart';
 import 'package:djangoflow_openapi/src/model/error_response.dart';
-import 'package:djangoflow_openapi/src/model/invite.dart';
-import 'package:djangoflow_openapi/src/model/invite_request.dart';
+import 'package:djangoflow_openapi/src/model/otp_device.dart';
+import 'package:djangoflow_openapi/src/model/otp_device_confirm_request.dart';
+import 'package:djangoflow_openapi/src/model/otp_device_request.dart';
+import 'package:djangoflow_openapi/src/model/otp_obtain.dart';
 import 'package:djangoflow_openapi/src/model/otp_obtain_request.dart';
-import 'package:djangoflow_openapi/src/model/set_password_request.dart';
-import 'package:djangoflow_openapi/src/model/signup.dart';
-import 'package:djangoflow_openapi/src/model/signup_request.dart';
-import 'package:djangoflow_openapi/src/model/social_o_auth1_token_obtain_request.dart';
+import 'package:djangoflow_openapi/src/model/paginated_otp_device_list.dart';
 import 'package:djangoflow_openapi/src/model/social_token_obtain_request.dart';
 import 'package:djangoflow_openapi/src/model/token.dart';
 import 'package:djangoflow_openapi/src/model/token_blacklist_request.dart';
 import 'package:djangoflow_openapi/src/model/token_obtain_request.dart';
 import 'package:djangoflow_openapi/src/model/token_refresh_request.dart';
 import 'package:djangoflow_openapi/src/model/token_verify_request.dart';
-import 'package:djangoflow_openapi/src/model/unlink.dart';
-import 'package:djangoflow_openapi/src/model/unlink_request.dart';
+import 'package:djangoflow_openapi/src/model/user.dart';
+import 'package:djangoflow_openapi/src/model/user_request.dart';
 
 final _regList = RegExp(r'^List<(.*)>$');
 final _regSet = RegExp(r'^Set<(.*)>$');
@@ -38,36 +33,23 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return (valueString == 'true' || valueString == '1') as ReturnType;
         case 'double':
           return (value is double ? value : double.parse('$value')) as ReturnType;
-        case 'Change':
-          return Change.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'ChangeRequest':
-          return ChangeRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'Connect':
-          return Connect.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'ConnectRequest':
-          return ConnectRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'Error':
           return Error.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'ErrorResponse':
           return ErrorResponse.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'Invite':
-          return Invite.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'InviteRequest':
-          return InviteRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'OTPDevice':
+          return OTPDevice.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'OTPDeviceConfirmRequest':
+          return OTPDeviceConfirmRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'OTPDeviceRequest':
+          return OTPDeviceRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'OTPObtain':
+          return OTPObtain.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'OTPObtainRequest':
           return OTPObtainRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'SetPasswordRequest':
-          return SetPasswordRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'Signup':
-          return Signup.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'SignupRequest':
-          return SignupRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'SocialOAuth1TokenObtainProviderEnum':
-          
-          
-        case 'SocialOAuth1TokenObtainRequest':
-          return SocialOAuth1TokenObtainRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'SocialTokenObtainProviderEnum':
+        case 'PaginatedOTPDeviceList':
+          return PaginatedOTPDeviceList.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'ProviderEnum':
           
           
         case 'SocialTokenObtainRequest':
@@ -82,10 +64,13 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return TokenRefreshRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'TokenVerifyRequest':
           return TokenVerifyRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'Unlink':
-          return Unlink.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'UnlinkRequest':
-          return UnlinkRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'TypeEnum':
+          
+          
+        case 'User':
+          return User.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'UserRequest':
+          return UserRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
         default:
           RegExpMatch? match;
 

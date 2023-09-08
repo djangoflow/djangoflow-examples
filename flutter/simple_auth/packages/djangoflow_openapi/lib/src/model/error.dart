@@ -23,6 +23,8 @@ class Error {
     required  this.code,
 
      this.field,
+
+     this.extraData,
   });
 
   @JsonKey(
@@ -61,17 +63,31 @@ class Error {
 
 
 
+  @JsonKey(
+    
+    name: r'extra_data',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final Map<String, Object>? extraData;
+
+
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is Error &&
      other.message == message &&
      other.code == code &&
-     other.field == field;
+     other.field == field &&
+     other.extraData == extraData;
 
   @override
   int get hashCode =>
     message.hashCode +
     code.hashCode +
-    field.hashCode;
+    field.hashCode +
+    extraData.hashCode;
 
   factory Error.fromJson(Map<String, dynamic> json) => _$ErrorFromJson(json);
 

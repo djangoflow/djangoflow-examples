@@ -1,4 +1,4 @@
-# djangoflow_openapi.model.SocialTokenObtainRequest
+# djangoflow_openapi.model.OTPObtain
 
 ## Load the model package
 ```dart
@@ -8,8 +8,9 @@ import 'package:djangoflow_openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accessToken** | **String** |  | 
-**provider** | [**ProviderEnum**](ProviderEnum.md) |  | 
+**username** | **String** |  | [optional] 
+**email** | **String** |  | [optional] 
+**phoneNumber** | **String** |  | [optional] 
 **otp** | **String** |  | [optional] 
 **password** | **String** |  | [optional] 
 

@@ -5,7 +5,7 @@
 // ignore_for_file: unused_element
 import 'package:json_annotation/json_annotation.dart';
 
-part 'token_obtain_request.g.dart';
+part 'user_request.g.dart';
 
 
 @JsonSerializable(
@@ -14,30 +14,54 @@ part 'token_obtain_request.g.dart';
   disallowUnrecognizedKeys: false,
   explicitToJson: true,
 )
-class TokenObtainRequest {
-  /// Returns a new [TokenObtainRequest] instance.
-  TokenObtainRequest({
+class UserRequest {
+  /// Returns a new [UserRequest] instance.
+  UserRequest({
 
-     this.otp,
+    required  this.email,
+
+     this.firstName,
+
+     this.lastName,
 
      this.password,
-
-     this.username,
-
-     this.email,
 
      this.phoneNumber,
   });
 
   @JsonKey(
     
-    name: r'otp',
+    name: r'email',
+    required: true,
+    includeIfNull: false
+  )
+
+
+  final String email;
+
+
+
+  @JsonKey(
+    
+    name: r'first_name',
     required: false,
     includeIfNull: false
   )
 
 
-  final String? otp;
+  final String? firstName;
+
+
+
+  @JsonKey(
+    
+    name: r'last_name',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final String? lastName;
 
 
 
@@ -55,30 +79,6 @@ class TokenObtainRequest {
 
   @JsonKey(
     
-    name: r'username',
-    required: false,
-    includeIfNull: false
-  )
-
-
-  final String? username;
-
-
-
-  @JsonKey(
-    
-    name: r'email',
-    required: false,
-    includeIfNull: false
-  )
-
-
-  final String? email;
-
-
-
-  @JsonKey(
-    
     name: r'phone_number',
     required: false,
     includeIfNull: false
@@ -90,24 +90,24 @@ class TokenObtainRequest {
 
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is TokenObtainRequest &&
-     other.otp == otp &&
-     other.password == password &&
-     other.username == username &&
+  bool operator ==(Object other) => identical(this, other) || other is UserRequest &&
      other.email == email &&
+     other.firstName == firstName &&
+     other.lastName == lastName &&
+     other.password == password &&
      other.phoneNumber == phoneNumber;
 
   @override
   int get hashCode =>
-    otp.hashCode +
-    password.hashCode +
-    username.hashCode +
     email.hashCode +
+    firstName.hashCode +
+    lastName.hashCode +
+    password.hashCode +
     phoneNumber.hashCode;
 
-  factory TokenObtainRequest.fromJson(Map<String, dynamic> json) => _$TokenObtainRequestFromJson(json);
+  factory UserRequest.fromJson(Map<String, dynamic> json) => _$UserRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TokenObtainRequestToJson(this);
+  Map<String, dynamic> toJson() => _$UserRequestToJson(this);
 
   @override
   String toString() {
