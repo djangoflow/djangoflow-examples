@@ -7,6 +7,16 @@ void main() {
   // TODO add properties to the entity
 
   group(SocialTokenObtainRequest, () {
+    // String accessToken
+    test('to test the property `accessToken`', () async {
+      // TODO
+    });
+
+    // ProviderEnum provider
+    test('to test the property `provider`', () async {
+      // TODO
+    });
+
     // String firstName
     test('to test the property `firstName`', () async {
       // TODO
@@ -17,13 +27,13 @@ void main() {
       // TODO
     });
 
-    // SocialTokenObtainProviderEnum provider
-    test('to test the property `provider`', () async {
+    // String otp
+    test('to test the property `otp`', () async {
       // TODO
     });
 
-    // String accessToken
-    test('to test the property `accessToken`', () async {
+    // String password
+    test('to test the property `password`', () async {
       // TODO
     });
 
