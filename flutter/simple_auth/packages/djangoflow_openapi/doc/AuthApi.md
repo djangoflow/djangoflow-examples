@@ -604,7 +604,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authUserCreate**
-> User authUserCreate(userRequest)
+> UserSignup authUserCreate(userSignupRequest)
 
 
 
@@ -620,10 +620,10 @@ import 'package:djangoflow_openapi/api.dart';
 //defaultApiClient.getAuthentication<HttpBasicAuth>('jwtAuth').password = 'YOUR_PASSWORD';
 
 final api = DjangoflowOpenapi().getAuthApi();
-final UserRequest userRequest = ; // UserRequest | 
+final UserSignupRequest userSignupRequest = ; // UserSignupRequest | 
 
 try {
-    final response = api.authUserCreate(userRequest);
+    final response = api.authUserCreate(userSignupRequest);
     print(response);
 } catch on DioError (e) {
     print('Exception when calling AuthApi->authUserCreate: $e\n');
@@ -634,11 +634,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userRequest** | [**UserRequest**](UserRequest.md)|  | 
+ **userSignupRequest** | [**UserSignupRequest**](UserSignupRequest.md)|  | 
 
 ### Return type
 
-[**User**](User.md)
+[**UserSignup**](UserSignup.md)
 
 ### Authorization
 

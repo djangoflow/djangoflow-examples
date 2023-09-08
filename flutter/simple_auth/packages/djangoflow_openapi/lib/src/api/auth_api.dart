@@ -22,8 +22,8 @@ import 'package:djangoflow_openapi/src/model/token_blacklist_request.dart';
 import 'package:djangoflow_openapi/src/model/token_obtain_request.dart';
 import 'package:djangoflow_openapi/src/model/token_refresh_request.dart';
 import 'package:djangoflow_openapi/src/model/token_verify_request.dart';
-import 'package:djangoflow_openapi/src/model/user.dart';
-import 'package:djangoflow_openapi/src/model/user_request.dart';
+import 'package:djangoflow_openapi/src/model/user_signup.dart';
+import 'package:djangoflow_openapi/src/model/user_signup_request.dart';
 
 class AuthApi {
 
@@ -1167,7 +1167,7 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   /// 
   ///
   /// Parameters:
-  /// * [userRequest] 
+  /// * [userSignupRequest] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1175,10 +1175,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [User] as data
+  /// Returns a [Future] containing a [Response] with a [UserSignup] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<User>> authUserCreate({ 
-    required UserRequest userRequest,
+  Future<Response<UserSignup>> authUserCreate({ 
+    required UserSignupRequest userSignupRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -1214,7 +1214,7 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(userRequest);
+_bodyData=jsonEncode(userSignupRequest);
     } catch(error, stackTrace) {
       throw DioError(
          requestOptions: _options.compose(
@@ -1236,11 +1236,11 @@ _bodyData=jsonEncode(userRequest);
       onReceiveProgress: onReceiveProgress,
     );
 
-    User? _responseData;
+    UserSignup? _responseData;
 
     try {
 final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<User, User>(rawData, 'User', growable: true);
+_responseData = rawData == null ? null : deserialize<UserSignup, UserSignup>(rawData, 'UserSignup', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1251,7 +1251,7 @@ _responseData = rawData == null ? null : deserialize<User, User>(rawData, 'User'
       );
     }
 
-    return Response<User>(
+    return Response<UserSignup>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

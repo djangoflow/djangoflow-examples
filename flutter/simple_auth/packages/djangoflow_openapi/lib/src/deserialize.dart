@@ -12,8 +12,8 @@ import 'package:djangoflow_openapi/src/model/token_blacklist_request.dart';
 import 'package:djangoflow_openapi/src/model/token_obtain_request.dart';
 import 'package:djangoflow_openapi/src/model/token_refresh_request.dart';
 import 'package:djangoflow_openapi/src/model/token_verify_request.dart';
-import 'package:djangoflow_openapi/src/model/user.dart';
-import 'package:djangoflow_openapi/src/model/user_request.dart';
+import 'package:djangoflow_openapi/src/model/user_signup.dart';
+import 'package:djangoflow_openapi/src/model/user_signup_request.dart';
 
 final _regList = RegExp(r'^List<(.*)>$');
 final _regSet = RegExp(r'^Set<(.*)>$');
@@ -67,10 +67,10 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
         case 'TypeEnum':
           
           
-        case 'User':
-          return User.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'UserRequest':
-          return UserRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'UserSignup':
+          return UserSignup.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'UserSignupRequest':
+          return UserSignupRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
         default:
           RegExpMatch? match;
 

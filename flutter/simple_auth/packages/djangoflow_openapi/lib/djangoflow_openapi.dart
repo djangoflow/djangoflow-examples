@@ -26,5 +26,5 @@ export 'package:djangoflow_openapi/src/model/token_obtain_request.dart';
 export 'package:djangoflow_openapi/src/model/token_refresh_request.dart';
 export 'package:djangoflow_openapi/src/model/token_verify_request.dart';
 export 'package:djangoflow_openapi/src/model/type_enum.dart';
-export 'package:djangoflow_openapi/src/model/user.dart';
-export 'package:djangoflow_openapi/src/model/user_request.dart';
+export 'package:djangoflow_openapi/src/model/user_signup.dart';
+export 'package:djangoflow_openapi/src/model/user_signup_request.dart';

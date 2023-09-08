@@ -23,6 +23,10 @@ class SocialTokenObtainRequest {
 
     required  this.provider,
 
+     this.firstName,
+
+     this.lastName,
+
      this.otp,
 
      this.password,
@@ -54,6 +58,30 @@ class SocialTokenObtainRequest {
 
   @JsonKey(
     
+    name: r'first_name',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final String? firstName;
+
+
+
+  @JsonKey(
+    
+    name: r'last_name',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final String? lastName;
+
+
+
+  @JsonKey(
+    
     name: r'otp',
     required: false,
     includeIfNull: false
@@ -80,6 +108,8 @@ class SocialTokenObtainRequest {
   bool operator ==(Object other) => identical(this, other) || other is SocialTokenObtainRequest &&
      other.accessToken == accessToken &&
      other.provider == provider &&
+     other.firstName == firstName &&
+     other.lastName == lastName &&
      other.otp == otp &&
      other.password == password;
 
@@ -87,6 +117,8 @@ class SocialTokenObtainRequest {
   int get hashCode =>
     accessToken.hashCode +
     provider.hashCode +
+    firstName.hashCode +
+    lastName.hashCode +
     otp.hashCode +
     password.hashCode;
 

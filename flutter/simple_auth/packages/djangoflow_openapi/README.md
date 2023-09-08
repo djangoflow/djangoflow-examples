@@ -98,8 +98,8 @@ Class | Method | HTTP request | Description
  - [TokenRefreshRequest](doc/TokenRefreshRequest.md)
  - [TokenVerifyRequest](doc/TokenVerifyRequest.md)
  - [TypeEnum](doc/TypeEnum.md)
- - [User](doc/User.md)
- - [UserRequest](doc/UserRequest.md)
+ - [UserSignup](doc/UserSignup.md)
+ - [UserSignupRequest](doc/UserSignupRequest.md)
 
 
 ## Documentation For Authorization
