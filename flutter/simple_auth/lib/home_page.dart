@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                           widget = const _OtpLogin();
                           break;
                         case _AuthOptions.passwordLogin:
-                          widget = _EmailPasswordInput(
+                          widget = _EmailPasswordInputs(
                             actionButtonBuilder: (context, form) {
                               return LinearProgressBuilder(
                                 action: (_) async {
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                             },
                           );
                         case _AuthOptions.register:
-                          widget = _EmailPasswordInput(
+                          widget = _EmailPasswordInputs(
                             actionButtonBuilder: (context, form) {
                               return LinearProgressBuilder(
                                 action: (_) async {
@@ -154,6 +154,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 8,
                   ),
+                  const _OtpDevices(),
                   ElevatedButton(
                     onPressed: () async {
                       await context.read<AuthCubit>().logout();
@@ -205,8 +206,8 @@ class _AuthOptionList extends StatelessWidget {
   }
 }
 
-class _EmailPasswordInput extends StatelessWidget {
-  const _EmailPasswordInput({
+class _EmailPasswordInputs extends StatelessWidget {
+  const _EmailPasswordInputs({
     required this.actionButtonBuilder,
   });
 
@@ -599,4 +600,93 @@ enum _AuthOptions {
   register,
   otpLogin,
   passwordLogin,
+}
+
+class _OtpDevices extends StatelessWidget {
+  const _OtpDevices({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Text('2FA Devices'),
+        _Create2FAInputs(
+          actionButtonBuilder: (BuildContext context, FormGroup form) {
+            return LinearProgressBuilder(
+              action: (_) async {
+                // TODO
+              },
+              builder: (context, action, error) => ElevatedButton(
+                onPressed: action,
+                child: const Text('Create'),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class _Create2FAInputs extends StatelessWidget {
+  const _Create2FAInputs({
+    required this.actionButtonBuilder,
+  });
+
+  final Widget Function(BuildContext context, FormGroup form)
+      actionButtonBuilder;
+
+  FormGroup get _form => FormGroup({
+        'name': FormControl<String>(
+          validators: [
+            Validators.required,
+          ],
+        ),
+        'device_type': FormControl<TypeEnum>(
+          validators: [
+            Validators.required,
+          ],
+        ),
+      });
+
+  @override
+  Widget build(BuildContext context) => ReactiveFormBuilder(
+      form: () => _form,
+      builder: (context, form, child) {
+        return Column(
+          children: [
+            ReactiveTextField(
+                formControlName: 'name',
+                decoration: const InputDecoration(
+                  labelText: 'Name',
+                ),
+                validationMessages: {
+                  ValidationMessage.required: (_) => 'Name must not be empty',
+                }),
+            const SizedBox(
+              height: 8,
+            ),
+            ReactiveDropdownField<TypeEnum>(
+                items: TypeEnum.values
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Text(
+                          e.name,
+                        ),
+                      ),
+                    )
+                    .toList(),
+                formControlName: 'device_type',
+                decoration: const InputDecoration(
+                  labelText: 'Device Type',
+                ),
+                validationMessages: {
+                  ValidationMessage.required: (_) =>
+                      'Device Type must not be empty',
+                }),
+            actionButtonBuilder.call(context, form),
+          ],
+        );
+      });
 }
