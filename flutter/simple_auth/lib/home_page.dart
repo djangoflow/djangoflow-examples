@@ -210,7 +210,7 @@ class _SocialLoginButtons extends StatelessWidget {
                 if (gAuth != null && gAuth.accessToken != null) {
                   await authCubit.loginWithSocialProvider(
                     socialTokenObtainRequest: SocialTokenObtainRequest(
-                      provider: SocialTokenObtainProviderEnum.googleOauth2,
+                      provider: ProviderEnum.googleOauth2,
                       accessToken: gAuth.accessToken!,
                     ),
                   );
@@ -222,7 +222,7 @@ class _SocialLoginButtons extends StatelessWidget {
                       .read<AuthCubit>()
                       .socialLogins
                       .getSocialLoginByProvider(
-                        SocialTokenObtainProviderEnum.googleOauth2,
+                        ProviderEnum.googleOauth2,
                       ) as GoogleSocialLogin)
                   .googleSignIn,
             )
@@ -232,7 +232,7 @@ class _SocialLoginButtons extends StatelessWidget {
                 final authCubit = context.read<AuthCubit>();
                 final socialLogin =
                     authCubit.socialLogins.getSocialLoginByProvider(
-                  SocialTokenObtainProviderEnum.googleOauth2,
+                  ProviderEnum.googleOauth2,
                 );
 
                 final result = await authCubit
@@ -270,7 +270,7 @@ class _SocialLoginButtons extends StatelessWidget {
               final authCubit = context.read<AuthCubit>();
               final socialLogin =
                   authCubit.socialLogins.getSocialLoginByProvider(
-                SocialTokenObtainProviderEnum.facebook,
+                ProviderEnum.facebook,
               );
 
               final result =
@@ -312,8 +312,7 @@ class _SocialLoginButtons extends StatelessWidget {
               action: (_) async {
                 final authCubit = context.read<AuthCubit>();
                 final socialLogin = authCubit.socialLogins
-                    .getSocialLoginByProvider(
-                        SocialTokenObtainProviderEnum.appleId);
+                    .getSocialLoginByProvider(ProviderEnum.appleId);
 
                 final result = (await authCubit.authenticateWithSocialProvider<
                     AuthorizationCredentialAppleID>(
@@ -347,7 +346,7 @@ class _SocialLoginButtons extends StatelessWidget {
           ),
           LinearProgressBuilder(
             action: (_) async {
-              const providerEnum = SocialTokenObtainProviderEnum.discord;
+              const providerEnum = ProviderEnum.discord;
               final authCubit = context.read<AuthCubit>();
               final socialLogin =
                   authCubit.socialLogins.getSocialLoginByProvider(providerEnum);
