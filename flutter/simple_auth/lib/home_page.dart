@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                                       form.control('password').value;
 
                                   if (email != null && password != null) {
-                                    await authCubit.loginWithOTP(
+                                    await authCubit.obtainTokenAndLogin(
                                         tokenObtainRequest: TokenObtainRequest(
                                       username: email,
                                       password: password,
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     );
                                     if (userSignup != null) {
-                                      await authCubit.loginWithOTP(
+                                      await authCubit.obtainTokenAndLogin(
                                         tokenObtainRequest: TokenObtainRequest(
                                           username:
                                               email, // this is confusing, needs to be discussed with BE
@@ -169,7 +169,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 class _AuthOptionList extends StatelessWidget {
-  const _AuthOptionList({super.key, required this.onSelected});
+  const _AuthOptionList({required this.onSelected});
   final Function(_AuthOptions selectedAuthOption) onSelected;
 
   @override
@@ -207,7 +207,6 @@ class _AuthOptionList extends StatelessWidget {
 
 class _EmailPasswordInput extends StatelessWidget {
   const _EmailPasswordInput({
-    super.key,
     required this.actionButtonBuilder,
   });
 
@@ -265,7 +264,7 @@ class _EmailPasswordInput extends StatelessWidget {
 }
 
 class _OtpLogin extends StatefulWidget {
-  const _OtpLogin({super.key});
+  const _OtpLogin();
 
   @override
   State<_OtpLogin> createState() => _OtpLoginState();
@@ -365,7 +364,7 @@ class _OtpLoginState extends State<_OtpLogin> {
 
                           final authCubit = context.read<AuthCubit>();
                           if (email != null && otp != null) {
-                            await authCubit.loginWithOTP(
+                            await authCubit.obtainTokenAndLogin(
                               tokenObtainRequest: TokenObtainRequest(
                                 email: email,
                                 otp: otp,
