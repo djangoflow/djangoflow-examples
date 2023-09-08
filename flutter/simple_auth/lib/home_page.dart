@@ -101,8 +101,9 @@ class _HomePageState extends State<HomePage> {
                                     if (userSignup != null) {
                                       await authCubit.loginWithOTP(
                                         tokenObtainRequest: TokenObtainRequest(
-                                          email: userSignup.email,
-                                          password: userSignup.password,
+                                          username:
+                                              email, // this is confusing, needs to be discussed with BE
+                                          password: password,
                                         ),
                                       );
                                     } else {
@@ -126,7 +127,21 @@ class _HomePageState extends State<HomePage> {
                           );
                       }
 
-                      return widget;
+                      return Column(
+                        children: [
+                          if (value != null)
+                            TextButton(
+                              onPressed: () {
+                                _selectedAuthOption.value = null;
+                              },
+                              child: const Text('Reset Login Options'),
+                            ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          widget,
+                        ],
+                      );
                     },
                   ),
                   const SizedBox(
