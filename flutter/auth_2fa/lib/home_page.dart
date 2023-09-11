@@ -1,7 +1,9 @@
+import 'package:auth_2fa/api_repository.dart';
 import 'package:djangoflow_auth/djangoflow_auth.dart';
 import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_list_bloc/flutter_list_bloc.dart';
 import 'package:progress_builder/progress_builder.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -25,9 +27,33 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Simple Auth'),
+          title: const Text('Auth 2FA'),
         ),
-        body: BlocBuilder<AuthCubit, AuthState>(
+        body: BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) => state.whenOrNull(
+            authenticated: (_) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Authenticated'),
+                ),
+              );
+              context.read<UsersUsersDataBloc>().load(
+                    const UsersUsersRetrieveFilter(id: '0'),
+                  );
+              return null;
+            },
+            unauthenticated: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Unauthenticated'),
+                ),
+              );
+              context.read<UsersUsersDataBloc>().clear();
+              return null;
+            },
+          ),
+          listenWhen: (previous, current) =>
+              current.isAuthenticated || current.isUnauthenticated,
           builder: (context, state) {
             final isAuthenticated = state.isAuthenticated;
 
@@ -128,6 +154,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 8,
                   ),
+                  const _OtpDeviceListView(),
                   ElevatedButton(
                     onPressed: () async {
                       await context.read<AuthCubit>().logout();
@@ -379,8 +406,309 @@ class _OtpLoginState extends State<_OtpLogin> {
   }
 }
 
+class _OtpDeviceListView extends StatelessWidget {
+  const _OtpDeviceListView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListViewBlocBuilder<OtpListBloc, OTPDevice, AuthOtpDeviceListFilter>(
+      create: (context) => OtpListBloc()..load(),
+      headerBuilder: (context, state) => const _AddOtpDeviceInputs(),
+      emptyBuilder: (context, state) => const Text('No 2FA Devices'),
+      loadingBuilder: (context, state) => const Text('Loading...'),
+      loadingItemsCount: 1,
+      errorBuilder: (context, state) =>
+          const Text('Failed to load 2FA Devices'),
+      withRefreshIndicator: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, state, index, item) => Card(
+        margin: EdgeInsets.zero,
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 8,
+            horizontal: 16,
+          ),
+          key: ValueKey(item.id),
+          title: Text(item.name ?? 'No Name'),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(item.type.name),
+              if (item.confirmed != true) ...[
+                const SizedBox(
+                  height: 8,
+                ),
+                LinearProgressBuilder(
+                  action: (_) async {
+                    final deviceName = item.name;
+                    final deviceId = item.id;
+
+                    if (deviceName == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Device name is null'),
+                        ),
+                      );
+                      return;
+                    }
+
+                    if (deviceId == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Device id is null'),
+                        ),
+                      );
+                      return;
+                    }
+
+                    final authCubit = context.read<AuthCubit>();
+                    final otpListBloc = context.read<OtpListBloc>();
+
+                    await authCubit.requestOTP(
+                      otpObtainRequest: OTPObtainRequest(
+                        email: deviceName,
+                      ),
+                    );
+                    if (context.mounted) {
+                      final code = await showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (context) => _OtpDeviceConfirmation(
+                          deviceId: deviceId.toString(),
+                        ),
+                      );
+                      if (code != null && code is String) {
+                        await otpListBloc.confirmOtpDevice(
+                          id: deviceId.toString(),
+                          otpDeviceConfirmRequest: OTPDeviceConfirmRequest(
+                            code: code,
+                          ),
+                        );
+                      }
+                    } else {
+                      throw Exception('Context is not mounted');
+                    }
+                  },
+                  onSuccess: () => context.read<OtpListBloc>().reload(),
+                  builder: (context, action, error) => TextButton.icon(
+                    onPressed: action,
+                    icon: const Icon(Icons.check),
+                    label: const Text('Confirm this device'),
+                  ),
+                ),
+              ],
+            ],
+          ),
+          trailing: IconButton(
+            onPressed: () async {
+              final id = item.id;
+              if (id != null) {
+                final cubit = context.read<OtpListBloc>();
+                await cubit.destroy(
+                  id: id.toString(),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('id is null'),
+                  ),
+                );
+              }
+            },
+            icon: const Icon(Icons.delete),
+          ),
+        ),
+      ),
+      shrinkWrap: true,
+    );
+  }
+}
+
+class _AddOtpDeviceInputs extends StatelessWidget {
+  const _AddOtpDeviceInputs({super.key});
+
+  FormGroup get _form => fb.group({
+        'device_name': FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.email,
+          ],
+        ),
+        'device_type': FormControl<TypeEnum>(
+          validators: [
+            Validators.required,
+          ],
+        ),
+      });
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveFormBuilder(
+      form: () => _form,
+      builder: (context, formGroup, child) {
+        return Column(
+          children: [
+            ReactiveTextField(
+              formControlName: 'device_name',
+              decoration: const InputDecoration(
+                labelText: 'Email/Phone',
+              ),
+              validationMessages: {
+                ValidationMessage.required: (_) => 'Name must not be empty',
+              },
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            ReactiveDropdownField<TypeEnum>(
+              formControlName: 'device_type',
+              decoration: const InputDecoration(
+                labelText: 'Device Type',
+              ),
+              items: TypeEnum.values
+                  .map(
+                    (e) => DropdownMenuItem(
+                      value: e,
+                      child: Text(e.name),
+                    ),
+                  )
+                  .toList(),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            LinearProgressBuilder(
+              action: (_) async {
+                final cubit = context.read<OtpListBloc>();
+                final deviceName = formGroup.control('device_name').value;
+                final deviceType = formGroup.control('device_type').value;
+
+                if (deviceName != null && deviceType != null) {
+                  await cubit.create(
+                    oTPDeviceRequest: OTPDeviceRequest(
+                      type: deviceType,
+                      name: deviceName,
+                    ),
+                  );
+                } else {
+                  formGroup.markAllAsTouched();
+                }
+              },
+              builder: (context, action, error) => ElevatedButton(
+                onPressed: action,
+                child: const Text('Add 2FA Device'),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 enum _AuthOptions {
   register,
   otpLogin,
   passwordLogin,
+}
+
+class OtpListBloc extends AuthOtpDeviceListBloc {
+  AuthApi get _authApi => ApiRepository.instance.auth;
+
+  Future<void> confirmOtpDevice({
+    required String id,
+    required OTPDeviceConfirmRequest otpDeviceConfirmRequest,
+  }) async {
+    await _authApi.authOtpDeviceConfirmCreate(
+      id: id,
+      oTPDeviceConfirmRequest: otpDeviceConfirmRequest,
+    );
+
+    super.reload();
+  }
+}
+
+class _OtpDeviceConfirmation extends StatelessWidget {
+  final String deviceId;
+  const _OtpDeviceConfirmation({super.key, required this.deviceId});
+  FormGroup get _form => fb.group(
+        {
+          'otp': FormControl<String>(
+            validators: [
+              Validators.required,
+              Validators.minLength(6),
+              Validators.maxLength(6),
+            ],
+          ),
+        },
+      );
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      bottom: true,
+      child: Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+          top: 16,
+          left: 16,
+          right: 16,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Input OTP to confirm the device!',
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            ReactiveFormBuilder(
+              form: () => _form,
+              builder: (context, formGroup, child) {
+                return Column(
+                  children: [
+                    ReactiveTextField(
+                      formControlName: 'otp',
+                      decoration: const InputDecoration(
+                        labelText: 'OTP',
+                      ),
+                      validationMessages: {
+                        ValidationMessage.required: (_) =>
+                            'OTP must not be empty',
+                        ValidationMessage.minLength: (_) =>
+                            'OTP must be 6 digits',
+                        ValidationMessage.maxLength: (_) =>
+                            'OTP must be 6 digits',
+                      },
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Builder(
+                      builder: (context) {
+                        return ElevatedButton(
+                          onPressed: () {
+                            if (formGroup.valid) {
+                              final otp = formGroup.control('otp').value;
+
+                              if (otp != null) {
+                                Navigator.pop(context, otp);
+                              }
+                            } else {
+                              formGroup.markAllAsTouched();
+                            }
+                          },
+                          child: const Text('Confirm'),
+                        );
+                      },
+                    )
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
