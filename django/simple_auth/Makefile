@@ -5,7 +5,7 @@ init: $(VENV) pip-tools requirements.txt
 	$(ACTIVATE) pip install -r requirements.txt
 
 $(VENV):
-	python -m venv $(VENV)
+	python3 -m venv $(VENV)
 
 pip-tools:
 	$(ACTIVATE) pip install --upgrade pip pip-tools

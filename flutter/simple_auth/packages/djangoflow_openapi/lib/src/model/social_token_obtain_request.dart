@@ -3,7 +3,7 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:djangoflow_openapi/src/model/social_token_obtain_provider_enum.dart';
+import 'package:djangoflow_openapi/src/model/provider_enum.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'social_token_obtain_request.g.dart';
@@ -19,14 +19,42 @@ class SocialTokenObtainRequest {
   /// Returns a new [SocialTokenObtainRequest] instance.
   SocialTokenObtainRequest({
 
+    required  this.accessToken,
+
+    required  this.provider,
+
      this.firstName,
 
      this.lastName,
 
-    required  this.provider,
+     this.otp,
 
-    required  this.accessToken,
+     this.password,
   });
+
+  @JsonKey(
+    
+    name: r'access_token',
+    required: true,
+    includeIfNull: false
+  )
+
+
+  final String accessToken;
+
+
+
+  @JsonKey(
+    
+    name: r'provider',
+    required: true,
+    includeIfNull: false
+  )
+
+
+  final ProviderEnum provider;
+
+
 
   @JsonKey(
     
@@ -54,41 +82,45 @@ class SocialTokenObtainRequest {
 
   @JsonKey(
     
-    name: r'provider',
-    required: true,
+    name: r'otp',
+    required: false,
     includeIfNull: false
   )
 
 
-  final SocialTokenObtainProviderEnum provider;
+  final String? otp;
 
 
 
   @JsonKey(
     
-    name: r'access_token',
-    required: true,
+    name: r'password',
+    required: false,
     includeIfNull: false
   )
 
 
-  final String accessToken;
+  final String? password;
 
 
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is SocialTokenObtainRequest &&
+     other.accessToken == accessToken &&
+     other.provider == provider &&
      other.firstName == firstName &&
      other.lastName == lastName &&
-     other.provider == provider &&
-     other.accessToken == accessToken;
+     other.otp == otp &&
+     other.password == password;
 
   @override
   int get hashCode =>
+    accessToken.hashCode +
+    provider.hashCode +
     firstName.hashCode +
     lastName.hashCode +
-    provider.hashCode +
-    accessToken.hashCode;
+    otp.hashCode +
+    password.hashCode;
 
   factory SocialTokenObtainRequest.fromJson(Map<String, dynamic> json) => _$SocialTokenObtainRequestFromJson(json);
 

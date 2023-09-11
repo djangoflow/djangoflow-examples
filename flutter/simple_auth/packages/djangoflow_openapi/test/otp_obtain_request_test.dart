@@ -7,6 +7,11 @@ void main() {
   // TODO add properties to the entity
 
   group(OTPObtainRequest, () {
+    // String username
+    test('to test the property `username`', () async {
+      // TODO
+    });
+
     // String email
     test('to test the property `email`', () async {
       // TODO

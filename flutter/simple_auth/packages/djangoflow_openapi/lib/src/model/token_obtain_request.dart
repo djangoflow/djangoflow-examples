@@ -18,38 +18,16 @@ class TokenObtainRequest {
   /// Returns a new [TokenObtainRequest] instance.
   TokenObtainRequest({
 
-     this.email,
-
-     this.phoneNumber,
-
      this.otp,
 
      this.password,
+
+     this.username,
+
+     this.email,
+
+     this.phoneNumber,
   });
-
-  @JsonKey(
-    
-    name: r'email',
-    required: false,
-    includeIfNull: false
-  )
-
-
-  final String? email;
-
-
-
-  @JsonKey(
-    
-    name: r'phone_number',
-    required: false,
-    includeIfNull: false
-  )
-
-
-  final String? phoneNumber;
-
-
 
   @JsonKey(
     
@@ -75,19 +53,57 @@ class TokenObtainRequest {
 
 
 
+  @JsonKey(
+    
+    name: r'username',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final String? username;
+
+
+
+  @JsonKey(
+    
+    name: r'email',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final String? email;
+
+
+
+  @JsonKey(
+    
+    name: r'phone_number',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final String? phoneNumber;
+
+
+
   @override
   bool operator ==(Object other) => identical(this, other) || other is TokenObtainRequest &&
-     other.email == email &&
-     other.phoneNumber == phoneNumber &&
      other.otp == otp &&
-     other.password == password;
+     other.password == password &&
+     other.username == username &&
+     other.email == email &&
+     other.phoneNumber == phoneNumber;
 
   @override
   int get hashCode =>
-    email.hashCode +
-    phoneNumber.hashCode +
     otp.hashCode +
-    password.hashCode;
+    password.hashCode +
+    username.hashCode +
+    email.hashCode +
+    phoneNumber.hashCode;
 
   factory TokenObtainRequest.fromJson(Map<String, dynamic> json) => _$TokenObtainRequestFromJson(json);
 

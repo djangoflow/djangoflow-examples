@@ -7,16 +7,6 @@ void main() {
   // TODO add properties to the entity
 
   group(TokenObtainRequest, () {
-    // String email
-    test('to test the property `email`', () async {
-      // TODO
-    });
-
-    // String phoneNumber
-    test('to test the property `phoneNumber`', () async {
-      // TODO
-    });
-
     // String otp
     test('to test the property `otp`', () async {
       // TODO
@@ -24,6 +14,21 @@ void main() {
 
     // String password
     test('to test the property `password`', () async {
+      // TODO
+    });
+
+    // String username
+    test('to test the property `username`', () async {
+      // TODO
+    });
+
+    // String email
+    test('to test the property `email`', () async {
+      // TODO
+    });
+
+    // String phoneNumber
+    test('to test the property `phoneNumber`', () async {
       // TODO
     });
 

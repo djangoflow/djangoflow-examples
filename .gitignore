@@ -1,5 +1,8 @@
-.idea/
-venv/
+/venv/
 .env
 *.sqlite*
 __pycache__
+.DS_Store
+/.idea/**
+!/.idea/*.iml
+!/.idea/modules.xml

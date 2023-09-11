@@ -61,22 +61,22 @@ Future<void> main() async {
               ],
             ),
             type: SocialLoginType.fromProvider(
-              SocialTokenObtainProviderEnum.googleOauth2,
+              ProviderEnum.googleOauth2,
             ),
           ),
           AppleSocialLogin(
             type: SocialLoginType.fromProvider(
-              SocialTokenObtainProviderEnum.appleId,
+              ProviderEnum.appleId,
             ),
           ),
           FacebookSocialLogin(
             type: SocialLoginType.fromProvider(
-              SocialTokenObtainProviderEnum.facebook,
+              ProviderEnum.facebook,
             ),
           ),
           DiscordSocialLoginProvider(
             type: SocialLoginType.fromProvider(
-              SocialTokenObtainProviderEnum.discord,
+              ProviderEnum.discord,
             ),
             oAuth2Configuration: const OAuth2Configuration(
               clientId: 'your_discord_client_id',

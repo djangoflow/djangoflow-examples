@@ -8,6 +8,7 @@ import 'package:djangoflow_openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**username** | **String** |  | [optional] 
 **email** | **String** |  | [optional] 
 **phoneNumber** | **String** |  | [optional] 
 **otp** | **String** |  | [optional] 

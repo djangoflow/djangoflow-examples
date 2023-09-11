@@ -12,17 +12,23 @@ import 'package:progress_builder/progress_builder.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
-  FormGroup get _form => FormGroup({
-        'email': FormControl<String>(
-          validators: [
-            Validators.required,
-            Validators.email,
-          ],
-        ),
-        'otp': FormControl<String?>(),
-      });
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final ValueNotifier<_AuthOptions?> _selectedAuthOption =
+      ValueNotifier<_AuthOptions?>(null);
+
+  @override
+  void dispose() {
+    _selectedAuthOption.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -35,18 +41,98 @@ class HomePage extends StatelessWidget {
             return ListView(
               padding: const EdgeInsets.all(8),
               children: [
-                if (!isAuthenticated)
-                  ReactiveFormBuilder(
-                    form: () => _form,
-                    builder: (context, formGroup, child) => const Column(
-                      children: [
-                        _OtpLoginInputs(),
-                        SizedBox(height: 8),
-                        _SocialLoginButtons(),
-                      ],
-                    ),
-                  )
-                else ...[
+                if (!isAuthenticated) ...[
+                  ValueListenableBuilder<_AuthOptions?>(
+                    valueListenable: _selectedAuthOption,
+                    builder: (context, value, child) {
+                      Widget widget;
+                      switch (value) {
+                        case _AuthOptions.otpLogin:
+                          widget = const _OtpLogin();
+                          break;
+                        case _AuthOptions.passwordLogin:
+                          widget = _EmailPasswordInputs(
+                            actionButtonBuilder: (context, form) {
+                              return LinearProgressBuilder(
+                                action: (_) async {
+                                  final email = form.control('email').value;
+                                  final password =
+                                      form.control('password').value;
+
+                                  if (email != null && password != null) {
+                                    await _signupOrLogin(
+                                      context: context,
+                                      email: email,
+                                      password: password,
+                                      isSigningUp: false,
+                                    );
+                                  }
+                                },
+                                builder: (context, action, error) {
+                                  return ElevatedButton(
+                                    onPressed: action,
+                                    child: const Text('Login'),
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        case _AuthOptions.register:
+                          widget = _EmailPasswordInputs(
+                            actionButtonBuilder: (context, form) {
+                              return LinearProgressBuilder(
+                                action: (_) async {
+                                  final email = form.control('email').value;
+                                  final password =
+                                      form.control('password').value;
+
+                                  if (email != null && password != null) {
+                                    await _signupOrLogin(
+                                      context: context,
+                                      email: email,
+                                      password: password,
+                                      isSigningUp: true,
+                                    );
+                                  }
+                                },
+                                builder: (context, action, error) {
+                                  return ElevatedButton(
+                                    onPressed: action,
+                                    child: const Text('Register'),
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        default:
+                          widget = _AuthOptionList(
+                            onSelected: (selectedAuthOption) =>
+                                _selectedAuthOption.value = selectedAuthOption,
+                          );
+                      }
+
+                      return Column(
+                        children: [
+                          if (value != null)
+                            TextButton(
+                              onPressed: () {
+                                _selectedAuthOption.value = null;
+                              },
+                              child: const Text('Reset Login Options'),
+                            ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          widget,
+                        ],
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const _SocialLoginButtons(),
+                ] else ...[
                   const Text('Authenticated'),
                   const SizedBox(height: 8),
                   SelectableText('Token: ${state.token}'),
@@ -65,16 +151,145 @@ class HomePage extends StatelessWidget {
           },
         ),
       );
+
+  Future<void> _signupOrLogin({
+    required BuildContext context,
+    required bool isSigningUp,
+    required String email,
+    required String password,
+  }) async {
+    final authCubit = context.read<AuthCubit>();
+    if (isSigningUp) {
+      await authCubit.registerOrInviteUser(
+        userSignupRequest: UserSignupRequest(
+          email: email,
+          password: password,
+        ),
+      );
+    }
+
+    await authCubit.obtainTokenAndLogin(
+      tokenObtainRequest: TokenObtainRequest(
+        username: email, // this is confusing, needs to be discussed with BE
+        password: password,
+      ),
+    );
+  }
 }
 
-class _OtpLoginInputs extends StatefulWidget {
-  const _OtpLoginInputs();
+class _AuthOptionList extends StatelessWidget {
+  const _AuthOptionList({required this.onSelected});
+  final Function(_AuthOptions selectedAuthOption) onSelected;
 
   @override
-  State<_OtpLoginInputs> createState() => _OtpLoginInputsState();
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            onSelected(_AuthOptions.otpLogin);
+          },
+          child: const Text('OTP Login'),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            onSelected(_AuthOptions.passwordLogin);
+          },
+          child: const Text('Password Login'),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            onSelected(_AuthOptions.register);
+          },
+          child: const Text('Register'),
+        ),
+      ],
+    );
+  }
 }
 
-class _OtpLoginInputsState extends State<_OtpLoginInputs> {
+class _EmailPasswordInputs extends StatelessWidget {
+  const _EmailPasswordInputs({
+    required this.actionButtonBuilder,
+  });
+
+  final Widget Function(BuildContext context, FormGroup form)
+      actionButtonBuilder;
+
+  FormGroup get _form => FormGroup({
+        'email': FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.email,
+          ],
+        ),
+        'password': FormControl<String?>(
+          validators: [
+            Validators.required,
+          ],
+        ),
+      });
+
+  @override
+  Widget build(BuildContext context) => ReactiveFormBuilder(
+      form: () => _form,
+      builder: (context, form, child) {
+        return Column(
+          children: [
+            ReactiveTextField(
+                formControlName: 'email',
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                ),
+                validationMessages: {
+                  ValidationMessage.required: (_) => 'Email must not be empty',
+                  ValidationMessage.email: (_) =>
+                      'Must be a valid email address',
+                }),
+            const SizedBox(
+              height: 8,
+            ),
+            ReactiveTextField(
+              formControlName: 'password',
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                labelText: 'Password',
+              ),
+              validationMessages: {
+                ValidationMessage.required: (_) => 'Password must not be empty',
+              },
+            ),
+            actionButtonBuilder.call(context, form),
+          ],
+        );
+      });
+}
+
+class _OtpLogin extends StatefulWidget {
+  const _OtpLogin();
+
+  @override
+  State<_OtpLogin> createState() => _OtpLoginState();
+}
+
+class _OtpLoginState extends State<_OtpLogin> {
+  FormGroup get _form => FormGroup({
+        'email': FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.email,
+          ],
+        ),
+        'otp': FormControl<String?>(),
+      });
+
   final ValueNotifier<bool> _hasRequestedOtp = ValueNotifier<bool>(false);
 
   @override
@@ -105,83 +320,96 @@ class _OtpLoginInputsState extends State<_OtpLoginInputs> {
 
   @override
   Widget build(BuildContext context) {
-    final form = ReactiveForm.of(context) as FormGroup;
-
-    return Column(
-      children: [
-        ReactiveTextField(
-            formControlName: 'email',
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              labelText: 'Email',
-            ),
-            validationMessages: {
-              ValidationMessage.required: (_) => 'Email must not be empty',
-              ValidationMessage.email: (_) => 'Must be a valid email address',
-            }),
-        const SizedBox(
-          height: 8,
-        ),
-        ValueListenableBuilder(
-          valueListenable: _hasRequestedOtp,
-          builder: (context, value, child) => value == true
-              ? ReactiveTextField(
-                  formControlName: 'otp',
-                  keyboardType: TextInputType.number,
+    return ReactiveFormBuilder(
+        form: () => _form,
+        builder: (context, form, child) {
+          return Column(
+            children: [
+              ReactiveTextField(
+                  formControlName: 'email',
+                  keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
-                    labelText: 'OTP',
+                    labelText: 'Email',
                   ),
                   validationMessages: {
-                    ValidationMessage.required: (_) => 'OTP must not be empty',
-                    ValidationMessage.minLength: (_) => 'OTP must be 6 digits',
-                    ValidationMessage.maxLength: (_) => 'OTP must be 6 digits',
-                  },
-                )
-              : const SizedBox(),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-        ValueListenableBuilder<bool>(
-          valueListenable: _hasRequestedOtp,
-          builder: (context, value, child) => value == true
-              ? LinearProgressBuilder(
-                  action: (_) async {
-                    final email = form.control('email').value;
-                    final otp = form.control('otp').value;
+                    ValidationMessage.required: (_) =>
+                        'Email must not be empty',
+                    ValidationMessage.email: (_) =>
+                        'Must be a valid email address',
+                  }),
+              const SizedBox(
+                height: 8,
+              ),
+              ValueListenableBuilder(
+                valueListenable: _hasRequestedOtp,
+                builder: (context, value, child) => value == true
+                    ? ReactiveTextField(
+                        formControlName: 'otp',
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          labelText: 'OTP',
+                        ),
+                        validationMessages: {
+                          ValidationMessage.required: (_) =>
+                              'OTP must not be empty',
+                          ValidationMessage.minLength: (_) =>
+                              'OTP must be 6 digits',
+                          ValidationMessage.maxLength: (_) =>
+                              'OTP must be 6 digits',
+                        },
+                      )
+                    : const SizedBox(),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              ValueListenableBuilder<bool>(
+                valueListenable: _hasRequestedOtp,
+                builder: (context, value, child) => value == true
+                    ? LinearProgressBuilder(
+                        action: (_) async {
+                          final email = form.control('email').value;
+                          final otp = form.control('otp').value;
 
-                    final authCubit = context.read<AuthCubit>();
-                    if (email != null && otp != null) {
-                      await authCubit.loginWithEmailOTP(email: email, otp: otp);
-                    }
-                  },
-                  builder: (context, action, error) => ElevatedButton(
-                    onPressed: action,
-                    child: const Text('Login'),
-                  ),
-                )
-              : LinearProgressBuilder(
-                  action: (_) async {
-                    if (form.valid) {
-                      final email = form.control('email').value;
-                      if (email != null) {
-                        await context
-                            .read<AuthCubit>()
-                            .requestOTP(email: email);
-                        _hasRequestedOtp.value = true;
-                      }
-                    } else {
-                      form.markAllAsTouched();
-                    }
-                  },
-                  builder: (context, action, error) => ElevatedButton(
-                    onPressed: action,
-                    child: const Text('Request OTP'),
-                  ),
-                ),
-        ),
-      ],
-    );
+                          final authCubit = context.read<AuthCubit>();
+                          if (email != null && otp != null) {
+                            await authCubit.obtainTokenAndLogin(
+                              tokenObtainRequest: TokenObtainRequest(
+                                email: email,
+                                otp: otp,
+                              ),
+                            );
+                          }
+                        },
+                        builder: (context, action, error) => ElevatedButton(
+                          onPressed: action,
+                          child: const Text('Login'),
+                        ),
+                      )
+                    : LinearProgressBuilder(
+                        action: (_) async {
+                          if (form.valid) {
+                            final email = form.control('email').value;
+                            if (email != null) {
+                              await context.read<AuthCubit>().requestOTP(
+                                    otpObtainRequest:
+                                        OTPObtainRequest(email: email),
+                                  );
+                              _hasRequestedOtp.value = true;
+                            }
+                          } else {
+                            form.markAllAsTouched();
+                          }
+                        },
+                        builder: (context, action, error) => ElevatedButton(
+                          onPressed: action,
+                          child: const Text('Request OTP'),
+                        ),
+                      ),
+              ),
+            ],
+          );
+        });
   }
 }
 
@@ -210,7 +438,7 @@ class _SocialLoginButtons extends StatelessWidget {
                 if (gAuth != null && gAuth.accessToken != null) {
                   await authCubit.loginWithSocialProvider(
                     socialTokenObtainRequest: SocialTokenObtainRequest(
-                      provider: SocialTokenObtainProviderEnum.googleOauth2,
+                      provider: ProviderEnum.googleOauth2,
                       accessToken: gAuth.accessToken!,
                     ),
                   );
@@ -222,7 +450,7 @@ class _SocialLoginButtons extends StatelessWidget {
                       .read<AuthCubit>()
                       .socialLogins
                       .getSocialLoginByProvider(
-                        SocialTokenObtainProviderEnum.googleOauth2,
+                        ProviderEnum.googleOauth2,
                       ) as GoogleSocialLogin)
                   .googleSignIn,
             )
@@ -232,7 +460,7 @@ class _SocialLoginButtons extends StatelessWidget {
                 final authCubit = context.read<AuthCubit>();
                 final socialLogin =
                     authCubit.socialLogins.getSocialLoginByProvider(
-                  SocialTokenObtainProviderEnum.googleOauth2,
+                  ProviderEnum.googleOauth2,
                 );
 
                 final result = await authCubit
@@ -270,7 +498,7 @@ class _SocialLoginButtons extends StatelessWidget {
               final authCubit = context.read<AuthCubit>();
               final socialLogin =
                   authCubit.socialLogins.getSocialLoginByProvider(
-                SocialTokenObtainProviderEnum.facebook,
+                ProviderEnum.facebook,
               );
 
               final result =
@@ -312,8 +540,7 @@ class _SocialLoginButtons extends StatelessWidget {
               action: (_) async {
                 final authCubit = context.read<AuthCubit>();
                 final socialLogin = authCubit.socialLogins
-                    .getSocialLoginByProvider(
-                        SocialTokenObtainProviderEnum.appleId);
+                    .getSocialLoginByProvider(ProviderEnum.appleId);
 
                 final result = (await authCubit.authenticateWithSocialProvider<
                     AuthorizationCredentialAppleID>(
@@ -347,7 +574,7 @@ class _SocialLoginButtons extends StatelessWidget {
           ),
           LinearProgressBuilder(
             action: (_) async {
-              const providerEnum = SocialTokenObtainProviderEnum.discord;
+              const providerEnum = ProviderEnum.discord;
               final authCubit = context.read<AuthCubit>();
               final socialLogin =
                   authCubit.socialLogins.getSocialLoginByProvider(providerEnum);
@@ -375,4 +602,10 @@ class _SocialLoginButtons extends StatelessWidget {
           ),
         ],
       );
+}
+
+enum _AuthOptions {
+  register,
+  otpLogin,
+  passwordLogin,
 }

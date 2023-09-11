@@ -7,33 +7,33 @@ void main() {
   final instance = DjangoflowOpenapi().getAuthApi();
 
   group(AuthApi, () {
-    //Future<Change> authChangeCreate({ ChangeRequest changeRequest }) async
-    test('test authChangeCreate', () async {
-      // TODO
-    });
-
-    //Future<Connect> authConnectCreate({ ConnectRequest connectRequest }) async
-    test('test authConnectCreate', () async {
-      // TODO
-    });
-
-    //Future<Invite> authInviteCreate({ InviteRequest inviteRequest }) async
-    test('test authInviteCreate', () async {
-      // TODO
-    });
-
-    //Future authOtpCreate({ OTPObtainRequest oTPObtainRequest }) async
+    //Future<OTPObtain> authOtpCreate({ OTPObtainRequest oTPObtainRequest }) async
     test('test authOtpCreate', () async {
       // TODO
     });
 
-    //Future authSetPasswordCreate({ SetPasswordRequest setPasswordRequest }) async
-    test('test authSetPasswordCreate', () async {
+    //Future authOtpDeviceConfirmCreate(String id, OTPDeviceConfirmRequest oTPDeviceConfirmRequest) async
+    test('test authOtpDeviceConfirmCreate', () async {
       // TODO
     });
 
-    //Future<Signup> authSignupCreate({ SignupRequest signupRequest }) async
-    test('test authSignupCreate', () async {
+    //Future<OTPDevice> authOtpDeviceCreate(OTPDeviceRequest oTPDeviceRequest) async
+    test('test authOtpDeviceCreate', () async {
+      // TODO
+    });
+
+    //Future<Object> authOtpDeviceDestroy(String id) async
+    test('test authOtpDeviceDestroy', () async {
+      // TODO
+    });
+
+    //Future<PaginatedOTPDeviceList> authOtpDeviceList({ int limit, int offset }) async
+    test('test authOtpDeviceList', () async {
+      // TODO
+    });
+
+    //Future<OTPDevice> authOtpDeviceRetrieve(String id) async
+    test('test authOtpDeviceRetrieve', () async {
       // TODO
     });
 
@@ -44,16 +44,6 @@ void main() {
 
     //Future<Token> authSocialCreate(SocialTokenObtainRequest socialTokenObtainRequest) async
     test('test authSocialCreate', () async {
-      // TODO
-    });
-
-    //Future<Token> authSocialOauth1ConnectCreate(SocialOAuth1TokenObtainRequest socialOAuth1TokenObtainRequest) async
-    test('test authSocialOauth1ConnectCreate', () async {
-      // TODO
-    });
-
-    //Future<Token> authSocialOauth1Create(SocialOAuth1TokenObtainRequest socialOAuth1TokenObtainRequest) async
-    test('test authSocialOauth1Create', () async {
       // TODO
     });
 
@@ -77,8 +67,8 @@ void main() {
       // TODO
     });
 
-    //Future<Unlink> authUnlinkCreate({ UnlinkRequest unlinkRequest }) async
-    test('test authUnlinkCreate', () async {
+    //Future<UserSignup> authUserCreate(UserSignupRequest userSignupRequest) async
+    test('test authUserCreate', () async {
       // TODO
     });
 
