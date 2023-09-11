@@ -5,7 +5,7 @@
 // ignore_for_file: unused_element
 import 'package:json_annotation/json_annotation.dart';
 
-part 'token_obtain_request.g.dart';
+part 'user_identity_request.g.dart';
 
 
 @JsonSerializable(
@@ -14,11 +14,13 @@ part 'token_obtain_request.g.dart';
   disallowUnrecognizedKeys: false,
   explicitToJson: true,
 )
-class TokenObtainRequest {
-  /// Returns a new [TokenObtainRequest] instance.
-  TokenObtainRequest({
+class UserIdentityRequest {
+  /// Returns a new [UserIdentityRequest] instance.
+  UserIdentityRequest({
 
-     this.otp,
+     this.firstName,
+
+     this.lastName,
 
      this.password,
 
@@ -27,13 +29,25 @@ class TokenObtainRequest {
 
   @JsonKey(
     
-    name: r'otp',
+    name: r'first_name',
     required: false,
     includeIfNull: false
   )
 
 
-  final String? otp;
+  final String? firstName;
+
+
+
+  @JsonKey(
+    
+    name: r'last_name',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final String? lastName;
 
 
 
@@ -62,20 +76,22 @@ class TokenObtainRequest {
 
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is TokenObtainRequest &&
-     other.otp == otp &&
+  bool operator ==(Object other) => identical(this, other) || other is UserIdentityRequest &&
+     other.firstName == firstName &&
+     other.lastName == lastName &&
      other.password == password &&
      other.email == email;
 
   @override
   int get hashCode =>
-    otp.hashCode +
+    firstName.hashCode +
+    lastName.hashCode +
     password.hashCode +
     email.hashCode;
 
-  factory TokenObtainRequest.fromJson(Map<String, dynamic> json) => _$TokenObtainRequestFromJson(json);
+  factory UserIdentityRequest.fromJson(Map<String, dynamic> json) => _$UserIdentityRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$TokenObtainRequestToJson(this);
+  Map<String, dynamic> toJson() => _$UserIdentityRequestToJson(this);
 
   @override
   String toString() {

@@ -78,10 +78,17 @@ Class | Method | HTTP request | Description
 [*AuthApi*](doc/AuthApi.md) | [**authTokenRefreshCreate**](doc/AuthApi.md#authtokenrefreshcreate) | **POST** /api/v1/auth/token/refresh/ | 
 [*AuthApi*](doc/AuthApi.md) | [**authTokenVerifyCreate**](doc/AuthApi.md#authtokenverifycreate) | **POST** /api/v1/auth/token/verify/ | 
 [*AuthApi*](doc/AuthApi.md) | [**authUserCreate**](doc/AuthApi.md#authusercreate) | **POST** /api/v1/auth/user/ | 
+[*AuthApi*](doc/AuthApi.md) | [**authUserPartialUpdate**](doc/AuthApi.md#authuserpartialupdate) | **PATCH** /api/v1/auth/user/{id}/ | 
+[*AuthApi*](doc/AuthApi.md) | [**authUserSetPasswordCreate**](doc/AuthApi.md#authusersetpasswordcreate) | **POST** /api/v1/auth/user/{id}/set_password/ | 
+[*AuthApi*](doc/AuthApi.md) | [**authUserUpdate**](doc/AuthApi.md#authuserupdate) | **PUT** /api/v1/auth/user/{id}/ | 
+[*UsersApi*](doc/UsersApi.md) | [**usersUsersPartialUpdate**](doc/UsersApi.md#usersuserspartialupdate) | **PATCH** /api/v1/users/users/{id}/ | 
+[*UsersApi*](doc/UsersApi.md) | [**usersUsersRetrieve**](doc/UsersApi.md#usersusersretrieve) | **GET** /api/v1/users/users/{id}/ | 
+[*UsersApi*](doc/UsersApi.md) | [**usersUsersUpdate**](doc/UsersApi.md#usersusersupdate) | **PUT** /api/v1/users/users/{id}/ | 
 
 
 ## Documentation For Models
 
+ - [ChangePasswordRequest](doc/ChangePasswordRequest.md)
  - [Error](doc/Error.md)
  - [ErrorResponse](doc/ErrorResponse.md)
  - [OTPDevice](doc/OTPDevice.md)
@@ -90,6 +97,8 @@ Class | Method | HTTP request | Description
  - [OTPObtain](doc/OTPObtain.md)
  - [OTPObtainRequest](doc/OTPObtainRequest.md)
  - [PaginatedOTPDeviceList](doc/PaginatedOTPDeviceList.md)
+ - [PatchedUserIdentityRequest](doc/PatchedUserIdentityRequest.md)
+ - [PatchedUserRequest](doc/PatchedUserRequest.md)
  - [ProviderEnum](doc/ProviderEnum.md)
  - [SocialTokenObtainRequest](doc/SocialTokenObtainRequest.md)
  - [Token](doc/Token.md)
@@ -98,8 +107,10 @@ Class | Method | HTTP request | Description
  - [TokenRefreshRequest](doc/TokenRefreshRequest.md)
  - [TokenVerifyRequest](doc/TokenVerifyRequest.md)
  - [TypeEnum](doc/TypeEnum.md)
- - [UserSignup](doc/UserSignup.md)
- - [UserSignupRequest](doc/UserSignupRequest.md)
+ - [User](doc/User.md)
+ - [UserIdentity](doc/UserIdentity.md)
+ - [UserIdentityRequest](doc/UserIdentityRequest.md)
+ - [UserRequest](doc/UserRequest.md)
 
 
 ## Documentation For Authorization

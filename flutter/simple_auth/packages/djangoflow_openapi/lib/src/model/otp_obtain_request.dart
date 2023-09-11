@@ -18,28 +18,12 @@ class OTPObtainRequest {
   /// Returns a new [OTPObtainRequest] instance.
   OTPObtainRequest({
 
-     this.username,
-
      this.email,
-
-     this.phoneNumber,
 
      this.otp,
 
      this.password,
   });
-
-  @JsonKey(
-    
-    name: r'username',
-    required: false,
-    includeIfNull: false
-  )
-
-
-  final String? username;
-
-
 
   @JsonKey(
     
@@ -50,18 +34,6 @@ class OTPObtainRequest {
 
 
   final String? email;
-
-
-
-  @JsonKey(
-    
-    name: r'phone_number',
-    required: false,
-    includeIfNull: false
-  )
-
-
-  final String? phoneNumber;
 
 
 
@@ -91,17 +63,13 @@ class OTPObtainRequest {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is OTPObtainRequest &&
-     other.username == username &&
      other.email == email &&
-     other.phoneNumber == phoneNumber &&
      other.otp == otp &&
      other.password == password;
 
   @override
   int get hashCode =>
-    username.hashCode +
     email.hashCode +
-    phoneNumber.hashCode +
     otp.hashCode +
     password.hashCode;
 
