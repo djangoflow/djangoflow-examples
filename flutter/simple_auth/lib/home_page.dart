@@ -55,18 +55,17 @@ class _HomePageState extends State<HomePage> {
                             actionButtonBuilder: (context, form) {
                               return LinearProgressBuilder(
                                 action: (_) async {
-                                  final authCubit = context.read<AuthCubit>();
-
                                   final email = form.control('email').value;
                                   final password =
                                       form.control('password').value;
 
                                   if (email != null && password != null) {
-                                    await authCubit.obtainTokenAndLogin(
-                                        tokenObtainRequest: TokenObtainRequest(
-                                      username: email,
+                                    await _signupOrLogin(
+                                      context: context,
+                                      email: email,
                                       password: password,
-                                    ));
+                                      isSigningUp: false,
+                                    );
                                   }
                                 },
                                 builder: (context, action, error) {
@@ -83,31 +82,17 @@ class _HomePageState extends State<HomePage> {
                             actionButtonBuilder: (context, form) {
                               return LinearProgressBuilder(
                                 action: (_) async {
-                                  final authCubit = context.read<AuthCubit>();
-
                                   final email = form.control('email').value;
                                   final password =
                                       form.control('password').value;
 
                                   if (email != null && password != null) {
-                                    final userSignup =
-                                        await authCubit.registerOrInviteUser(
-                                      userSignupRequest: UserSignupRequest(
-                                        email: email,
-                                        password: password,
-                                      ),
+                                    await _signupOrLogin(
+                                      context: context,
+                                      email: email,
+                                      password: password,
+                                      isSigningUp: true,
                                     );
-                                    if (userSignup != null) {
-                                      await authCubit.obtainTokenAndLogin(
-                                        tokenObtainRequest: TokenObtainRequest(
-                                          username:
-                                              email, // this is confusing, needs to be discussed with BE
-                                          password: password,
-                                        ),
-                                      );
-                                    } else {
-                                      throw Exception('Registration failed');
-                                    }
                                   }
                                 },
                                 builder: (context, action, error) {
@@ -154,7 +139,6 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 8,
                   ),
-                  const _OtpDevices(),
                   ElevatedButton(
                     onPressed: () async {
                       await context.read<AuthCubit>().logout();
@@ -167,6 +151,30 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       );
+
+  Future<void> _signupOrLogin({
+    required BuildContext context,
+    required bool isSigningUp,
+    required String email,
+    required String password,
+  }) async {
+    final authCubit = context.read<AuthCubit>();
+    if (isSigningUp) {
+      await authCubit.registerOrInviteUser(
+        userSignupRequest: UserSignupRequest(
+          email: email,
+          password: password,
+        ),
+      );
+    }
+
+    await authCubit.obtainTokenAndLogin(
+      tokenObtainRequest: TokenObtainRequest(
+        username: email, // this is confusing, needs to be discussed with BE
+        password: password,
+      ),
+    );
+  }
 }
 
 class _AuthOptionList extends StatelessWidget {
@@ -600,93 +608,4 @@ enum _AuthOptions {
   register,
   otpLogin,
   passwordLogin,
-}
-
-class _OtpDevices extends StatelessWidget {
-  const _OtpDevices({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text('2FA Devices'),
-        _Create2FAInputs(
-          actionButtonBuilder: (BuildContext context, FormGroup form) {
-            return LinearProgressBuilder(
-              action: (_) async {
-                // TODO
-              },
-              builder: (context, action, error) => ElevatedButton(
-                onPressed: action,
-                child: const Text('Create'),
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class _Create2FAInputs extends StatelessWidget {
-  const _Create2FAInputs({
-    required this.actionButtonBuilder,
-  });
-
-  final Widget Function(BuildContext context, FormGroup form)
-      actionButtonBuilder;
-
-  FormGroup get _form => FormGroup({
-        'name': FormControl<String>(
-          validators: [
-            Validators.required,
-          ],
-        ),
-        'device_type': FormControl<TypeEnum>(
-          validators: [
-            Validators.required,
-          ],
-        ),
-      });
-
-  @override
-  Widget build(BuildContext context) => ReactiveFormBuilder(
-      form: () => _form,
-      builder: (context, form, child) {
-        return Column(
-          children: [
-            ReactiveTextField(
-                formControlName: 'name',
-                decoration: const InputDecoration(
-                  labelText: 'Name',
-                ),
-                validationMessages: {
-                  ValidationMessage.required: (_) => 'Name must not be empty',
-                }),
-            const SizedBox(
-              height: 8,
-            ),
-            ReactiveDropdownField<TypeEnum>(
-                items: TypeEnum.values
-                    .map(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(
-                          e.name,
-                        ),
-                      ),
-                    )
-                    .toList(),
-                formControlName: 'device_type',
-                decoration: const InputDecoration(
-                  labelText: 'Device Type',
-                ),
-                validationMessages: {
-                  ValidationMessage.required: (_) =>
-                      'Device Type must not be empty',
-                }),
-            actionButtonBuilder.call(context, form),
-          ],
-        );
-      });
 }
