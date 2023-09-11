@@ -294,7 +294,6 @@ class _OtpLoginState extends State<_OtpLogin> {
 
   @override
   void initState() {
-    _hasRequestedOtp.addListener(_hasOtpRequestedListener);
     super.initState();
   }
 
@@ -302,20 +301,6 @@ class _OtpLoginState extends State<_OtpLogin> {
   void dispose() {
     super.dispose();
     _hasRequestedOtp.dispose();
-  }
-
-  void _hasOtpRequestedListener() {
-    final form = ReactiveForm.of(context) as FormGroup;
-    if (_hasRequestedOtp.value == true) {
-      form.control('otp').setValidators([
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(6),
-      ]);
-    } else {
-      form.control('otp').setValidators([]);
-      form.control('otp').markAsUntouched();
-    }
   }
 
   @override
@@ -349,14 +334,6 @@ class _OtpLoginState extends State<_OtpLogin> {
                         decoration: const InputDecoration(
                           labelText: 'OTP',
                         ),
-                        validationMessages: {
-                          ValidationMessage.required: (_) =>
-                              'OTP must not be empty',
-                          ValidationMessage.minLength: (_) =>
-                              'OTP must be 6 digits',
-                          ValidationMessage.maxLength: (_) =>
-                              'OTP must be 6 digits',
-                        },
                       )
                     : const SizedBox(),
               ),
