@@ -1,5 +1,6 @@
 import 'package:auth_2fa/api_repository.dart';
 import 'package:auth_2fa/main.dart';
+import 'package:dio/dio.dart';
 import 'package:djangoflow_auth/djangoflow_auth.dart';
 import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 import 'package:flutter/material.dart';
@@ -85,9 +86,11 @@ class _HomePageState extends State<HomePage> {
                                       context: context,
                                       email: email,
                                       password: password,
-                                      isSigningUp: false,
                                     );
                                   }
+                                },
+                                onError: (error) async {
+                                  await _onEmailPasswordLoginError(error, form);
                                 },
                                 builder: (context, action, error) {
                                   return ElevatedButton(
@@ -156,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 8,
                   ),
-                  const _2FASwitch(),
+                  const _TwoFactorSwitch(),
                   const SizedBox(
                     height: 8,
                   ),
@@ -174,11 +177,88 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
+  Future<void> _onEmailPasswordLoginError(Object error, FormGroup form) async {
+    final authCubit = context.read<AuthCubit>();
+    if (error is DioException) {
+      if (error.response?.statusCode == 401) {
+        final errorsJson = (error.response?.data
+            as Map<String, dynamic>?)?['errors'] as List<dynamic>?;
+        if (errorsJson != null) {
+          final twoFaError = errorsJson.firstWhere(
+              (element) => element['code'] == '2fa_required',
+              orElse: () => -1);
+          if (twoFaError != -1) {
+            final otpDevicesJson = twoFaError['extra_data']['devices'];
+
+            if (otpDevicesJson != null) {
+              debugPrint(otpDevicesJson.toString());
+              final otpDevices = <OTPDevice>[];
+              for (final otpDeviceJson in otpDevicesJson) {
+                otpDevices.add(
+                  OTPDevice.fromJson(
+                    otpDeviceJson,
+                  ),
+                );
+              }
+
+              final selectedValue = await showModalBottomSheet(
+                context: context,
+                builder: (context) => _OtpDeviceSelector(
+                  availableOtpDevices: otpDevices,
+                ),
+              );
+
+              if (selectedValue != null &&
+                  selectedValue is OTPDevice &&
+                  selectedValue.id != null) {
+                if (context.mounted) {
+                  await authCubit.requestOTP(
+                    otpObtainRequest: OTPObtainRequest(
+                      email: selectedValue.name,
+                    ),
+                  );
+                  if (context.mounted) {
+                    final code = await showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      builder: (context) => _OtpDeviceConfirmation(
+                        deviceId: selectedValue.id.toString(),
+                      ),
+                    );
+                    if (code != null && code is String) {
+                      final email = form.control('email').value;
+                      final password = form.control('password').value;
+                      if (email != null &&
+                          password != null &&
+                          context.mounted) {
+                        await _signupOrLogin(
+                          context: context,
+                          email: email,
+                          password: password,
+                          otp: code,
+                        );
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          } else {
+            throw error;
+          }
+        }
+      }
+    } else {
+      throw error;
+    }
+  }
+
   Future<void> _signupOrLogin({
     required BuildContext context,
-    required bool isSigningUp,
+    bool isSigningUp = false,
     required String email,
     required String password,
+    String? otp,
   }) async {
     final authCubit = context.read<AuthCubit>();
     if (isSigningUp) {
@@ -194,6 +274,7 @@ class _HomePageState extends State<HomePage> {
       tokenObtainRequest: TokenObtainRequest(
         email: email,
         password: password,
+        otp: otp,
       ),
     );
   }
@@ -662,8 +743,9 @@ class _OtpDeviceConfirmation extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
+            Text(
               'Input OTP to confirm the device!',
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(
               height: 8,
@@ -719,8 +801,8 @@ class _OtpDeviceConfirmation extends StatelessWidget {
   }
 }
 
-class _2FASwitch extends StatelessWidget {
-  const _2FASwitch({super.key});
+class _TwoFactorSwitch extends StatelessWidget {
+  const _TwoFactorSwitch({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -743,6 +825,52 @@ class _2FASwitch extends StatelessWidget {
       loadingBuilder: (context, state) => const Text('Loading'),
       emptyBuilder: (context, state) => const Text('No User Data'),
       builder: (context, state, itemBuilder) => itemBuilder(context),
+    );
+  }
+}
+
+class _OtpDeviceSelector extends StatelessWidget {
+  const _OtpDeviceSelector({
+    super.key,
+    this.availableOtpDevices = const <OTPDevice>[],
+  });
+  final List<OTPDevice> availableOtpDevices;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(
+        16,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Please select a 2FA device to verify your identity',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: availableOtpDevices.length,
+            itemBuilder: (context, index) {
+              final otpDevice = availableOtpDevices[index];
+              return Card(
+                margin: EdgeInsets.zero,
+                child: ListTile(
+                  title: Text(otpDevice.name ?? 'No Name'),
+                  subtitle: Text(otpDevice.type.name),
+                  onTap: () {
+                    Navigator.pop(context, otpDevice);
+                  },
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
