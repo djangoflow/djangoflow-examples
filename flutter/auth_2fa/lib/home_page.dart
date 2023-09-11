@@ -1,4 +1,5 @@
 import 'package:auth_2fa/api_repository.dart';
+import 'package:auth_2fa/main.dart';
 import 'package:djangoflow_auth/djangoflow_auth.dart';
 import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void dispose() {
     _selectedAuthOption.dispose();
+
     super.dispose();
   }
 
@@ -151,6 +153,10 @@ class _HomePageState extends State<HomePage> {
                   const Text('Authenticated'),
                   const SizedBox(height: 8),
                   SelectableText('Token: ${state.token}'),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  const _2FASwitch(),
                   const SizedBox(
                     height: 8,
                   ),
@@ -709,6 +715,34 @@ class _OtpDeviceConfirmation extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _2FASwitch extends StatelessWidget {
+  const _2FASwitch({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DataBlocBuilder<UsersUsersDataBloc, User, UsersUsersRetrieveFilter>(
+      itemBuilder: (context, state) => SwitchListTile(
+        key: ValueKey(state.data?.is2faEnabled),
+        title: const Text('2FA Enabled'),
+        value: state.data?.is2faEnabled ?? false,
+        onChanged: (value) async {
+          final usersDataBloc = context.read<UsersUsersDataBloc>();
+          await usersDataBloc.partialUpdate(
+            id: defaultUserId,
+            patchedUserRequest: PatchedUserRequest(
+              is2faEnabled: value,
+            ),
+          );
+          usersDataBloc.load();
+        },
+      ),
+      loadingBuilder: (context, state) => const Text('Loading'),
+      emptyBuilder: (context, state) => const Text('No User Data'),
+      builder: (context, state, itemBuilder) => itemBuilder(context),
     );
   }
 }
