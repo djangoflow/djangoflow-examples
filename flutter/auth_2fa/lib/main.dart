@@ -11,6 +11,8 @@ import 'package:path_provider/path_provider.dart';
 import 'api_repository.dart';
 import 'home_page.dart';
 
+const defaultUserId = '0';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -27,10 +29,26 @@ Future<void> main() async {
     kIsWeb || Platform.isIOS ? baseUrl : baseUrlForAndroid,
   );
 
+  ApiRepository.instance.interceptors.add(JwtAuthInterceptor());
+
   runApp(
-    BlocProvider<AuthCubit>(
-      create: (context) =>
-          AuthCubit.instance..authApi = ApiRepository.instance.auth,
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>(
+          create: (context) =>
+              AuthCubit.instance..authApi = ApiRepository.instance.auth,
+        ),
+        BlocProvider<UsersUsersDataBloc>(
+          create: (context) {
+            final cubit = UsersUsersDataBloc();
+            if (context.read<AuthCubit>().state.isAuthenticated) {
+              cubit.load(const UsersUsersRetrieveFilter(id: defaultUserId));
+            }
+
+            return cubit;
+          },
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Simple Auth',
