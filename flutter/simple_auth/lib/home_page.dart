@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
     final authCubit = context.read<AuthCubit>();
     if (isSigningUp) {
       await authCubit.registerOrInviteUser(
-        userSignupRequest: UserSignupRequest(
+        userIdentityRequest: UserIdentityRequest(
           email: email,
           password: password,
         ),
@@ -170,7 +170,7 @@ class _HomePageState extends State<HomePage> {
 
     await authCubit.obtainTokenAndLogin(
       tokenObtainRequest: TokenObtainRequest(
-        username: email, // this is confusing, needs to be discussed with BE
+        email: email,
         password: password,
       ),
     );
