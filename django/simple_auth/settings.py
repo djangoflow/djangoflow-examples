@@ -97,6 +97,11 @@ STATIC_URL = "/static/"
 
 ALLOWED_HOSTS = ["*"]
 
+DF_AUTH = {
+    "USER_IDENTITY_FIELDS": {
+        "email": "rest_framework.serializers.EmailField",
+    }
+}
 
 AUTHENTICATION_BACKENDS = [
     "df_auth.backends.TestEmailBackend",
