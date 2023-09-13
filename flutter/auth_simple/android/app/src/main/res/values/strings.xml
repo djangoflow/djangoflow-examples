@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Simple Auth</string>
+    <string name="app_name">Auth Simple</string>
     <string name="facebook_app_id">994262658365758</string>
     <string name="fb_login_protocol_scheme">fb994262658365758</string>
     <string name="facebook_client_token">b06e78b610167958f0e8c10e2d4bff07</string>

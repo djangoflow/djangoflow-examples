@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Simple Auth'),
+          title: const Text('Auth Simple'),
         ),
         body: BlocBuilder<AuthCubit, AuthState>(
           builder: (context, state) {

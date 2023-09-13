@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Simple Auth demonstrates how to use the djangoflow_auth package along with additional social authentication packages.",
+    "description": "Auth Simple demonstrates how to use the djangoflow_auth package along with additional social authentication packages.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [{
