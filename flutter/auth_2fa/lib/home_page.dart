@@ -492,7 +492,7 @@ class _OtpLoginState extends State<_OtpLogin> {
 }
 
 class _OtpDeviceListView extends StatelessWidget {
-  const _OtpDeviceListView({super.key});
+  const _OtpDeviceListView();
 
   @override
   Widget build(BuildContext context) {
@@ -613,7 +613,7 @@ class _OtpDeviceListView extends StatelessWidget {
 }
 
 class _AddOtpDeviceInputs extends StatelessWidget {
-  const _AddOtpDeviceInputs({super.key});
+  const _AddOtpDeviceInputs();
 
   FormGroup get _form => fb.group({
         'device_name': FormControl<String>(
@@ -720,7 +720,7 @@ class OtpListBloc extends AuthOtpDevicesListBloc {
 
 class _OtpDeviceConfirmation extends StatelessWidget {
   final String deviceId;
-  const _OtpDeviceConfirmation({super.key, required this.deviceId});
+  const _OtpDeviceConfirmation({required this.deviceId});
   FormGroup get _form => fb.group(
         {
           'otp': FormControl<String>(
@@ -805,7 +805,7 @@ class _OtpDeviceConfirmation extends StatelessWidget {
 }
 
 class _TwoFactorSwitch extends StatelessWidget {
-  const _TwoFactorSwitch({super.key});
+  const _TwoFactorSwitch();
 
   @override
   Widget build(BuildContext context) {
@@ -834,7 +834,6 @@ class _TwoFactorSwitch extends StatelessWidget {
 
 class _OtpDeviceSelector extends StatelessWidget {
   const _OtpDeviceSelector({
-    super.key,
     this.availableOtpDevices = const <OTPDevice>[],
   });
   final List<OTPDevice> availableOtpDevices;
