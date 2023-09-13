@@ -32,6 +32,7 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra_fields)
 
+
 class User(AbstractUser):
     objects = UserManager()
 
@@ -40,7 +41,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=32, unique=True, null=True, blank=True)
-    invited_by = models.ForeignKey(
+    created_by = models.ForeignKey(
         "self", on_delete=models.SET_NULL, null=True, blank=True
     )
     is_2fa_enabled = models.BooleanField(default=False)
