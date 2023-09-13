@@ -23,6 +23,7 @@ Method | HTTP request | Description
 [**authTokenVerifyCreate**](AuthApi.md#authtokenverifycreate) | **POST** /api/v1/auth/token/verify/ | 
 [**authUserCreate**](AuthApi.md#authusercreate) | **POST** /api/v1/auth/user/ | 
 [**authUserPartialUpdate**](AuthApi.md#authuserpartialupdate) | **PATCH** /api/v1/auth/user/{id}/ | 
+[**authUserRetrieve**](AuthApi.md#authuserretrieve) | **GET** /api/v1/auth/user/{id}/ | 
 [**authUserSetPasswordCreate**](AuthApi.md#authusersetpasswordcreate) | **POST** /api/v1/auth/user/{id}/set_password/ | 
 [**authUserUpdate**](AuthApi.md#authuserupdate) | **PUT** /api/v1/auth/user/{id}/ | 
 
@@ -76,7 +77,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authOtpDeviceConfirmCreate**
-> authOtpDeviceConfirmCreate(id, oTPDeviceConfirmRequest)
+> authOtpDeviceConfirmCreate(id, type, oTPDeviceConfirmRequest)
 
 
 
@@ -93,10 +94,11 @@ import 'package:djangoflow_openapi/api.dart';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
+final String type = type_example; // String | OTP Device type
 final OTPDeviceConfirmRequest oTPDeviceConfirmRequest = ; // OTPDeviceConfirmRequest | 
 
 try {
-    api.authOtpDeviceConfirmCreate(id, oTPDeviceConfirmRequest);
+    api.authOtpDeviceConfirmCreate(id, type, oTPDeviceConfirmRequest);
 } catch on DioError (e) {
     print('Exception when calling AuthApi->authOtpDeviceConfirmCreate: $e\n');
 }
@@ -107,6 +109,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**|  | 
+ **type** | **String**| OTP Device type | 
  **oTPDeviceConfirmRequest** | [**OTPDeviceConfirmRequest**](OTPDeviceConfirmRequest.md)|  | 
 
 ### Return type
@@ -173,7 +176,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authOtpDeviceDestroy**
-> Object authOtpDeviceDestroy(id)
+> Object authOtpDeviceDestroy(id, type)
 
 
 
@@ -190,9 +193,10 @@ import 'package:djangoflow_openapi/api.dart';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
+final String type = type_example; // String | OTP Device type
 
 try {
-    final response = api.authOtpDeviceDestroy(id);
+    final response = api.authOtpDeviceDestroy(id, type);
     print(response);
 } catch on DioError (e) {
     print('Exception when calling AuthApi->authOtpDeviceDestroy: $e\n');
@@ -204,6 +208,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**|  | 
+ **type** | **String**| OTP Device type | 
 
 ### Return type
 
@@ -271,7 +276,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **authOtpDeviceRetrieve**
-> OTPDevice authOtpDeviceRetrieve(id)
+> OTPDevice authOtpDeviceRetrieve(id, type)
 
 
 
@@ -288,9 +293,10 @@ import 'package:djangoflow_openapi/api.dart';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
+final String type = type_example; // String | OTP Device type
 
 try {
-    final response = api.authOtpDeviceRetrieve(id);
+    final response = api.authOtpDeviceRetrieve(id, type);
     print(response);
 } catch on DioError (e) {
     print('Exception when calling AuthApi->authOtpDeviceRetrieve: $e\n');
@@ -302,6 +308,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**|  | 
+ **type** | **String**| OTP Device type | 
 
 ### Return type
 
@@ -700,6 +707,54 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **authUserRetrieve**
+> UserIdentity authUserRetrieve(id)
+
+
+
+### Example
+```dart
+import 'package:djangoflow_openapi/api.dart';
+// TODO Configure API key authorization: cookieAuth
+//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
+// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
+// TODO Configure HTTP basic authorization: jwtAuth
+//defaultApiClient.getAuthentication<HttpBasicAuth>('jwtAuth').username = 'YOUR_USERNAME'
+//defaultApiClient.getAuthentication<HttpBasicAuth>('jwtAuth').password = 'YOUR_PASSWORD';
+
+final api = DjangoflowOpenapi().getAuthApi();
+final String id = id_example; // String | 
+
+try {
+    final response = api.authUserRetrieve(id);
+    print(response);
+} catch on DioError (e) {
+    print('Exception when calling AuthApi->authUserRetrieve: $e\n');
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**|  | 
+
+### Return type
+
+[**UserIdentity**](UserIdentity.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [jwtAuth](../README.md#jwtAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

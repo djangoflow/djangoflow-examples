@@ -79,6 +79,7 @@ Class | Method | HTTP request | Description
 [*AuthApi*](doc/AuthApi.md) | [**authTokenVerifyCreate**](doc/AuthApi.md#authtokenverifycreate) | **POST** /api/v1/auth/token/verify/ | 
 [*AuthApi*](doc/AuthApi.md) | [**authUserCreate**](doc/AuthApi.md#authusercreate) | **POST** /api/v1/auth/user/ | 
 [*AuthApi*](doc/AuthApi.md) | [**authUserPartialUpdate**](doc/AuthApi.md#authuserpartialupdate) | **PATCH** /api/v1/auth/user/{id}/ | 
+[*AuthApi*](doc/AuthApi.md) | [**authUserRetrieve**](doc/AuthApi.md#authuserretrieve) | **GET** /api/v1/auth/user/{id}/ | 
 [*AuthApi*](doc/AuthApi.md) | [**authUserSetPasswordCreate**](doc/AuthApi.md#authusersetpasswordcreate) | **POST** /api/v1/auth/user/{id}/set_password/ | 
 [*AuthApi*](doc/AuthApi.md) | [**authUserUpdate**](doc/AuthApi.md#authuserupdate) | **PUT** /api/v1/auth/user/{id}/ | 
 [*UsersApi*](doc/UsersApi.md) | [**usersUsersPartialUpdate**](doc/UsersApi.md#usersuserspartialupdate) | **PATCH** /api/v1/users/users/{id}/ | 
