@@ -4,10 +4,14 @@ A collection of samle djangoflow projects showcasing the framework
 
 ## What's here?
 
-`simple_auth` - A simple auth app with djangoflow backend
+`auth_simple` - A simple auth app with social logins and djangoflow backend
 
-- [frontend-flutter](flutter/simple_auth/) - An example flutter application showcasing a simple auth application. Follow [README](flutter/simple_auth/packages/simple_auth/README.md) to learn more.
+- [frontend-flutter](flutter/auth_simple/) - An example flutter application showcasing a simple auth application. Follow [README](flutter/auth_simple/README.md) to learn more.
 - backend-dango - Django backend
+
+`auth_2fa` - A simple auth app with 2FA verification
+
+- [frontend-flutter](flutter/auth_2fa/) - An example flutter application showcasing a simple auth with 2FA application. Follow [README](flutter/auth_2fa/README.md) to learn more.
 
 `simple_chat` - A simple chat app with djangoflow backend
 
