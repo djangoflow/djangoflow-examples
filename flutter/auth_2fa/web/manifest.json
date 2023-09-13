@@ -1,6 +1,6 @@
 {
-    "name": "2FA Auth",
-    "short_name": "2FA Auth",
+    "name": "Auth 2FA",
+    "short_name": "Auth 2FA",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
