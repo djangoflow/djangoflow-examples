@@ -1,16 +1,18 @@
-# auth_2fa
+# DjangoFlow Auth 2FA Flutter Example
 
-A new Flutter project.
+Welcome to the DjangoFlow Auth Flutter Example! This example demonstrates how to use the `djangoflow_auth` package along with 2FA verification.
 
-## Getting Started
+Follow the steps below to set up the project on your local machine.
 
-This project is a starting point for a Flutter application.
+## BEFORE RUNNING THE APP TODO
 
-A few resources to get you started if this is your first Flutter project:
+- [x] Install and run local backend server for [django-df-auth](https://github.com/djangoflow/django-df-auth), please follow steps in [README](../../django/simple_auth/README.md) to run the example backend for django.
+- [x] OpenAPI client repository is already generated in local `djangoflow_openapi` pacakge. If needed, to generate OpenAPI client repository from local server by using the following command `sh ../../tools/generate-openapi.sh -l` and this will create/updated a `djangoflow_openapi` package in [djangoflow_openapi package](./packages/djangoflow_openapi/) directory. (Note: You must re-generate this everytime schema/endpoint changes from backend/server side)
+- [x] Generate api_repository,freezed, json_serializable etc files by running `make run-build_runner`(you must regenerate this whenever openapi changes).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## RUNNING THE APP
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- run `make init`
+- run `make run`
+
+The example app should now be running on your local machine. You can explore the authentication flows for 2FA verification.
