@@ -201,16 +201,14 @@ class _HomePageState extends State<HomePage> {
                 );
               }
 
-              final selectedValue = await showModalBottomSheet(
+              final selectedValue = await showModalBottomSheet<OTPDevice>(
                 context: context,
                 builder: (context) => _OtpDeviceSelector(
                   availableOtpDevices: otpDevices,
                 ),
               );
 
-              if (selectedValue != null &&
-                  selectedValue is OTPDevice &&
-                  selectedValue.id != null) {
+              if (selectedValue != null && selectedValue.id != null) {
                 if (context.mounted) {
                   await authCubit.requestOTP(
                     otpObtainRequest: OTPObtainRequest(
@@ -218,14 +216,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                   );
                   if (context.mounted) {
-                    final code = await showModalBottomSheet(
+                    final code = await showModalBottomSheet<String>(
                       context: context,
                       isScrollControlled: true,
                       builder: (context) => _OtpDeviceConfirmation(
                         deviceId: selectedValue.id.toString(),
                       ),
                     );
-                    if (code != null && code is String) {
+                    if (code != null) {
                       final email = form.control('email').value;
                       final password = form.control('password').value;
                       if (email != null &&
