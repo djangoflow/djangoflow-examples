@@ -10,22 +10,21 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**authOtpCreate**](AuthApi.md#authotpcreate) | **POST** /api/v1/auth/otp/ | 
-[**authOtpDeviceConfirmCreate**](AuthApi.md#authotpdeviceconfirmcreate) | **POST** /api/v1/auth/otp-device/{id}/confirm/ | 
-[**authOtpDeviceCreate**](AuthApi.md#authotpdevicecreate) | **POST** /api/v1/auth/otp-device/ | 
-[**authOtpDeviceDestroy**](AuthApi.md#authotpdevicedestroy) | **DELETE** /api/v1/auth/otp-device/{id}/ | 
-[**authOtpDeviceList**](AuthApi.md#authotpdevicelist) | **GET** /api/v1/auth/otp-device/ | 
-[**authOtpDeviceRetrieve**](AuthApi.md#authotpdeviceretrieve) | **GET** /api/v1/auth/otp-device/{id}/ | 
+[**authOtpDevicesConfirmCreate**](AuthApi.md#authotpdevicesconfirmcreate) | **POST** /api/v1/auth/otp-devices/{id}/confirm/ | 
+[**authOtpDevicesCreate**](AuthApi.md#authotpdevicescreate) | **POST** /api/v1/auth/otp-devices/ | 
+[**authOtpDevicesDestroy**](AuthApi.md#authotpdevicesdestroy) | **DELETE** /api/v1/auth/otp-devices/{id}/ | 
+[**authOtpDevicesList**](AuthApi.md#authotpdeviceslist) | **GET** /api/v1/auth/otp-devices/ | 
+[**authOtpDevicesRetrieve**](AuthApi.md#authotpdevicesretrieve) | **GET** /api/v1/auth/otp-devices/{id}/ | 
 [**authSocialConnectCreate**](AuthApi.md#authsocialconnectcreate) | **POST** /api/v1/auth/social/connect/ | 
 [**authSocialCreate**](AuthApi.md#authsocialcreate) | **POST** /api/v1/auth/social/ | 
 [**authTokenBlacklistCreate**](AuthApi.md#authtokenblacklistcreate) | **POST** /api/v1/auth/token/blacklist/ | 
 [**authTokenCreate**](AuthApi.md#authtokencreate) | **POST** /api/v1/auth/token/ | 
 [**authTokenRefreshCreate**](AuthApi.md#authtokenrefreshcreate) | **POST** /api/v1/auth/token/refresh/ | 
 [**authTokenVerifyCreate**](AuthApi.md#authtokenverifycreate) | **POST** /api/v1/auth/token/verify/ | 
-[**authUserCreate**](AuthApi.md#authusercreate) | **POST** /api/v1/auth/user/ | 
-[**authUserPartialUpdate**](AuthApi.md#authuserpartialupdate) | **PATCH** /api/v1/auth/user/{id}/ | 
-[**authUserRetrieve**](AuthApi.md#authuserretrieve) | **GET** /api/v1/auth/user/{id}/ | 
-[**authUserSetPasswordCreate**](AuthApi.md#authusersetpasswordcreate) | **POST** /api/v1/auth/user/{id}/set_password/ | 
-[**authUserUpdate**](AuthApi.md#authuserupdate) | **PUT** /api/v1/auth/user/{id}/ | 
+[**authUsersCreate**](AuthApi.md#authuserscreate) | **POST** /api/v1/auth/users/ | 
+[**authUsersPartialUpdate**](AuthApi.md#authuserspartialupdate) | **PATCH** /api/v1/auth/users/{id}/ | 
+[**authUsersRetrieve**](AuthApi.md#authusersretrieve) | **GET** /api/v1/auth/users/{id}/ | 
+[**authUsersSetPasswordCreate**](AuthApi.md#authuserssetpasswordcreate) | **POST** /api/v1/auth/users/{id}/set-password/ | 
 
 
 # **authOtpCreate**
@@ -76,8 +75,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authOtpDeviceConfirmCreate**
-> authOtpDeviceConfirmCreate(id, type, oTPDeviceConfirmRequest)
+# **authOtpDevicesConfirmCreate**
+> authOtpDevicesConfirmCreate(id, type, oTPDeviceConfirmRequest)
 
 
 
@@ -98,9 +97,9 @@ final String type = type_example; // String | OTP Device type
 final OTPDeviceConfirmRequest oTPDeviceConfirmRequest = ; // OTPDeviceConfirmRequest | 
 
 try {
-    api.authOtpDeviceConfirmCreate(id, type, oTPDeviceConfirmRequest);
+    api.authOtpDevicesConfirmCreate(id, type, oTPDeviceConfirmRequest);
 } catch on DioError (e) {
-    print('Exception when calling AuthApi->authOtpDeviceConfirmCreate: $e\n');
+    print('Exception when calling AuthApi->authOtpDevicesConfirmCreate: $e\n');
 }
 ```
 
@@ -127,8 +126,8 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authOtpDeviceCreate**
-> OTPDevice authOtpDeviceCreate(oTPDeviceRequest)
+# **authOtpDevicesCreate**
+> OTPDevice authOtpDevicesCreate(oTPDeviceRequest)
 
 
 
@@ -147,10 +146,10 @@ final api = DjangoflowOpenapi().getAuthApi();
 final OTPDeviceRequest oTPDeviceRequest = ; // OTPDeviceRequest | 
 
 try {
-    final response = api.authOtpDeviceCreate(oTPDeviceRequest);
+    final response = api.authOtpDevicesCreate(oTPDeviceRequest);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling AuthApi->authOtpDeviceCreate: $e\n');
+    print('Exception when calling AuthApi->authOtpDevicesCreate: $e\n');
 }
 ```
 
@@ -175,8 +174,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authOtpDeviceDestroy**
-> Object authOtpDeviceDestroy(id, type)
+# **authOtpDevicesDestroy**
+> Object authOtpDevicesDestroy(id, type)
 
 
 
@@ -196,10 +195,10 @@ final String id = id_example; // String |
 final String type = type_example; // String | OTP Device type
 
 try {
-    final response = api.authOtpDeviceDestroy(id, type);
+    final response = api.authOtpDevicesDestroy(id, type);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling AuthApi->authOtpDeviceDestroy: $e\n');
+    print('Exception when calling AuthApi->authOtpDevicesDestroy: $e\n');
 }
 ```
 
@@ -225,8 +224,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authOtpDeviceList**
-> PaginatedOTPDeviceList authOtpDeviceList(limit, offset)
+# **authOtpDevicesList**
+> PaginatedOTPDeviceList authOtpDevicesList(limit, offset)
 
 
 
@@ -246,10 +245,10 @@ final int limit = 56; // int | Number of results to return per page.
 final int offset = 56; // int | The initial index from which to return the results.
 
 try {
-    final response = api.authOtpDeviceList(limit, offset);
+    final response = api.authOtpDevicesList(limit, offset);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling AuthApi->authOtpDeviceList: $e\n');
+    print('Exception when calling AuthApi->authOtpDevicesList: $e\n');
 }
 ```
 
@@ -275,8 +274,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authOtpDeviceRetrieve**
-> OTPDevice authOtpDeviceRetrieve(id, type)
+# **authOtpDevicesRetrieve**
+> OTPDevice authOtpDevicesRetrieve(id, type)
 
 
 
@@ -296,10 +295,10 @@ final String id = id_example; // String |
 final String type = type_example; // String | OTP Device type
 
 try {
-    final response = api.authOtpDeviceRetrieve(id, type);
+    final response = api.authOtpDevicesRetrieve(id, type);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling AuthApi->authOtpDeviceRetrieve: $e\n');
+    print('Exception when calling AuthApi->authOtpDevicesRetrieve: $e\n');
 }
 ```
 
@@ -613,8 +612,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authUserCreate**
-> UserIdentity authUserCreate(userIdentityRequest)
+# **authUsersCreate**
+> UserIdentity authUsersCreate(userIdentityRequest)
 
 
 
@@ -633,10 +632,10 @@ final api = DjangoflowOpenapi().getAuthApi();
 final UserIdentityRequest userIdentityRequest = ; // UserIdentityRequest | 
 
 try {
-    final response = api.authUserCreate(userIdentityRequest);
+    final response = api.authUsersCreate(userIdentityRequest);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling AuthApi->authUserCreate: $e\n');
+    print('Exception when calling AuthApi->authUsersCreate: $e\n');
 }
 ```
 
@@ -661,8 +660,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authUserPartialUpdate**
-> UserIdentity authUserPartialUpdate(id, patchedUserIdentityRequest)
+# **authUsersPartialUpdate**
+> UserIdentity authUsersPartialUpdate(id, patchedUserIdentityRequest)
 
 
 
@@ -682,10 +681,10 @@ final String id = id_example; // String |
 final PatchedUserIdentityRequest patchedUserIdentityRequest = ; // PatchedUserIdentityRequest | 
 
 try {
-    final response = api.authUserPartialUpdate(id, patchedUserIdentityRequest);
+    final response = api.authUsersPartialUpdate(id, patchedUserIdentityRequest);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling AuthApi->authUserPartialUpdate: $e\n');
+    print('Exception when calling AuthApi->authUsersPartialUpdate: $e\n');
 }
 ```
 
@@ -711,8 +710,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authUserRetrieve**
-> UserIdentity authUserRetrieve(id)
+# **authUsersRetrieve**
+> UserIdentity authUsersRetrieve(id)
 
 
 
@@ -731,10 +730,10 @@ final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
 
 try {
-    final response = api.authUserRetrieve(id);
+    final response = api.authUsersRetrieve(id);
     print(response);
 } catch on DioError (e) {
-    print('Exception when calling AuthApi->authUserRetrieve: $e\n');
+    print('Exception when calling AuthApi->authUsersRetrieve: $e\n');
 }
 ```
 
@@ -759,8 +758,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **authUserSetPasswordCreate**
-> authUserSetPasswordCreate(id, changePasswordRequest)
+# **authUsersSetPasswordCreate**
+> authUsersSetPasswordCreate(id, changePasswordRequest)
 
 
 
@@ -780,9 +779,9 @@ final String id = id_example; // String |
 final ChangePasswordRequest changePasswordRequest = ; // ChangePasswordRequest | 
 
 try {
-    api.authUserSetPasswordCreate(id, changePasswordRequest);
+    api.authUsersSetPasswordCreate(id, changePasswordRequest);
 } catch on DioError (e) {
-    print('Exception when calling AuthApi->authUserSetPasswordCreate: $e\n');
+    print('Exception when calling AuthApi->authUsersSetPasswordCreate: $e\n');
 }
 ```
 
@@ -796,56 +795,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 void (empty response body)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [jwtAuth](../README.md#jwtAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **authUserUpdate**
-> UserIdentity authUserUpdate(id, userIdentityRequest)
-
-
-
-### Example
-```dart
-import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure HTTP basic authorization: jwtAuth
-//defaultApiClient.getAuthentication<HttpBasicAuth>('jwtAuth').username = 'YOUR_USERNAME'
-//defaultApiClient.getAuthentication<HttpBasicAuth>('jwtAuth').password = 'YOUR_PASSWORD';
-
-final api = DjangoflowOpenapi().getAuthApi();
-final String id = id_example; // String | 
-final UserIdentityRequest userIdentityRequest = ; // UserIdentityRequest | 
-
-try {
-    final response = api.authUserUpdate(id, userIdentityRequest);
-    print(response);
-} catch on DioError (e) {
-    print('Exception when calling AuthApi->authUserUpdate: $e\n');
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **String**|  | 
- **userIdentityRequest** | [**UserIdentityRequest**](UserIdentityRequest.md)|  | [optional] 
-
-### Return type
-
-[**UserIdentity**](UserIdentity.md)
 
 ### Authorization
 
