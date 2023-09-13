@@ -2,7 +2,7 @@
 <module version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$/flutter/simple_auth" />
+    <content url="file://$MODULE_DIR$/flutter/auth_simple" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Flutter Plugins" level="project" />
     <orderEntry type="library" name="Dart SDK" level="project" />
