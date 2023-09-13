@@ -555,18 +555,19 @@ class _OtpDeviceListView extends StatelessWidget {
                       ),
                     );
                     if (context.mounted) {
-                      final code = await showModalBottomSheet(
+                      final otp = await showModalBottomSheet(
                         context: context,
                         isScrollControlled: true,
                         builder: (context) => _OtpDeviceConfirmation(
                           deviceId: deviceId.toString(),
                         ),
                       );
-                      if (code != null && code is String) {
+                      if (otp != null && otp is String) {
                         await otpListBloc.confirmOtpDevice(
                           id: deviceId.toString(),
+                          type: item.type.name,
                           otpDeviceConfirmRequest: OTPDeviceConfirmRequest(
-                            code: code,
+                            otp: otp,
                           ),
                         );
                       }
@@ -590,6 +591,7 @@ class _OtpDeviceListView extends StatelessWidget {
               if (id != null) {
                 final cubit = context.read<OtpListBloc>();
                 await cubit.destroy(
+                  type: item.type.name,
                   id: id.toString(),
                 );
               } else {
@@ -702,10 +704,12 @@ class OtpListBloc extends AuthOtpDeviceListBloc {
 
   Future<void> confirmOtpDevice({
     required String id,
+    required String type,
     required OTPDeviceConfirmRequest otpDeviceConfirmRequest,
   }) async {
     await _authApi.authOtpDeviceConfirmCreate(
       id: id,
+      type: type,
       oTPDeviceConfirmRequest: otpDeviceConfirmRequest,
     );
 
