@@ -496,7 +496,8 @@ class _OtpDeviceListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListViewBlocBuilder<OtpListBloc, OTPDevice, AuthOtpDeviceListFilter>(
+    return ListViewBlocBuilder<OtpListBloc, OTPDevice,
+        AuthOtpDevicesListFilter>(
       create: (context) => OtpListBloc()..load(),
       headerBuilder: (context, state) => const _AddOtpDeviceInputs(),
       emptyBuilder: (context, state) => const Text('No 2FA Devices'),
@@ -699,7 +700,7 @@ enum _AuthOptions {
   passwordLogin,
 }
 
-class OtpListBloc extends AuthOtpDeviceListBloc {
+class OtpListBloc extends AuthOtpDevicesListBloc {
   AuthApi get _authApi => ApiRepository.instance.auth;
 
   Future<void> confirmOtpDevice({
@@ -707,7 +708,7 @@ class OtpListBloc extends AuthOtpDeviceListBloc {
     required String type,
     required OTPDeviceConfirmRequest otpDeviceConfirmRequest,
   }) async {
-    await _authApi.authOtpDeviceConfirmCreate(
+    await _authApi.authOtpDevicesConfirmCreate(
       id: id,
       type: type,
       oTPDeviceConfirmRequest: otpDeviceConfirmRequest,
