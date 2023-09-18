@@ -8,7 +8,7 @@ A collection of samle djangoflow projects showcasing the framework
 
   - [frontend-flutter](flutter/auth_simple/) - An example flutter application showcasing a simple auth application. Follow [README](flutter/auth_simple/README.md) to learn more.
 
-  - backend-dango - Django backend
+  - [backend-django](django/simple_auth/) - Django backend for `simple_auth` example.
 
 - `auth_2fa` - A simple auth app with 2FA verification
 
@@ -18,11 +18,11 @@ A collection of samle djangoflow projects showcasing the framework
 
 To run the example and fully test it, you must first run the backend example locally. Once the backend is running, the frontend will work as expected. Here are the steps to run the example:
 
-- **Run the backend example**:
-  - Navigate to the root directory of the module(django/{module}).
+- **Run the `django` backend example**:
+  - Navigate to the root directory of the example app(`django/{example_app}`).
   - run `make init` to initialize
   - run `make run` to run the application
-- **Run the frontend example**:
-  - Navigate to the root directory of the module(flutter/{module}).
+- **Run the `flutter` frontend example**:
+  - Navigate to the root directory of the example app(`flutter/{example_app}`).
   - run `make init` to initialize
   - run `make run` to run the application
