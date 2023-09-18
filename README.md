@@ -1,28 +1,42 @@
-# djangoflow-examples
+<div align="center">
+<img src="https://user-images.githubusercontent.com/116165418/238683908-ddaa2265-af04-4915-8f02-bae1bce43291.png" alt="DjangoFlow Logo" width="200">
 
-A collection of samle djangoflow projects showcasing the framework
+# 🌐 djangoflow-examples
 
-## What's here?
+**A curated collection of sample djangoflow projects to showcase the power of the framework at ease.**
 
-- `auth_simple` - A simple auth app with social logins and djangoflow backend
+</div>
 
-  - [frontend-flutter](flutter/auth_simple/) - An example flutter application showcasing a simple auth application. Follow [README](flutter/auth_simple/README.md) to learn more.
+---
 
-  - [backend-django](django/simple_auth/) - Django backend for `simple_auth` example.
+## 📂 Contents
 
-- `auth_2fa` - A simple auth app with 2FA verification
+- **auth_simple** - Simple Authentication with Social Authentications
 
-  - [frontend-flutter](flutter/auth_2fa/) - An example flutter application showcasing a simple auth with 2FA application. Follow [README](flutter/auth_2fa/README.md) to learn more.
+  - 📱 [frontend-flutter](flutter/auth_simple/) - Flutter app for simple authentication. Dive into the [README](flutter/auth_simple/README.md) for details.
+  - 🌍 [backend-django](django/simple_auth/) - Django backend for the `simple_auth` example.
 
-## How to run the examples?
+- **auth_2fa** - Two-Factor Authentication
+  - 📱 [frontend-flutter](flutter/auth_2fa/) - Flutter app with 2FA. Check the [README](flutter/auth_2fa/README.md) for more insights. It uses [django simple_auth](django/simple_auth/) as backend.
 
-To run the example and fully test it, you must first run the backend example locally. Once the backend is running, the frontend will work as expected. Here are the steps to run the example:
+---
 
-- **Run the `django` backend example**:
-  - Navigate to the root directory of the example app(`django/{example_app}`).
-  - run `make init` to initialize
-  - run `make run` to run the application
-- **Run the `flutter` frontend example**:
-  - Navigate to the root directory of the example app(`flutter/{example_app}`).
-  - run `make init` to initialize
-  - run `make run` to run the application
+## 🚀 Getting Started
+
+To experience the examples in action, ensure you run the backend locally. Once it's up and running, the frontend will operate seamlessly. Here's a step-by-step guide:
+
+### 1. Django Backend
+
+- 📁 Head to the root directory of the desired `django` example app: `django/{example_app}`.
+- 🛠️ Execute `make init` to initialization.
+- 🚀 Use `make run` to launch the application.
+
+### 2. Flutter Frontend
+
+- 📁 Head to the root directory of the desired `flutter` example app: `flutter/{example_app}`.
+- 🛠️ Execute `make init` to initialization.
+- 🚀 Use `make run` to launch the application.
+
+---
+
+Enjoy exploring the examples and happy coding! 🚀🌐
