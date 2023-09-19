@@ -1,6 +1,0 @@
-name: simple_chat_workspace
-description: Flutter workspace for Simple chat flutter frontend
-environment:
-  sdk: ">=2.18.0 <3.0.0"
-dev_dependencies:
-  melos: ^3.1.0
