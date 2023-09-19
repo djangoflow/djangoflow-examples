@@ -1,5 +1,5 @@
 django
 django-rest-framework
-django-df-api-drf==1.0.0-alpha.1
-django-df-auth==1.0.0-alpha.9
+django-df-api-drf==1.0.0-alpha.2
+django-df-auth==1.0.0-alpha.12
 django-cors-headers

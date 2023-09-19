@@ -21,7 +21,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 USE_TZ = True
 
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "auth.User"
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     *DF_API_DRF_INSTALLED_APPS,
     *DF_AUTH_INSTALLED_APPS,
-    "users",
 ]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
@@ -100,8 +99,10 @@ ALLOWED_HOSTS = ["*"]
 
 DF_AUTH = {
     "USER_IDENTITY_FIELDS": {
-        "email": "rest_framework.serializers.EmailField",
-    }
+        "username": "rest_framework.serializers.CharField",
+        "email": "rest_framework.serializers.CharField",
+    },
+    "OTP_IDENTITY_UPDATE_FIELD": False,
 }
 
 AUTHENTICATION_BACKENDS = [
