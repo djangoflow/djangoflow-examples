@@ -40,8 +40,8 @@ class _HomePageState extends State<HomePage> {
                   content: Text('Authenticated'),
                 ),
               );
-              context.read<UsersUsersDataBloc>().load(
-                    const UsersUsersRetrieveFilter(id: '0'),
+              context.read<AuthUsersTwoFaDataBloc>().load(
+                    const AuthUsersTwoFaRetrieveFilter(id: '0'),
                   );
               return null;
             },
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                   content: Text('Unauthenticated'),
                 ),
               );
-              context.read<UsersUsersDataBloc>().clear();
+              context.read<AuthUsersTwoFaDataBloc>().clear();
               return null;
             },
           ),
@@ -73,18 +73,19 @@ class _HomePageState extends State<HomePage> {
                           widget = const _OtpLogin();
                           break;
                         case _AuthOptions.passwordLogin:
-                          widget = _EmailPasswordInputs(
+                          widget = _UsernamePasswordInputs(
                             actionButtonBuilder: (context, form) {
                               return LinearProgressBuilder(
                                 action: (_) async {
-                                  final email = form.control('email').value;
+                                  final username =
+                                      form.control('username').value;
                                   final password =
                                       form.control('password').value;
 
-                                  if (email != null && password != null) {
+                                  if (username != null && password != null) {
                                     await _signupOrLogin(
                                       context: context,
-                                      email: email,
+                                      username: username,
                                       password: password,
                                     );
                                   }
@@ -102,18 +103,19 @@ class _HomePageState extends State<HomePage> {
                             },
                           );
                         case _AuthOptions.register:
-                          widget = _EmailPasswordInputs(
+                          widget = _UsernamePasswordInputs(
                             actionButtonBuilder: (context, form) {
                               return LinearProgressBuilder(
                                 action: (_) async {
-                                  final email = form.control('email').value;
+                                  final username =
+                                      form.control('username').value;
                                   final password =
                                       form.control('password').value;
 
-                                  if (email != null && password != null) {
+                                  if (username != null && password != null) {
                                     await _signupOrLogin(
                                       context: context,
-                                      email: email,
+                                      username: username,
                                       password: password,
                                       isSigningUp: true,
                                     );
@@ -180,15 +182,15 @@ class _HomePageState extends State<HomePage> {
   Future<void> _onEmailPasswordLoginError(Object error, FormGroup form) async {
     final authCubit = context.read<AuthCubit>();
     if (error is DioException) {
-      if (error.response?.statusCode == 401) {
-        final errorsJson = (error.response?.data
-            as Map<String, dynamic>?)?['errors'] as List<dynamic>?;
-        if (errorsJson != null) {
-          final twoFaError = errorsJson.firstWhere(
-              (element) => element['code'] == '2fa_required',
-              orElse: () => -1);
-          if (twoFaError != -1) {
-            final otpDevicesJson = twoFaError['extra_data']['devices'];
+      if (error.response?.statusCode == 401 && error.response?.data != null) {
+        final errorResponse = ErrorResponse.fromJson(error.response!.data);
+        if (errorResponse.errors.isNotEmpty) {
+          final twoFaError = errorResponse.errors.firstWhere(
+            (element) => element.code == '2fa_required',
+          );
+          final extraData = twoFaError.extraData;
+          if (extraData != null) {
+            final otpDevicesJson = extraData['devices'] as List<dynamic>?;
 
             if (otpDevicesJson != null) {
               debugPrint(otpDevicesJson.toString());
@@ -212,7 +214,9 @@ class _HomePageState extends State<HomePage> {
                 if (context.mounted) {
                   await authCubit.requestOTP(
                     otpObtainRequest: OTPObtainRequest(
-                      email: selectedValue.name,
+                      email: selectedValue.type == TypeEnum.email
+                          ? selectedValue.name
+                          : null,
                     ),
                   );
                   if (context.mounted) {
@@ -224,14 +228,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                     if (code != null) {
-                      final email = form.control('email').value;
+                      final username = form.control('username').value;
                       final password = form.control('password').value;
-                      if (email != null &&
+                      if (username != null &&
                           password != null &&
                           context.mounted) {
                         await _signupOrLogin(
                           context: context,
-                          email: email,
+                          username: username,
                           password: password,
                           otp: code,
                         );
@@ -241,9 +245,9 @@ class _HomePageState extends State<HomePage> {
                 }
               }
             }
-          } else {
-            throw error;
           }
+        } else {
+          throw error;
         }
       }
     } else {
@@ -254,7 +258,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> _signupOrLogin({
     required BuildContext context,
     bool isSigningUp = false,
-    required String email,
+    required String username,
     required String password,
     String? otp,
   }) async {
@@ -262,7 +266,7 @@ class _HomePageState extends State<HomePage> {
     if (isSigningUp) {
       await authCubit.registerOrInviteUser(
         userIdentityRequest: UserIdentityRequest(
-          email: email,
+          username: username,
           password: password,
         ),
       );
@@ -270,7 +274,7 @@ class _HomePageState extends State<HomePage> {
 
     await authCubit.obtainTokenAndLogin(
       tokenObtainRequest: TokenObtainRequest(
-        email: email,
+        username: username,
         password: password,
         otp: otp,
       ),
@@ -315,8 +319,8 @@ class _AuthOptionList extends StatelessWidget {
   }
 }
 
-class _EmailPasswordInputs extends StatelessWidget {
-  const _EmailPasswordInputs({
+class _UsernamePasswordInputs extends StatelessWidget {
+  const _UsernamePasswordInputs({
     required this.actionButtonBuilder,
   });
 
@@ -324,10 +328,9 @@ class _EmailPasswordInputs extends StatelessWidget {
       actionButtonBuilder;
 
   FormGroup get _form => FormGroup({
-        'email': FormControl<String>(
+        'username': FormControl<String>(
           validators: [
             Validators.required,
-            Validators.email,
           ],
         ),
         'password': FormControl<String?>(
@@ -344,22 +347,21 @@ class _EmailPasswordInputs extends StatelessWidget {
         return Column(
           children: [
             ReactiveTextField(
-                formControlName: 'email',
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                ),
-                validationMessages: {
-                  ValidationMessage.required: (_) => 'Email must not be empty',
-                  ValidationMessage.email: (_) =>
-                      'Must be a valid email address',
-                }),
+              formControlName: 'username',
+              keyboardType: TextInputType.text,
+              decoration: const InputDecoration(
+                labelText: 'Username',
+              ),
+              validationMessages: {
+                ValidationMessage.required: (_) => 'Username must not be empty',
+              },
+            ),
             const SizedBox(
               height: 8,
             ),
             ReactiveTextField(
               formControlName: 'password',
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.visiblePassword,
               decoration: const InputDecoration(
                 labelText: 'Password',
               ),
@@ -421,7 +423,7 @@ class _OtpLoginState extends State<_OtpLogin> {
                     ValidationMessage.required: (_) =>
                         'Email must not be empty',
                     ValidationMessage.email: (_) =>
-                        'Must be a valid email address',
+                        'Must be a valid username address',
                   }),
               const SizedBox(
                 height: 8,
@@ -446,14 +448,14 @@ class _OtpLoginState extends State<_OtpLogin> {
                 builder: (context, value, child) => value == true
                     ? LinearProgressBuilder(
                         action: (_) async {
-                          final email = form.control('email').value;
+                          final username = form.control('username').value;
                           final otp = form.control('otp').value;
 
                           final authCubit = context.read<AuthCubit>();
-                          if (email != null && otp != null) {
+                          if (username != null && otp != null) {
                             await authCubit.obtainTokenAndLogin(
                               tokenObtainRequest: TokenObtainRequest(
-                                email: email,
+                                username: username,
                                 otp: otp,
                               ),
                             );
@@ -467,11 +469,11 @@ class _OtpLoginState extends State<_OtpLogin> {
                     : LinearProgressBuilder(
                         action: (_) async {
                           if (form.valid) {
-                            final email = form.control('email').value;
-                            if (email != null) {
+                            final username = form.control('username').value;
+                            if (username != null) {
                               await context.read<AuthCubit>().requestOTP(
                                     otpObtainRequest:
-                                        OTPObtainRequest(email: email),
+                                        OTPObtainRequest(username: username),
                                   );
                               _hasRequestedOtp.value = true;
                             }
@@ -619,7 +621,6 @@ class _AddOtpDeviceInputs extends StatelessWidget {
         'device_name': FormControl<String>(
           validators: [
             Validators.required,
-            Validators.email,
           ],
         ),
         'device_type': FormControl<TypeEnum>(
@@ -642,7 +643,8 @@ class _AddOtpDeviceInputs extends StatelessWidget {
                 labelText: 'Email/Phone',
               ),
               validationMessages: {
-                ValidationMessage.required: (_) => 'Name must not be empty',
+                ValidationMessage.required: (_) =>
+                    'Email/Phone must not be empty',
               },
             ),
             const SizedBox(
@@ -809,20 +811,21 @@ class _TwoFactorSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DataBlocBuilder<UsersUsersDataBloc, User, UsersUsersRetrieveFilter>(
+    return DataBlocBuilder<AuthUsersTwoFaDataBloc, User2FA,
+        AuthUsersTwoFaRetrieveFilter>(
       itemBuilder: (context, state) => SwitchListTile(
-        key: ValueKey(state.data?.is2faEnabled),
+        key: ValueKey(state.data?.isRequired),
         title: const Text('2FA Enabled'),
-        value: state.data?.is2faEnabled ?? false,
+        value: state.data?.isRequired ?? false,
         onChanged: (value) async {
-          final usersDataBloc = context.read<UsersUsersDataBloc>();
-          await usersDataBloc.partialUpdate(
+          final twoFaDataBloc = context.read<AuthUsersTwoFaDataBloc>();
+          await twoFaDataBloc.partialUpdate(
             id: defaultUserId,
-            patchedUserRequest: PatchedUserRequest(
-              is2faEnabled: value,
+            patchedUser2FARequest: PatchedUser2FARequest(
+              isRequired: value,
             ),
           );
-          usersDataBloc.load();
+          twoFaDataBloc.load();
         },
       ),
       loadingBuilder: (context, state) => const Text('Loading'),

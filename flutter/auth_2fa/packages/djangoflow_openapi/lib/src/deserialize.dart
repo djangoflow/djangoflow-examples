@@ -7,18 +7,17 @@ import 'package:djangoflow_openapi/src/model/otp_device_request.dart';
 import 'package:djangoflow_openapi/src/model/otp_obtain.dart';
 import 'package:djangoflow_openapi/src/model/otp_obtain_request.dart';
 import 'package:djangoflow_openapi/src/model/paginated_otp_device_list.dart';
+import 'package:djangoflow_openapi/src/model/patched_user2_fa_request.dart';
 import 'package:djangoflow_openapi/src/model/patched_user_identity_request.dart';
-import 'package:djangoflow_openapi/src/model/patched_user_request.dart';
 import 'package:djangoflow_openapi/src/model/social_token_obtain_request.dart';
 import 'package:djangoflow_openapi/src/model/token.dart';
 import 'package:djangoflow_openapi/src/model/token_blacklist_request.dart';
 import 'package:djangoflow_openapi/src/model/token_obtain_request.dart';
 import 'package:djangoflow_openapi/src/model/token_refresh_request.dart';
 import 'package:djangoflow_openapi/src/model/token_verify_request.dart';
-import 'package:djangoflow_openapi/src/model/user.dart';
+import 'package:djangoflow_openapi/src/model/user2_fa.dart';
 import 'package:djangoflow_openapi/src/model/user_identity.dart';
 import 'package:djangoflow_openapi/src/model/user_identity_request.dart';
-import 'package:djangoflow_openapi/src/model/user_request.dart';
 
 final _regList = RegExp(r'^List<(.*)>$');
 final _regSet = RegExp(r'^Set<(.*)>$');
@@ -56,10 +55,10 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return OTPObtainRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'PaginatedOTPDeviceList':
           return PaginatedOTPDeviceList.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'PatchedUser2FARequest':
+          return PatchedUser2FARequest.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'PatchedUserIdentityRequest':
           return PatchedUserIdentityRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'PatchedUserRequest':
-          return PatchedUserRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'ProviderEnum':
           
           
@@ -78,14 +77,12 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
         case 'TypeEnum':
           
           
-        case 'User':
-          return User.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'User2FA':
+          return User2FA.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'UserIdentity':
           return UserIdentity.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'UserIdentityRequest':
           return UserIdentityRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'UserRequest':
-          return UserRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
         default:
           RegExpMatch? match;
 

@@ -22,6 +22,8 @@ class TokenObtainRequest {
 
      this.password,
 
+     this.username,
+
      this.email,
   });
 
@@ -51,6 +53,18 @@ class TokenObtainRequest {
 
   @JsonKey(
     
+    name: r'username',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final String? username;
+
+
+
+  @JsonKey(
+    
     name: r'email',
     required: false,
     includeIfNull: false
@@ -65,12 +79,14 @@ class TokenObtainRequest {
   bool operator ==(Object other) => identical(this, other) || other is TokenObtainRequest &&
      other.otp == otp &&
      other.password == password &&
+     other.username == username &&
      other.email == email;
 
   @override
   int get hashCode =>
     otp.hashCode +
     password.hashCode +
+    username.hashCode +
     email.hashCode;
 
   factory TokenObtainRequest.fromJson(Map<String, dynamic> json) => _$TokenObtainRequestFromJson(json);
