@@ -8,7 +8,6 @@ import 'package:djangoflow_openapi/src/auth/basic_auth.dart';
 import 'package:djangoflow_openapi/src/auth/bearer_auth.dart';
 import 'package:djangoflow_openapi/src/auth/oauth.dart';
 import 'package:djangoflow_openapi/src/api/auth_api.dart';
-import 'package:djangoflow_openapi/src/api/users_api.dart';
 
 class DjangoflowOpenapi {
   static const String basePath = r'http://localhost';
@@ -65,11 +64,5 @@ class DjangoflowOpenapi {
   /// by doing that all interceptors will not be executed
   AuthApi getAuthApi() {
     return AuthApi(dio);
-  }
-
-  /// Get UsersApi instance, base route and serializer can be overridden by a given but be careful,
-  /// by doing that all interceptors will not be executed
-  UsersApi getUsersApi() {
-    return UsersApi(dio);
   }
 }

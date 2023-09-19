@@ -24,6 +24,8 @@ class UserIdentityRequest {
 
      this.password,
 
+     this.username,
+
      this.email,
   });
 
@@ -65,6 +67,18 @@ class UserIdentityRequest {
 
   @JsonKey(
     
+    name: r'username',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final String? username;
+
+
+
+  @JsonKey(
+    
     name: r'email',
     required: false,
     includeIfNull: false
@@ -80,6 +94,7 @@ class UserIdentityRequest {
      other.firstName == firstName &&
      other.lastName == lastName &&
      other.password == password &&
+     other.username == username &&
      other.email == email;
 
   @override
@@ -87,6 +102,7 @@ class UserIdentityRequest {
     firstName.hashCode +
     lastName.hashCode +
     password.hashCode +
+    username.hashCode +
     email.hashCode;
 
   factory UserIdentityRequest.fromJson(Map<String, dynamic> json) => _$UserIdentityRequestFromJson(json);

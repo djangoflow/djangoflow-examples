@@ -81,9 +81,8 @@ Class | Method | HTTP request | Description
 [*AuthApi*](doc/AuthApi.md) | [**authUsersPartialUpdate**](doc/AuthApi.md#authuserspartialupdate) | **PATCH** /api/v1/auth/users/{id}/ | 
 [*AuthApi*](doc/AuthApi.md) | [**authUsersRetrieve**](doc/AuthApi.md#authusersretrieve) | **GET** /api/v1/auth/users/{id}/ | 
 [*AuthApi*](doc/AuthApi.md) | [**authUsersSetPasswordCreate**](doc/AuthApi.md#authuserssetpasswordcreate) | **POST** /api/v1/auth/users/{id}/set-password/ | 
-[*UsersApi*](doc/UsersApi.md) | [**usersUsersPartialUpdate**](doc/UsersApi.md#usersuserspartialupdate) | **PATCH** /api/v1/users/users/{id}/ | 
-[*UsersApi*](doc/UsersApi.md) | [**usersUsersRetrieve**](doc/UsersApi.md#usersusersretrieve) | **GET** /api/v1/users/users/{id}/ | 
-[*UsersApi*](doc/UsersApi.md) | [**usersUsersUpdate**](doc/UsersApi.md#usersusersupdate) | **PUT** /api/v1/users/users/{id}/ | 
+[*AuthApi*](doc/AuthApi.md) | [**authUsersTwoFaPartialUpdate**](doc/AuthApi.md#authuserstwofapartialupdate) | **PATCH** /api/v1/auth/users/{id}/two-fa/ | 
+[*AuthApi*](doc/AuthApi.md) | [**authUsersTwoFaRetrieve**](doc/AuthApi.md#authuserstwofaretrieve) | **GET** /api/v1/auth/users/{id}/two-fa/ | 
 
 
 ## Documentation For Models
@@ -97,8 +96,8 @@ Class | Method | HTTP request | Description
  - [OTPObtain](doc/OTPObtain.md)
  - [OTPObtainRequest](doc/OTPObtainRequest.md)
  - [PaginatedOTPDeviceList](doc/PaginatedOTPDeviceList.md)
+ - [PatchedUser2FARequest](doc/PatchedUser2FARequest.md)
  - [PatchedUserIdentityRequest](doc/PatchedUserIdentityRequest.md)
- - [PatchedUserRequest](doc/PatchedUserRequest.md)
  - [ProviderEnum](doc/ProviderEnum.md)
  - [SocialTokenObtainRequest](doc/SocialTokenObtainRequest.md)
  - [Token](doc/Token.md)
@@ -107,10 +106,9 @@ Class | Method | HTTP request | Description
  - [TokenRefreshRequest](doc/TokenRefreshRequest.md)
  - [TokenVerifyRequest](doc/TokenVerifyRequest.md)
  - [TypeEnum](doc/TypeEnum.md)
- - [User](doc/User.md)
+ - [User2FA](doc/User2FA.md)
  - [UserIdentity](doc/UserIdentity.md)
  - [UserIdentityRequest](doc/UserIdentityRequest.md)
- - [UserRequest](doc/UserRequest.md)
 
 
 ## Documentation For Authorization
