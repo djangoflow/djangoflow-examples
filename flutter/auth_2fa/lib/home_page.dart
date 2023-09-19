@@ -182,15 +182,15 @@ class _HomePageState extends State<HomePage> {
   Future<void> _onEmailPasswordLoginError(Object error, FormGroup form) async {
     final authCubit = context.read<AuthCubit>();
     if (error is DioException) {
-      if (error.response?.statusCode == 401) {
-        final errorsJson = (error.response?.data
-            as Map<String, dynamic>?)?['errors'] as List<dynamic>?;
-        if (errorsJson != null) {
-          final twoFaError = errorsJson.firstWhere(
-              (element) => element['code'] == '2fa_required',
-              orElse: () => -1);
-          if (twoFaError != -1) {
-            final otpDevicesJson = twoFaError['extra_data']['devices'];
+      if (error.response?.statusCode == 401 && error.response?.data != null) {
+        final errorResponse = ErrorResponse.fromJson(error.response!.data);
+        if (errorResponse.errors.isNotEmpty) {
+          final twoFaError = errorResponse.errors.firstWhere(
+            (element) => element.code == '2fa_required',
+          );
+          final extraData = twoFaError.extraData;
+          if (extraData != null) {
+            final otpDevicesJson = extraData['devices'] as List<dynamic>?;
 
             if (otpDevicesJson != null) {
               debugPrint(otpDevicesJson.toString());
@@ -245,9 +245,9 @@ class _HomePageState extends State<HomePage> {
                 }
               }
             }
-          } else {
-            throw error;
           }
+        } else {
+          throw error;
         }
       }
     } else {
