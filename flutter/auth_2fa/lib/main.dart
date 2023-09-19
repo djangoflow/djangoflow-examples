@@ -38,11 +38,11 @@ Future<void> main() async {
           create: (context) =>
               AuthCubit.instance..authApi = ApiRepository.instance.auth,
         ),
-        BlocProvider<UsersUsersDataBloc>(
+        BlocProvider<AuthUsersTwoFaDataBloc>(
           create: (context) {
-            final cubit = UsersUsersDataBloc();
+            final cubit = AuthUsersTwoFaDataBloc();
             if (context.read<AuthCubit>().state.isAuthenticated) {
-              cubit.load(const UsersUsersRetrieveFilter(id: defaultUserId));
+              cubit.load(const AuthUsersTwoFaRetrieveFilter(id: defaultUserId));
             }
 
             return cubit;

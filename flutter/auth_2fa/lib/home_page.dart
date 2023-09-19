@@ -40,8 +40,8 @@ class _HomePageState extends State<HomePage> {
                   content: Text('Authenticated'),
                 ),
               );
-              context.read<UsersUsersDataBloc>().load(
-                    const UsersUsersRetrieveFilter(id: '0'),
+              context.read<AuthUsersTwoFaDataBloc>().load(
+                    const AuthUsersTwoFaRetrieveFilter(id: '0'),
                   );
               return null;
             },
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                   content: Text('Unauthenticated'),
                 ),
               );
-              context.read<UsersUsersDataBloc>().clear();
+              context.read<AuthUsersTwoFaDataBloc>().clear();
               return null;
             },
           ),
@@ -809,20 +809,21 @@ class _TwoFactorSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DataBlocBuilder<UsersUsersDataBloc, User, UsersUsersRetrieveFilter>(
+    return DataBlocBuilder<AuthUsersTwoFaDataBloc, User2FA,
+        AuthUsersTwoFaRetrieveFilter>(
       itemBuilder: (context, state) => SwitchListTile(
-        key: ValueKey(state.data?.is2faEnabled),
+        key: ValueKey(state.data?.isRequired),
         title: const Text('2FA Enabled'),
-        value: state.data?.is2faEnabled ?? false,
+        value: state.data?.isRequired ?? false,
         onChanged: (value) async {
-          final usersDataBloc = context.read<UsersUsersDataBloc>();
-          await usersDataBloc.partialUpdate(
+          final twoFaDataBloc = context.read<AuthUsersTwoFaDataBloc>();
+          await twoFaDataBloc.partialUpdate(
             id: defaultUserId,
-            patchedUserRequest: PatchedUserRequest(
-              is2faEnabled: value,
+            patchedUser2FARequest: PatchedUser2FARequest(
+              isRequired: value,
             ),
           );
-          usersDataBloc.load();
+          twoFaDataBloc.load();
         },
       ),
       loadingBuilder: (context, state) => const Text('Loading'),

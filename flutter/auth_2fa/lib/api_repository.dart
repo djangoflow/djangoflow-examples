@@ -19,7 +19,6 @@ const baseUrlForAndroid = 'http://10.0.2.2:8000';
   buildFor: DjangoflowOpenapi,
   builderList: [
     RepositoryBuilder(AuthApi),
-    RepositoryBuilder(UsersApi),
   ],
   liveBasePath: baseUrl,
   baseUrl: baseUrl,
