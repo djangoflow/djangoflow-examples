@@ -22,6 +22,8 @@ class UserIdentity {
 
      this.lastName,
 
+     this.username,
+
      this.email,
   });
 
@@ -51,6 +53,18 @@ class UserIdentity {
 
   @JsonKey(
     
+    name: r'username',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final String? username;
+
+
+
+  @JsonKey(
+    
     name: r'email',
     required: false,
     includeIfNull: false
@@ -65,12 +79,14 @@ class UserIdentity {
   bool operator ==(Object other) => identical(this, other) || other is UserIdentity &&
      other.firstName == firstName &&
      other.lastName == lastName &&
+     other.username == username &&
      other.email == email;
 
   @override
   int get hashCode =>
     firstName.hashCode +
     lastName.hashCode +
+    username.hashCode +
     email.hashCode;
 
   factory UserIdentity.fromJson(Map<String, dynamic> json) => _$UserIdentityFromJson(json);

@@ -24,6 +24,8 @@ class PatchedUserIdentityRequest {
 
      this.password,
 
+     this.username,
+
      this.email,
   });
 
@@ -65,6 +67,18 @@ class PatchedUserIdentityRequest {
 
   @JsonKey(
     
+    name: r'username',
+    required: false,
+    includeIfNull: false
+  )
+
+
+  final String? username;
+
+
+
+  @JsonKey(
+    
     name: r'email',
     required: false,
     includeIfNull: false
@@ -80,6 +94,7 @@ class PatchedUserIdentityRequest {
      other.firstName == firstName &&
      other.lastName == lastName &&
      other.password == password &&
+     other.username == username &&
      other.email == email;
 
   @override
@@ -87,6 +102,7 @@ class PatchedUserIdentityRequest {
     firstName.hashCode +
     lastName.hashCode +
     password.hashCode +
+    username.hashCode +
     email.hashCode;
 
   factory PatchedUserIdentityRequest.fromJson(Map<String, dynamic> json) => _$PatchedUserIdentityRequestFromJson(json);
