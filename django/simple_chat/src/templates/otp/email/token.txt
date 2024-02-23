@@ -1,7 +1,0 @@
-{% load auth_magic_link %}
-
-Here is your secret link to login: {% auth_magic_link %}
-
-Alternatively you can use this single-time login code: {{ token }}
-
-You can safely ignore this e-mail if you were not trying to login.
