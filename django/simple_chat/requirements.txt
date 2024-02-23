@@ -1,0 +1,3 @@
+django
+django-df-chat==0.1.0
+

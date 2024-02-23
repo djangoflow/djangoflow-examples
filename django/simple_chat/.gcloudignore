@@ -1,8 +1,0 @@
-.gcloudignore
-.git
-.gitignore
-#!include:.gitignore
-*.po
-!*.mo
-docs/
-venv/

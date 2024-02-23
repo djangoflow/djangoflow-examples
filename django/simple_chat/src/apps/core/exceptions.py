@@ -1,2 +1,0 @@
-class AdminError(Exception):
-    pass
