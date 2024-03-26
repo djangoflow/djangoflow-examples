@@ -125,6 +125,7 @@ Class | Method | HTTP request | Description
  - [PatchedChatRoomRequest](doc/PatchedChatRoomRequest.md)
  - [PatchedUser2FARequest](doc/PatchedUser2FARequest.md)
  - [PatchedUserIdentityRequest](doc/PatchedUserIdentityRequest.md)
+ - [ProviderEnum](doc/ProviderEnum.md)
  - [SocialTokenObtainRequest](doc/SocialTokenObtainRequest.md)
  - [Token](doc/Token.md)
  - [TokenBlacklistRequest](doc/TokenBlacklistRequest.md)

@@ -100,6 +100,9 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return PatchedUser2FARequest.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'PatchedUserIdentityRequest':
           return PatchedUserIdentityRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'ProviderEnum':
+          
+          
         case 'SocialTokenObtainRequest':
           return SocialTokenObtainRequest.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'Token':

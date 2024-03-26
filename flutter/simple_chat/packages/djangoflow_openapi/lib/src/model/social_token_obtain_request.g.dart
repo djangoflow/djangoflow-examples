@@ -9,7 +9,7 @@ part of 'social_token_obtain_request.dart';
 abstract class _$SocialTokenObtainRequestCWProxy {
   SocialTokenObtainRequest accessToken(String accessToken);
 
-  SocialTokenObtainRequest provider(bool provider);
+  SocialTokenObtainRequest provider(ProviderEnum provider);
 
   SocialTokenObtainRequest firstName(String? firstName);
 
@@ -27,7 +27,7 @@ abstract class _$SocialTokenObtainRequestCWProxy {
   /// ````
   SocialTokenObtainRequest call({
     String? accessToken,
-    bool? provider,
+    ProviderEnum? provider,
     String? firstName,
     String? lastName,
     String? otp,
@@ -47,7 +47,8 @@ class _$SocialTokenObtainRequestCWProxyImpl
       this(accessToken: accessToken);
 
   @override
-  SocialTokenObtainRequest provider(bool provider) => this(provider: provider);
+  SocialTokenObtainRequest provider(ProviderEnum provider) =>
+      this(provider: provider);
 
   @override
   SocialTokenObtainRequest firstName(String? firstName) =>
@@ -89,7 +90,7 @@ class _$SocialTokenObtainRequestCWProxyImpl
       provider: provider == const $CopyWithPlaceholder() || provider == null
           ? _value.provider
           // ignore: cast_nullable_to_non_nullable
-          : provider as bool,
+          : provider as ProviderEnum,
       firstName: firstName == const $CopyWithPlaceholder()
           ? _value.firstName
           // ignore: cast_nullable_to_non_nullable
@@ -133,7 +134,8 @@ SocialTokenObtainRequest _$SocialTokenObtainRequestFromJson(
         );
         final val = SocialTokenObtainRequest(
           accessToken: $checkedConvert('access_token', (v) => v as String),
-          provider: $checkedConvert('provider', (v) => v as bool),
+          provider: $checkedConvert(
+              'provider', (v) => $enumDecode(_$ProviderEnumEnumMap, v)),
           firstName: $checkedConvert('first_name', (v) => v as String?),
           lastName: $checkedConvert('last_name', (v) => v as String?),
           otp: $checkedConvert('otp', (v) => v as String?),
@@ -152,7 +154,7 @@ Map<String, dynamic> _$SocialTokenObtainRequestToJson(
     SocialTokenObtainRequest instance) {
   final val = <String, dynamic>{
     'access_token': instance.accessToken,
-    'provider': instance.provider,
+    'provider': _$ProviderEnumEnumMap[instance.provider]!,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -167,3 +169,11 @@ Map<String, dynamic> _$SocialTokenObtainRequestToJson(
   writeNotNull('password', instance.password);
   return val;
 }
+
+const _$ProviderEnumEnumMap = {
+  ProviderEnum.googleOauth2: 'google-oauth2',
+  ProviderEnum.facebook: 'facebook',
+  ProviderEnum.appleId: 'apple-id',
+  ProviderEnum.twitter: 'twitter',
+  ProviderEnum.discord: 'discord',
+};

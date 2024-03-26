@@ -29,6 +29,7 @@ doc/PatchedChatMessageRequest.md
 doc/PatchedChatRoomRequest.md
 doc/PatchedUser2FARequest.md
 doc/PatchedUserIdentityRequest.md
+doc/ProviderEnum.md
 doc/SocialTokenObtainRequest.md
 doc/Token.md
 doc/TokenBlacklistRequest.md
@@ -75,6 +76,7 @@ lib/src/model/patched_chat_message_request.dart
 lib/src/model/patched_chat_room_request.dart
 lib/src/model/patched_user2_fa_request.dart
 lib/src/model/patched_user_identity_request.dart
+lib/src/model/provider_enum.dart
 lib/src/model/social_token_obtain_request.dart
 lib/src/model/token.dart
 lib/src/model/token_blacklist_request.dart
@@ -114,6 +116,7 @@ test/patched_chat_message_request_test.dart
 test/patched_chat_room_request_test.dart
 test/patched_user2_fa_request_test.dart
 test/patched_user_identity_request_test.dart
+test/provider_enum_test.dart
 test/social_token_obtain_request_test.dart
 test/token_blacklist_request_test.dart
 test/token_obtain_request_test.dart

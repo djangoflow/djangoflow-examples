@@ -35,6 +35,7 @@ export 'package:djangoflow_openapi/src/model/patched_chat_message_request.dart';
 export 'package:djangoflow_openapi/src/model/patched_chat_room_request.dart';
 export 'package:djangoflow_openapi/src/model/patched_user2_fa_request.dart';
 export 'package:djangoflow_openapi/src/model/patched_user_identity_request.dart';
+export 'package:djangoflow_openapi/src/model/provider_enum.dart';
 export 'package:djangoflow_openapi/src/model/social_token_obtain_request.dart';
 export 'package:djangoflow_openapi/src/model/token.dart';
 export 'package:djangoflow_openapi/src/model/token_blacklist_request.dart';
