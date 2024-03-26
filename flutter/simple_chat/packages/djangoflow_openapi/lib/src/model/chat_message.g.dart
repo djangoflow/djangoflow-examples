@@ -9,13 +9,15 @@ part of 'chat_message.dart';
 abstract class _$ChatMessageCWProxy {
   ChatMessage id(int? id);
 
+  ChatMessage created(DateTime? created);
+
+  ChatMessage modified(DateTime? modified);
+
   ChatMessage chatRoom(int? chatRoom);
 
   ChatMessage createdBy(User? createdBy);
 
   ChatMessage message(String message);
-
-  ChatMessage created(DateTime? created);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `ChatMessage(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -25,10 +27,11 @@ abstract class _$ChatMessageCWProxy {
   /// ````
   ChatMessage call({
     int? id,
+    DateTime? created,
+    DateTime? modified,
     int? chatRoom,
     User? createdBy,
     String? message,
-    DateTime? created,
   });
 }
 
@@ -42,6 +45,12 @@ class _$ChatMessageCWProxyImpl implements _$ChatMessageCWProxy {
   ChatMessage id(int? id) => this(id: id);
 
   @override
+  ChatMessage created(DateTime? created) => this(created: created);
+
+  @override
+  ChatMessage modified(DateTime? modified) => this(modified: modified);
+
+  @override
   ChatMessage chatRoom(int? chatRoom) => this(chatRoom: chatRoom);
 
   @override
@@ -49,9 +58,6 @@ class _$ChatMessageCWProxyImpl implements _$ChatMessageCWProxy {
 
   @override
   ChatMessage message(String message) => this(message: message);
-
-  @override
-  ChatMessage created(DateTime? created) => this(created: created);
 
   @override
 
@@ -63,16 +69,25 @@ class _$ChatMessageCWProxyImpl implements _$ChatMessageCWProxy {
   /// ````
   ChatMessage call({
     Object? id = const $CopyWithPlaceholder(),
+    Object? created = const $CopyWithPlaceholder(),
+    Object? modified = const $CopyWithPlaceholder(),
     Object? chatRoom = const $CopyWithPlaceholder(),
     Object? createdBy = const $CopyWithPlaceholder(),
     Object? message = const $CopyWithPlaceholder(),
-    Object? created = const $CopyWithPlaceholder(),
   }) {
     return ChatMessage(
       id: id == const $CopyWithPlaceholder()
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
           : id as int?,
+      created: created == const $CopyWithPlaceholder()
+          ? _value.created
+          // ignore: cast_nullable_to_non_nullable
+          : created as DateTime?,
+      modified: modified == const $CopyWithPlaceholder()
+          ? _value.modified
+          // ignore: cast_nullable_to_non_nullable
+          : modified as DateTime?,
       chatRoom: chatRoom == const $CopyWithPlaceholder()
           ? _value.chatRoom
           // ignore: cast_nullable_to_non_nullable
@@ -85,10 +100,6 @@ class _$ChatMessageCWProxyImpl implements _$ChatMessageCWProxy {
           ? _value.message
           // ignore: cast_nullable_to_non_nullable
           : message as String,
-      created: created == const $CopyWithPlaceholder()
-          ? _value.created
-          // ignore: cast_nullable_to_non_nullable
-          : created as DateTime?,
     );
   }
 }
@@ -113,14 +124,16 @@ ChatMessage _$ChatMessageFromJson(Map<String, dynamic> json) => $checkedCreate(
         );
         final val = ChatMessage(
           id: $checkedConvert('id', (v) => v as int?),
+          created: $checkedConvert(
+              'created', (v) => v == null ? null : DateTime.parse(v as String)),
+          modified: $checkedConvert('modified',
+              (v) => v == null ? null : DateTime.parse(v as String)),
           chatRoom: $checkedConvert('chat_room', (v) => v as int?),
           createdBy: $checkedConvert(
               'created_by',
               (v) =>
                   v == null ? null : User.fromJson(v as Map<String, dynamic>)),
           message: $checkedConvert('message', (v) => v as String),
-          created: $checkedConvert(
-              'created', (v) => v == null ? null : DateTime.parse(v as String)),
         );
         return val;
       },
@@ -137,9 +150,10 @@ Map<String, dynamic> _$ChatMessageToJson(ChatMessage instance) {
   }
 
   writeNotNull('id', instance.id);
+  writeNotNull('created', instance.created?.toIso8601String());
+  writeNotNull('modified', instance.modified?.toIso8601String());
   writeNotNull('chat_room', instance.chatRoom);
   writeNotNull('created_by', instance.createdBy?.toJson());
   val['message'] = instance.message;
-  writeNotNull('created', instance.created?.toIso8601String());
   return val;
 }

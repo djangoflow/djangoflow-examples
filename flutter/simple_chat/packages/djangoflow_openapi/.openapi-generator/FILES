@@ -9,8 +9,6 @@ doc/ChangePasswordRequest.md
 doc/ChatApi.md
 doc/ChatMessage.md
 doc/ChatMessageRequest.md
-doc/ChatMessageUpdate.md
-doc/ChatMessageUpdateRequest.md
 doc/ChatRoom.md
 doc/ChatRoomMemberList.md
 doc/ChatRoomMembers.md
@@ -27,7 +25,7 @@ doc/OTPObtainRequest.md
 doc/PaginatedChatMessageList.md
 doc/PaginatedChatRoomList.md
 doc/PaginatedOTPDeviceList.md
-doc/PatchedChatMessageUpdateRequest.md
+doc/PatchedChatMessageRequest.md
 doc/PatchedChatRoomRequest.md
 doc/PatchedUser2FARequest.md
 doc/PatchedUserIdentityRequest.md
@@ -57,8 +55,6 @@ lib/src/model/action_enum.dart
 lib/src/model/change_password_request.dart
 lib/src/model/chat_message.dart
 lib/src/model/chat_message_request.dart
-lib/src/model/chat_message_update.dart
-lib/src/model/chat_message_update_request.dart
 lib/src/model/chat_room.dart
 lib/src/model/chat_room_member_list.dart
 lib/src/model/chat_room_members.dart
@@ -75,7 +71,7 @@ lib/src/model/otp_obtain_request.dart
 lib/src/model/paginated_chat_message_list.dart
 lib/src/model/paginated_chat_room_list.dart
 lib/src/model/paginated_otp_device_list.dart
-lib/src/model/patched_chat_message_update_request.dart
+lib/src/model/patched_chat_message_request.dart
 lib/src/model/patched_chat_room_request.dart
 lib/src/model/patched_user2_fa_request.dart
 lib/src/model/patched_user_identity_request.dart
@@ -98,8 +94,6 @@ test/change_password_request_test.dart
 test/chat_api_test.dart
 test/chat_message_request_test.dart
 test/chat_message_test.dart
-test/chat_message_update_request_test.dart
-test/chat_message_update_test.dart
 test/chat_room_member_list_test.dart
 test/chat_room_members_request_test.dart
 test/chat_room_members_test.dart
@@ -116,7 +110,7 @@ test/otp_obtain_test.dart
 test/paginated_chat_message_list_test.dart
 test/paginated_chat_room_list_test.dart
 test/paginated_otp_device_list_test.dart
-test/patched_chat_message_update_request_test.dart
+test/patched_chat_message_request_test.dart
 test/patched_chat_room_request_test.dart
 test/patched_user2_fa_request_test.dart
 test/patched_user_identity_request_test.dart

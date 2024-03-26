@@ -20,22 +20,8 @@ class ChatMessageRequest {
   /// Returns a new [ChatMessageRequest] instance.
   ChatMessageRequest({
 
-     this.chatRoom,
-
     required  this.message,
   });
-
-  @JsonKey(
-    
-    name: r'chat_room',
-    required: false,
-    includeIfNull: false
-  )
-
-
-  final int? chatRoom;
-
-
 
   @JsonKey(
     
@@ -51,12 +37,10 @@ class ChatMessageRequest {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is ChatMessageRequest &&
-     other.chatRoom == chatRoom &&
      other.message == message;
 
   @override
   int get hashCode =>
-    chatRoom.hashCode +
     message.hashCode;
 
   factory ChatMessageRequest.fromJson(Map<String, dynamic> json) => _$ChatMessageRequestFromJson(json);

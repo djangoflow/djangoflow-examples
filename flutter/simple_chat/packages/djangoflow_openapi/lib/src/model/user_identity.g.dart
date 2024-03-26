@@ -17,6 +17,8 @@ abstract class _$UserIdentityCWProxy {
 
   UserIdentity phoneNumber(String? phoneNumber);
 
+  UserIdentity id(String? id);
+
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `UserIdentity(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
   /// Usage
@@ -29,6 +31,7 @@ abstract class _$UserIdentityCWProxy {
     String? username,
     String? email,
     String? phoneNumber,
+    String? id,
   });
 }
 
@@ -55,6 +58,9 @@ class _$UserIdentityCWProxyImpl implements _$UserIdentityCWProxy {
       this(phoneNumber: phoneNumber);
 
   @override
+  UserIdentity id(String? id) => this(id: id);
+
+  @override
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `UserIdentity(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -68,6 +74,7 @@ class _$UserIdentityCWProxyImpl implements _$UserIdentityCWProxy {
     Object? username = const $CopyWithPlaceholder(),
     Object? email = const $CopyWithPlaceholder(),
     Object? phoneNumber = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
   }) {
     return UserIdentity(
       firstName: firstName == const $CopyWithPlaceholder()
@@ -90,6 +97,10 @@ class _$UserIdentityCWProxyImpl implements _$UserIdentityCWProxy {
           ? _value.phoneNumber
           // ignore: cast_nullable_to_non_nullable
           : phoneNumber as String?,
+      id: id == const $CopyWithPlaceholder()
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as String?,
     );
   }
 }
@@ -115,6 +126,7 @@ UserIdentity _$UserIdentityFromJson(Map<String, dynamic> json) =>
           username: $checkedConvert('username', (v) => v as String?),
           email: $checkedConvert('email', (v) => v as String?),
           phoneNumber: $checkedConvert('phone_number', (v) => v as String?),
+          id: $checkedConvert('id', (v) => v as String?),
         );
         return val;
       },
@@ -139,5 +151,6 @@ Map<String, dynamic> _$UserIdentityToJson(UserIdentity instance) {
   writeNotNull('username', instance.username);
   writeNotNull('email', instance.email);
   writeNotNull('phone_number', instance.phoneNumber);
+  writeNotNull('id', instance.id);
   return val;
 }

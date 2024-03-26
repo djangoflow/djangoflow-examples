@@ -6,7 +6,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 // ignore_for_file: unused_element
 import 'package:json_annotation/json_annotation.dart';
 
-part 'chat_message_update_request.g.dart';
+part 'patched_chat_message_request.g.dart';
 
 
 @CopyWith()
@@ -16,36 +16,36 @@ part 'chat_message_update_request.g.dart';
   disallowUnrecognizedKeys: false,
   explicitToJson: true,
 )
-class ChatMessageUpdateRequest {
-  /// Returns a new [ChatMessageUpdateRequest] instance.
-  ChatMessageUpdateRequest({
+class PatchedChatMessageRequest {
+  /// Returns a new [PatchedChatMessageRequest] instance.
+  PatchedChatMessageRequest({
 
-    required  this.message,
+     this.message,
   });
 
   @JsonKey(
     
     name: r'message',
-    required: true,
+    required: false,
     includeIfNull: false
   )
 
 
-  final String message;
+  final String? message;
 
 
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is ChatMessageUpdateRequest &&
+  bool operator ==(Object other) => identical(this, other) || other is PatchedChatMessageRequest &&
      other.message == message;
 
   @override
   int get hashCode =>
     message.hashCode;
 
-  factory ChatMessageUpdateRequest.fromJson(Map<String, dynamic> json) => _$ChatMessageUpdateRequestFromJson(json);
+  factory PatchedChatMessageRequest.fromJson(Map<String, dynamic> json) => _$PatchedChatMessageRequestFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ChatMessageUpdateRequestToJson(this);
+  Map<String, dynamic> toJson() => _$PatchedChatMessageRequestToJson(this);
 
   @override
   String toString() {

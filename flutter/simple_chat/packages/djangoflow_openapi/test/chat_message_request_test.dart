@@ -7,11 +7,6 @@ void main() {
   // TODO add properties to the entity
 
   group(ChatMessageRequest, () {
-    // int chatRoom
-    test('to test the property `chatRoom`', () async {
-      // TODO
-    });
-
     // String message
     test('to test the property `message`', () async {
       // TODO

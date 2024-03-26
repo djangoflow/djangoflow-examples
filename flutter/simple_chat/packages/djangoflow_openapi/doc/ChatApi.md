@@ -287,7 +287,7 @@ import 'package:djangoflow_openapi/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getChatApi();
-final String roomId = roomId_example; // String | 
+final int roomId = 56; // int | 
 final ChatMessageRequest chatMessageRequest = ; // ChatMessageRequest | 
 
 try {
@@ -302,7 +302,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **roomId** | **String**|  | 
+ **roomId** | **int**|  | 
  **chatMessageRequest** | [**ChatMessageRequest**](ChatMessageRequest.md)|  | 
 
 ### Return type
@@ -339,7 +339,7 @@ import 'package:djangoflow_openapi/api.dart';
 
 final api = DjangoflowOpenapi().getChatApi();
 final int id = 56; // int | A unique integer value identifying this chat message.
-final String roomId = roomId_example; // String | 
+final int roomId = 56; // int | 
 
 try {
     final response = api.chatRoomsMessagesDestroy(id, roomId);
@@ -354,7 +354,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| A unique integer value identifying this chat message. | 
- **roomId** | **String**|  | 
+ **roomId** | **int**|  | 
 
 ### Return type
 
@@ -389,7 +389,7 @@ import 'package:djangoflow_openapi/api.dart';
 //defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getChatApi();
-final String roomId = roomId_example; // String | 
+final int roomId = 56; // int | 
 final int limit = 56; // int | Number of results to return per page.
 final int offset = 56; // int | The initial index from which to return the results.
 
@@ -405,7 +405,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **roomId** | **String**|  | 
+ **roomId** | **int**|  | 
  **limit** | **int**| Number of results to return per page. | [optional] 
  **offset** | **int**| The initial index from which to return the results. | [optional] 
 
@@ -425,7 +425,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **chatRoomsMessagesPartialUpdate**
-> ChatMessageUpdate chatRoomsMessagesPartialUpdate(id, roomId, patchedChatMessageUpdateRequest)
+> ChatMessage chatRoomsMessagesPartialUpdate(id, roomId, patchedChatMessageRequest)
 
 
 
@@ -443,11 +443,11 @@ import 'package:djangoflow_openapi/api.dart';
 
 final api = DjangoflowOpenapi().getChatApi();
 final int id = 56; // int | A unique integer value identifying this chat message.
-final String roomId = roomId_example; // String | 
-final PatchedChatMessageUpdateRequest patchedChatMessageUpdateRequest = ; // PatchedChatMessageUpdateRequest | 
+final int roomId = 56; // int | 
+final PatchedChatMessageRequest patchedChatMessageRequest = ; // PatchedChatMessageRequest | 
 
 try {
-    final response = api.chatRoomsMessagesPartialUpdate(id, roomId, patchedChatMessageUpdateRequest);
+    final response = api.chatRoomsMessagesPartialUpdate(id, roomId, patchedChatMessageRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling ChatApi->chatRoomsMessagesPartialUpdate: $e\n');
@@ -459,12 +459,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| A unique integer value identifying this chat message. | 
- **roomId** | **String**|  | 
- **patchedChatMessageUpdateRequest** | [**PatchedChatMessageUpdateRequest**](PatchedChatMessageUpdateRequest.md)|  | [optional] 
+ **roomId** | **int**|  | 
+ **patchedChatMessageRequest** | [**PatchedChatMessageRequest**](PatchedChatMessageRequest.md)|  | [optional] 
 
 ### Return type
 
-[**ChatMessageUpdate**](ChatMessageUpdate.md)
+[**ChatMessage**](ChatMessage.md)
 
 ### Authorization
 
@@ -496,7 +496,7 @@ import 'package:djangoflow_openapi/api.dart';
 
 final api = DjangoflowOpenapi().getChatApi();
 final int id = 56; // int | A unique integer value identifying this chat message.
-final String roomId = roomId_example; // String | 
+final int roomId = 56; // int | 
 
 try {
     final response = api.chatRoomsMessagesRetrieve(id, roomId);
@@ -511,7 +511,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| A unique integer value identifying this chat message. | 
- **roomId** | **String**|  | 
+ **roomId** | **int**|  | 
 
 ### Return type
 
@@ -529,7 +529,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **chatRoomsMessagesUpdate**
-> ChatMessageUpdate chatRoomsMessagesUpdate(id, roomId, chatMessageUpdateRequest)
+> ChatMessage chatRoomsMessagesUpdate(id, roomId, chatMessageRequest)
 
 
 
@@ -547,11 +547,11 @@ import 'package:djangoflow_openapi/api.dart';
 
 final api = DjangoflowOpenapi().getChatApi();
 final int id = 56; // int | A unique integer value identifying this chat message.
-final String roomId = roomId_example; // String | 
-final ChatMessageUpdateRequest chatMessageUpdateRequest = ; // ChatMessageUpdateRequest | 
+final int roomId = 56; // int | 
+final ChatMessageRequest chatMessageRequest = ; // ChatMessageRequest | 
 
 try {
-    final response = api.chatRoomsMessagesUpdate(id, roomId, chatMessageUpdateRequest);
+    final response = api.chatRoomsMessagesUpdate(id, roomId, chatMessageRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling ChatApi->chatRoomsMessagesUpdate: $e\n');
@@ -563,12 +563,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **int**| A unique integer value identifying this chat message. | 
- **roomId** | **String**|  | 
- **chatMessageUpdateRequest** | [**ChatMessageUpdateRequest**](ChatMessageUpdateRequest.md)|  | 
+ **roomId** | **int**|  | 
+ **chatMessageRequest** | [**ChatMessageRequest**](ChatMessageRequest.md)|  | 
 
 ### Return type
 
-[**ChatMessageUpdate**](ChatMessageUpdate.md)
+[**ChatMessage**](ChatMessage.md)
 
 ### Authorization
 
