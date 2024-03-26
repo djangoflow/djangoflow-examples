@@ -47,7 +47,7 @@ Map<String, dynamic> _$$ChatRoomsMembersRetrieveFilterImplToJson(
 _$ChatRoomsMessagesListFilterImpl _$$ChatRoomsMessagesListFilterImplFromJson(
         Map<String, dynamic> json) =>
     _$ChatRoomsMessagesListFilterImpl(
-      roomId: json['roomId'] as String,
+      roomId: json['roomId'] as int,
       limit: json['limit'] as int? ?? 25,
       offset: json['offset'] as int? ?? 0,
     );
@@ -64,7 +64,7 @@ _$ChatRoomsMessagesRetrieveFilterImpl
     _$$ChatRoomsMessagesRetrieveFilterImplFromJson(Map<String, dynamic> json) =>
         _$ChatRoomsMessagesRetrieveFilterImpl(
           id: json['id'] as int,
-          roomId: json['roomId'] as String,
+          roomId: json['roomId'] as int,
         );
 
 Map<String, dynamic> _$$ChatRoomsMessagesRetrieveFilterImplToJson(
@@ -72,4 +72,56 @@ Map<String, dynamic> _$$ChatRoomsMessagesRetrieveFilterImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'roomId': instance.roomId,
+    };
+
+_$AuthOtpDevicesListFilterImpl _$$AuthOtpDevicesListFilterImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AuthOtpDevicesListFilterImpl(
+      limit: json['limit'] as int? ?? 25,
+      offset: json['offset'] as int? ?? 0,
+    );
+
+Map<String, dynamic> _$$AuthOtpDevicesListFilterImplToJson(
+        _$AuthOtpDevicesListFilterImpl instance) =>
+    <String, dynamic>{
+      'limit': instance.limit,
+      'offset': instance.offset,
+    };
+
+_$AuthOtpDevicesRetrieveFilterImpl _$$AuthOtpDevicesRetrieveFilterImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AuthOtpDevicesRetrieveFilterImpl(
+      id: json['id'] as String,
+      type: json['type'] as String,
+    );
+
+Map<String, dynamic> _$$AuthOtpDevicesRetrieveFilterImplToJson(
+        _$AuthOtpDevicesRetrieveFilterImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'type': instance.type,
+    };
+
+_$AuthUsersRetrieveFilterImpl _$$AuthUsersRetrieveFilterImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AuthUsersRetrieveFilterImpl(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$$AuthUsersRetrieveFilterImplToJson(
+        _$AuthUsersRetrieveFilterImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+    };
+
+_$AuthUsersTwoFaRetrieveFilterImpl _$$AuthUsersTwoFaRetrieveFilterImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AuthUsersTwoFaRetrieveFilterImpl(
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$$AuthUsersTwoFaRetrieveFilterImplToJson(
+        _$AuthUsersTwoFaRetrieveFilterImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
     };

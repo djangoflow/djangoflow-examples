@@ -35,6 +35,7 @@ class ApiRepository {
   );
 
   DjangoflowOpenapi get api => _openapi;
+  AuthApi get auth => api.getAuthApi();
   ChatApi get chat => api.getChatApi();
 }
 
@@ -340,7 +341,7 @@ class ChatRoomsMessagesListFilter
 
   @Implements<OffsetLimitFilter>()
   const factory ChatRoomsMessagesListFilter({
-    required String roomId,
+    required int roomId,
     @Default(25) int limit,
     @Default(0) int offset,
   }) = _ChatRoomsMessagesListFilter;
@@ -368,7 +369,7 @@ class ChatRoomsMessagesRetrieveFilter with _$ChatRoomsMessagesRetrieveFilter {
 
   const factory ChatRoomsMessagesRetrieveFilter({
     required int id,
-    required String roomId,
+    required int roomId,
   }) = _ChatRoomsMessagesRetrieveFilter;
 
   factory ChatRoomsMessagesRetrieveFilter.fromJson(
@@ -413,7 +414,7 @@ mixin ChatRoomsMessagesRepositoryMixin {
   }
 
   Future<ChatMessage?> create({
-    required String roomId,
+    required int roomId,
     required ChatMessageRequest chatMessageRequest,
   }) async {
     final r = (await ApiRepository.instance.chat.chatRoomsMessagesCreate(
@@ -424,29 +425,29 @@ mixin ChatRoomsMessagesRepositoryMixin {
     return r.data;
   }
 
-  Future<ChatMessageUpdate?> partialUpdate({
+  Future<ChatMessage?> partialUpdate({
     required int id,
-    required String roomId,
-    PatchedChatMessageUpdateRequest? patchedChatMessageUpdateRequest,
+    required int roomId,
+    PatchedChatMessageRequest? patchedChatMessageRequest,
   }) async {
     final r = (await ApiRepository.instance.chat.chatRoomsMessagesPartialUpdate(
       id: id,
       roomId: roomId,
-      patchedChatMessageUpdateRequest: patchedChatMessageUpdateRequest,
+      patchedChatMessageRequest: patchedChatMessageRequest,
     ));
 
     return r.data;
   }
 
-  Future<ChatMessageUpdate?> updateObject({
+  Future<ChatMessage?> updateObject({
     required int id,
-    required String roomId,
-    required ChatMessageUpdateRequest chatMessageUpdateRequest,
+    required int roomId,
+    required ChatMessageRequest chatMessageRequest,
   }) async {
     final r = (await ApiRepository.instance.chat.chatRoomsMessagesUpdate(
       id: id,
       roomId: roomId,
-      chatMessageUpdateRequest: chatMessageUpdateRequest,
+      chatMessageRequest: chatMessageRequest,
     ));
 
     return r.data;
@@ -454,7 +455,7 @@ mixin ChatRoomsMessagesRepositoryMixin {
 
   Future<Object?> destroy({
     required int id,
-    required String roomId,
+    required int roomId,
   }) async {
     final r = (await ApiRepository.instance.chat.chatRoomsMessagesDestroy(
       id: id,
@@ -475,7 +476,7 @@ class ChatRoomsMessagesDataBloc
 
   @override
   Future<ChatMessage?> create({
-    required String roomId,
+    required int roomId,
     required ChatMessageRequest chatMessageRequest,
   }) async {
     final r = await super.create(
@@ -487,30 +488,30 @@ class ChatRoomsMessagesDataBloc
   }
 
   @override
-  Future<ChatMessageUpdate?> partialUpdate({
+  Future<ChatMessage?> partialUpdate({
     required int id,
-    required String roomId,
-    PatchedChatMessageUpdateRequest? patchedChatMessageUpdateRequest,
+    required int roomId,
+    PatchedChatMessageRequest? patchedChatMessageRequest,
   }) async {
     final r = await super.partialUpdate(
       id: id,
       roomId: roomId,
-      patchedChatMessageUpdateRequest: patchedChatMessageUpdateRequest,
+      patchedChatMessageRequest: patchedChatMessageRequest,
     );
 
     return r;
   }
 
   @override
-  Future<ChatMessageUpdate?> updateObject({
+  Future<ChatMessage?> updateObject({
     required int id,
-    required String roomId,
-    required ChatMessageUpdateRequest chatMessageUpdateRequest,
+    required int roomId,
+    required ChatMessageRequest chatMessageRequest,
   }) async {
     final r = await super.updateObject(
       id: id,
       roomId: roomId,
-      chatMessageUpdateRequest: chatMessageUpdateRequest,
+      chatMessageRequest: chatMessageRequest,
     );
 
     return r;
@@ -519,7 +520,7 @@ class ChatRoomsMessagesDataBloc
   @override
   Future<Object?> destroy({
     required int id,
-    required String roomId,
+    required int roomId,
   }) async {
     final r = await super.destroy(
       id: id,
@@ -539,7 +540,7 @@ class ChatRoomsMessagesListBloc
 
   @override
   Future<ChatMessage?> create({
-    required String roomId,
+    required int roomId,
     required ChatMessageRequest chatMessageRequest,
   }) async {
     final r = await super.create(
@@ -552,15 +553,15 @@ class ChatRoomsMessagesListBloc
   }
 
   @override
-  Future<ChatMessageUpdate?> partialUpdate({
+  Future<ChatMessage?> partialUpdate({
     required int id,
-    required String roomId,
-    PatchedChatMessageUpdateRequest? patchedChatMessageUpdateRequest,
+    required int roomId,
+    PatchedChatMessageRequest? patchedChatMessageRequest,
   }) async {
     final r = await super.partialUpdate(
       id: id,
       roomId: roomId,
-      patchedChatMessageUpdateRequest: patchedChatMessageUpdateRequest,
+      patchedChatMessageRequest: patchedChatMessageRequest,
     );
     await super.reload();
 
@@ -568,15 +569,15 @@ class ChatRoomsMessagesListBloc
   }
 
   @override
-  Future<ChatMessageUpdate?> updateObject({
+  Future<ChatMessage?> updateObject({
     required int id,
-    required String roomId,
-    required ChatMessageUpdateRequest chatMessageUpdateRequest,
+    required int roomId,
+    required ChatMessageRequest chatMessageRequest,
   }) async {
     final r = await super.updateObject(
       id: id,
       roomId: roomId,
-      chatMessageUpdateRequest: chatMessageUpdateRequest,
+      chatMessageRequest: chatMessageRequest,
     );
     await super.reload();
 
@@ -586,13 +587,352 @@ class ChatRoomsMessagesListBloc
   @override
   Future<Object?> destroy({
     required int id,
-    required String roomId,
+    required int roomId,
   }) async {
     final r = await super.destroy(
       id: id,
       roomId: roomId,
     );
     await super.reload();
+
+    return r;
+  }
+}
+
+//Typdef for AuthOtpDevicesListState
+
+typedef AuthOtpDevicesListState
+    = Data<List<OTPDevice>, AuthOtpDevicesListFilter>;
+
+//Filter for AuthOtpDevicesListFilter
+
+@freezed
+class AuthOtpDevicesListFilter
+    with _$AuthOtpDevicesListFilter
+    implements OffsetLimitFilter {
+  static const kPageSize = 25;
+  const AuthOtpDevicesListFilter._();
+
+  @Implements<OffsetLimitFilter>()
+  const factory AuthOtpDevicesListFilter({
+    @Default(25) int limit,
+    @Default(0) int offset,
+  }) = _AuthOtpDevicesListFilter;
+
+  factory AuthOtpDevicesListFilter.fromJson(
+    Map<String, dynamic> map,
+  ) =>
+      _$AuthOtpDevicesListFilterFromJson(map);
+
+  @override
+  AuthOtpDevicesListFilter copyWithOffset(int offset) =>
+      copyWith(offset: offset);
+}
+
+//Typdef for AuthOtpDevicesRetrieveState
+
+typedef AuthOtpDevicesRetrieveState
+    = Data<OTPDevice, AuthOtpDevicesRetrieveFilter>;
+
+//Filter for AuthOtpDevicesRetrieveFilter
+
+@freezed
+class AuthOtpDevicesRetrieveFilter with _$AuthOtpDevicesRetrieveFilter {
+  const AuthOtpDevicesRetrieveFilter._();
+
+  const factory AuthOtpDevicesRetrieveFilter({
+    required String id,
+    required String type,
+  }) = _AuthOtpDevicesRetrieveFilter;
+
+  factory AuthOtpDevicesRetrieveFilter.fromJson(
+    Map<String, dynamic> map,
+  ) =>
+      _$AuthOtpDevicesRetrieveFilterFromJson(map);
+}
+
+// RepositoryMixin for AuthOtpDevicesRepositoryMixin
+
+mixin AuthOtpDevicesRepositoryMixin {
+  static Future<OTPDevice> retrieve([
+    AuthOtpDevicesRetrieveFilter? filter,
+  ]) async {
+    if (filter == null) {
+      throw Exception('Invalid filter');
+    }
+    final r = await ApiRepository.instance.auth.authOtpDevicesRetrieve(
+      id: filter.id,
+      type: filter.type,
+    );
+    if (r.data == null) {
+      throw Exception('Failed to load data!');
+    } else {
+      return r.data!;
+    }
+  }
+
+  static Future<List<OTPDevice>> list([
+    AuthOtpDevicesListFilter? filter,
+  ]) async {
+    final r = await ApiRepository.instance.auth.authOtpDevicesList(
+      limit: filter?.limit,
+      offset: filter?.offset,
+    );
+
+    return r.data?.results?.toList(growable: false) ?? [];
+  }
+
+  Future<OTPDevice?> create({
+    required OTPDeviceRequest oTPDeviceRequest,
+  }) async {
+    final r = (await ApiRepository.instance.auth.authOtpDevicesCreate(
+      oTPDeviceRequest: oTPDeviceRequest,
+    ));
+
+    return r.data;
+  }
+
+  Future<Object?> destroy({
+    required String id,
+    required String type,
+  }) async {
+    final r = (await ApiRepository.instance.auth.authOtpDevicesDestroy(
+      id: id,
+      type: type,
+    ));
+
+    return r.data;
+  }
+}
+
+// DataCubit for AuthOtpDevices
+
+class AuthOtpDevicesDataBloc
+    extends DataCubit<OTPDevice, AuthOtpDevicesRetrieveFilter>
+    with AuthOtpDevicesRepositoryMixin {
+  AuthOtpDevicesDataBloc() : super(AuthOtpDevicesRepositoryMixin.retrieve);
+
+  @override
+  Future<OTPDevice?> create({
+    required OTPDeviceRequest oTPDeviceRequest,
+  }) async {
+    final r = await super.create(
+      oTPDeviceRequest: oTPDeviceRequest,
+    );
+
+    return r;
+  }
+
+  @override
+  Future<Object?> destroy({
+    required String id,
+    required String type,
+  }) async {
+    final r = await super.destroy(
+      id: id,
+      type: type,
+    );
+
+    return r;
+  }
+}
+
+// ListCubit for AuthOtpDevices
+
+class AuthOtpDevicesListBloc
+    extends ListCubit<OTPDevice, AuthOtpDevicesListFilter>
+    with AuthOtpDevicesRepositoryMixin {
+  AuthOtpDevicesListBloc() : super(AuthOtpDevicesRepositoryMixin.list);
+
+  @override
+  Future<OTPDevice?> create({
+    required OTPDeviceRequest oTPDeviceRequest,
+  }) async {
+    final r = await super.create(
+      oTPDeviceRequest: oTPDeviceRequest,
+    );
+    await super.reload();
+
+    return r;
+  }
+
+  @override
+  Future<Object?> destroy({
+    required String id,
+    required String type,
+  }) async {
+    final r = await super.destroy(
+      id: id,
+      type: type,
+    );
+    await super.reload();
+
+    return r;
+  }
+}
+
+//Typdef for AuthUsersRetrieveState
+
+typedef AuthUsersRetrieveState = Data<UserIdentity, AuthUsersRetrieveFilter>;
+
+//Filter for AuthUsersRetrieveFilter
+
+@freezed
+class AuthUsersRetrieveFilter with _$AuthUsersRetrieveFilter {
+  const AuthUsersRetrieveFilter._();
+
+  const factory AuthUsersRetrieveFilter({
+    required String id,
+  }) = _AuthUsersRetrieveFilter;
+
+  factory AuthUsersRetrieveFilter.fromJson(
+    Map<String, dynamic> map,
+  ) =>
+      _$AuthUsersRetrieveFilterFromJson(map);
+}
+
+// RepositoryMixin for AuthUsersRepositoryMixin
+
+mixin AuthUsersRepositoryMixin {
+  static Future<UserIdentity> retrieve([
+    AuthUsersRetrieveFilter? filter,
+  ]) async {
+    if (filter == null) {
+      throw Exception('Invalid filter');
+    }
+    final r = await ApiRepository.instance.auth.authUsersRetrieve(
+      id: filter.id,
+    );
+    if (r.data == null) {
+      throw Exception('Failed to load data!');
+    } else {
+      return r.data!;
+    }
+  }
+
+  Future<UserIdentity?> create({
+    UserIdentityRequest? userIdentityRequest,
+  }) async {
+    final r = (await ApiRepository.instance.auth.authUsersCreate(
+      userIdentityRequest: userIdentityRequest,
+    ));
+
+    return r.data;
+  }
+
+  Future<UserIdentity?> partialUpdate({
+    required String id,
+    PatchedUserIdentityRequest? patchedUserIdentityRequest,
+  }) async {
+    final r = (await ApiRepository.instance.auth.authUsersPartialUpdate(
+      id: id,
+      patchedUserIdentityRequest: patchedUserIdentityRequest,
+    ));
+
+    return r.data;
+  }
+}
+
+// DataCubit for AuthUsers
+
+class AuthUsersDataBloc extends DataCubit<UserIdentity, AuthUsersRetrieveFilter>
+    with AuthUsersRepositoryMixin {
+  AuthUsersDataBloc() : super(AuthUsersRepositoryMixin.retrieve);
+
+  @override
+  Future<UserIdentity?> create({
+    UserIdentityRequest? userIdentityRequest,
+  }) async {
+    final r = await super.create(
+      userIdentityRequest: userIdentityRequest,
+    );
+
+    return r;
+  }
+
+  @override
+  Future<UserIdentity?> partialUpdate({
+    required String id,
+    PatchedUserIdentityRequest? patchedUserIdentityRequest,
+  }) async {
+    final r = await super.partialUpdate(
+      id: id,
+      patchedUserIdentityRequest: patchedUserIdentityRequest,
+    );
+
+    return r;
+  }
+}
+
+//Typdef for AuthUsersTwoFaRetrieveState
+
+typedef AuthUsersTwoFaRetrieveState
+    = Data<User2FA, AuthUsersTwoFaRetrieveFilter>;
+
+//Filter for AuthUsersTwoFaRetrieveFilter
+
+@freezed
+class AuthUsersTwoFaRetrieveFilter with _$AuthUsersTwoFaRetrieveFilter {
+  const AuthUsersTwoFaRetrieveFilter._();
+
+  const factory AuthUsersTwoFaRetrieveFilter({
+    required String id,
+  }) = _AuthUsersTwoFaRetrieveFilter;
+
+  factory AuthUsersTwoFaRetrieveFilter.fromJson(
+    Map<String, dynamic> map,
+  ) =>
+      _$AuthUsersTwoFaRetrieveFilterFromJson(map);
+}
+
+// RepositoryMixin for AuthUsersTwoFaRepositoryMixin
+
+mixin AuthUsersTwoFaRepositoryMixin {
+  static Future<User2FA> retrieve([
+    AuthUsersTwoFaRetrieveFilter? filter,
+  ]) async {
+    if (filter == null) {
+      throw Exception('Invalid filter');
+    }
+    final r = await ApiRepository.instance.auth.authUsersTwoFaRetrieve(
+      id: filter.id,
+    );
+    if (r.data == null) {
+      throw Exception('Failed to load data!');
+    } else {
+      return r.data!;
+    }
+  }
+
+  Future<User2FA?> partialUpdate({
+    required String id,
+    PatchedUser2FARequest? patchedUser2FARequest,
+  }) async {
+    final r = (await ApiRepository.instance.auth.authUsersTwoFaPartialUpdate(
+      id: id,
+      patchedUser2FARequest: patchedUser2FARequest,
+    ));
+
+    return r.data;
+  }
+}
+
+// DataCubit for AuthUsersTwoFa
+
+class AuthUsersTwoFaDataBloc
+    extends DataCubit<User2FA, AuthUsersTwoFaRetrieveFilter>
+    with AuthUsersTwoFaRepositoryMixin {
+  AuthUsersTwoFaDataBloc() : super(AuthUsersTwoFaRepositoryMixin.retrieve);
+
+  @override
+  Future<User2FA?> partialUpdate({
+    required String id,
+    PatchedUser2FARequest? patchedUser2FARequest,
+  }) async {
+    final r = await super.partialUpdate(
+      id: id,
+      patchedUser2FARequest: patchedUser2FARequest,
+    );
 
     return r;
   }

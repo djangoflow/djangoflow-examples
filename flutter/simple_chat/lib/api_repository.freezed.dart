@@ -502,7 +502,7 @@ ChatRoomsMessagesListFilter _$ChatRoomsMessagesListFilterFromJson(
 
 /// @nodoc
 mixin _$ChatRoomsMessagesListFilter {
-  String get roomId => throw _privateConstructorUsedError;
+  int get roomId => throw _privateConstructorUsedError;
   int get limit => throw _privateConstructorUsedError;
   int get offset => throw _privateConstructorUsedError;
 
@@ -520,7 +520,7 @@ abstract class $ChatRoomsMessagesListFilterCopyWith<$Res> {
       _$ChatRoomsMessagesListFilterCopyWithImpl<$Res,
           ChatRoomsMessagesListFilter>;
   @useResult
-  $Res call({String roomId, int limit, int offset});
+  $Res call({int roomId, int limit, int offset});
 }
 
 /// @nodoc
@@ -545,7 +545,7 @@ class _$ChatRoomsMessagesListFilterCopyWithImpl<$Res,
       roomId: null == roomId
           ? _value.roomId
           : roomId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       limit: null == limit
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
@@ -567,7 +567,7 @@ abstract class _$$ChatRoomsMessagesListFilterImplCopyWith<$Res>
       __$$ChatRoomsMessagesListFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String roomId, int limit, int offset});
+  $Res call({int roomId, int limit, int offset});
 }
 
 /// @nodoc
@@ -591,7 +591,7 @@ class __$$ChatRoomsMessagesListFilterImplCopyWithImpl<$Res>
       roomId: null == roomId
           ? _value.roomId
           : roomId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       limit: null == limit
           ? _value.limit
           : limit // ignore: cast_nullable_to_non_nullable
@@ -617,7 +617,7 @@ class _$ChatRoomsMessagesListFilterImpl extends _ChatRoomsMessagesListFilter
       _$$ChatRoomsMessagesListFilterImplFromJson(json);
 
   @override
-  final String roomId;
+  final int roomId;
   @override
   @JsonKey()
   final int limit;
@@ -672,7 +672,7 @@ class _$ChatRoomsMessagesListFilterImpl extends _ChatRoomsMessagesListFilter
 abstract class _ChatRoomsMessagesListFilter extends ChatRoomsMessagesListFilter
     implements OffsetLimitFilter {
   const factory _ChatRoomsMessagesListFilter(
-      {required final String roomId,
+      {required final int roomId,
       final int limit,
       final int offset}) = _$ChatRoomsMessagesListFilterImpl;
   const _ChatRoomsMessagesListFilter._() : super._();
@@ -681,7 +681,7 @@ abstract class _ChatRoomsMessagesListFilter extends ChatRoomsMessagesListFilter
       _$ChatRoomsMessagesListFilterImpl.fromJson;
 
   @override
-  String get roomId;
+  int get roomId;
   @override
   int get limit;
   @override
@@ -700,7 +700,7 @@ ChatRoomsMessagesRetrieveFilter _$ChatRoomsMessagesRetrieveFilterFromJson(
 /// @nodoc
 mixin _$ChatRoomsMessagesRetrieveFilter {
   int get id => throw _privateConstructorUsedError;
-  String get roomId => throw _privateConstructorUsedError;
+  int get roomId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -716,7 +716,7 @@ abstract class $ChatRoomsMessagesRetrieveFilterCopyWith<$Res> {
       _$ChatRoomsMessagesRetrieveFilterCopyWithImpl<$Res,
           ChatRoomsMessagesRetrieveFilter>;
   @useResult
-  $Res call({int id, String roomId});
+  $Res call({int id, int roomId});
 }
 
 /// @nodoc
@@ -744,7 +744,7 @@ class _$ChatRoomsMessagesRetrieveFilterCopyWithImpl<$Res,
       roomId: null == roomId
           ? _value.roomId
           : roomId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ) as $Val);
   }
 }
@@ -758,7 +758,7 @@ abstract class _$$ChatRoomsMessagesRetrieveFilterImplCopyWith<$Res>
       __$$ChatRoomsMessagesRetrieveFilterImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String roomId});
+  $Res call({int id, int roomId});
 }
 
 /// @nodoc
@@ -785,7 +785,7 @@ class __$$ChatRoomsMessagesRetrieveFilterImplCopyWithImpl<$Res>
       roomId: null == roomId
           ? _value.roomId
           : roomId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ));
   }
 }
@@ -805,7 +805,7 @@ class _$ChatRoomsMessagesRetrieveFilterImpl
   @override
   final int id;
   @override
-  final String roomId;
+  final int roomId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -854,7 +854,7 @@ abstract class _ChatRoomsMessagesRetrieveFilter
     extends ChatRoomsMessagesRetrieveFilter {
   const factory _ChatRoomsMessagesRetrieveFilter(
       {required final int id,
-      required final String roomId}) = _$ChatRoomsMessagesRetrieveFilterImpl;
+      required final int roomId}) = _$ChatRoomsMessagesRetrieveFilterImpl;
   const _ChatRoomsMessagesRetrieveFilter._() : super._();
 
   factory _ChatRoomsMessagesRetrieveFilter.fromJson(Map<String, dynamic> json) =
@@ -863,10 +863,675 @@ abstract class _ChatRoomsMessagesRetrieveFilter
   @override
   int get id;
   @override
-  String get roomId;
+  int get roomId;
   @override
   @JsonKey(ignore: true)
   _$$ChatRoomsMessagesRetrieveFilterImplCopyWith<
           _$ChatRoomsMessagesRetrieveFilterImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+AuthOtpDevicesListFilter _$AuthOtpDevicesListFilterFromJson(
+    Map<String, dynamic> json) {
+  return _AuthOtpDevicesListFilter.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AuthOtpDevicesListFilter {
+  int get limit => throw _privateConstructorUsedError;
+  int get offset => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AuthOtpDevicesListFilterCopyWith<AuthOtpDevicesListFilter> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthOtpDevicesListFilterCopyWith<$Res> {
+  factory $AuthOtpDevicesListFilterCopyWith(AuthOtpDevicesListFilter value,
+          $Res Function(AuthOtpDevicesListFilter) then) =
+      _$AuthOtpDevicesListFilterCopyWithImpl<$Res, AuthOtpDevicesListFilter>;
+  @useResult
+  $Res call({int limit, int offset});
+}
+
+/// @nodoc
+class _$AuthOtpDevicesListFilterCopyWithImpl<$Res,
+        $Val extends AuthOtpDevicesListFilter>
+    implements $AuthOtpDevicesListFilterCopyWith<$Res> {
+  _$AuthOtpDevicesListFilterCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? limit = null,
+    Object? offset = null,
+  }) {
+    return _then(_value.copyWith(
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+      offset: null == offset
+          ? _value.offset
+          : offset // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AuthOtpDevicesListFilterImplCopyWith<$Res>
+    implements $AuthOtpDevicesListFilterCopyWith<$Res> {
+  factory _$$AuthOtpDevicesListFilterImplCopyWith(
+          _$AuthOtpDevicesListFilterImpl value,
+          $Res Function(_$AuthOtpDevicesListFilterImpl) then) =
+      __$$AuthOtpDevicesListFilterImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int limit, int offset});
+}
+
+/// @nodoc
+class __$$AuthOtpDevicesListFilterImplCopyWithImpl<$Res>
+    extends _$AuthOtpDevicesListFilterCopyWithImpl<$Res,
+        _$AuthOtpDevicesListFilterImpl>
+    implements _$$AuthOtpDevicesListFilterImplCopyWith<$Res> {
+  __$$AuthOtpDevicesListFilterImplCopyWithImpl(
+      _$AuthOtpDevicesListFilterImpl _value,
+      $Res Function(_$AuthOtpDevicesListFilterImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? limit = null,
+    Object? offset = null,
+  }) {
+    return _then(_$AuthOtpDevicesListFilterImpl(
+      limit: null == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int,
+      offset: null == offset
+          ? _value.offset
+          : offset // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AuthOtpDevicesListFilterImpl extends _AuthOtpDevicesListFilter
+    with DiagnosticableTreeMixin {
+  const _$AuthOtpDevicesListFilterImpl({this.limit = 25, this.offset = 0})
+      : super._();
+
+  factory _$AuthOtpDevicesListFilterImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AuthOtpDevicesListFilterImplFromJson(json);
+
+  @override
+  @JsonKey()
+  final int limit;
+  @override
+  @JsonKey()
+  final int offset;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AuthOtpDevicesListFilter(limit: $limit, offset: $offset)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AuthOtpDevicesListFilter'))
+      ..add(DiagnosticsProperty('limit', limit))
+      ..add(DiagnosticsProperty('offset', offset));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthOtpDevicesListFilterImpl &&
+            (identical(other.limit, limit) || other.limit == limit) &&
+            (identical(other.offset, offset) || other.offset == offset));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, limit, offset);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthOtpDevicesListFilterImplCopyWith<_$AuthOtpDevicesListFilterImpl>
+      get copyWith => __$$AuthOtpDevicesListFilterImplCopyWithImpl<
+          _$AuthOtpDevicesListFilterImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AuthOtpDevicesListFilterImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AuthOtpDevicesListFilter extends AuthOtpDevicesListFilter
+    implements OffsetLimitFilter {
+  const factory _AuthOtpDevicesListFilter({final int limit, final int offset}) =
+      _$AuthOtpDevicesListFilterImpl;
+  const _AuthOtpDevicesListFilter._() : super._();
+
+  factory _AuthOtpDevicesListFilter.fromJson(Map<String, dynamic> json) =
+      _$AuthOtpDevicesListFilterImpl.fromJson;
+
+  @override
+  int get limit;
+  @override
+  int get offset;
+  @override
+  @JsonKey(ignore: true)
+  _$$AuthOtpDevicesListFilterImplCopyWith<_$AuthOtpDevicesListFilterImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+AuthOtpDevicesRetrieveFilter _$AuthOtpDevicesRetrieveFilterFromJson(
+    Map<String, dynamic> json) {
+  return _AuthOtpDevicesRetrieveFilter.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AuthOtpDevicesRetrieveFilter {
+  String get id => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AuthOtpDevicesRetrieveFilterCopyWith<AuthOtpDevicesRetrieveFilter>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthOtpDevicesRetrieveFilterCopyWith<$Res> {
+  factory $AuthOtpDevicesRetrieveFilterCopyWith(
+          AuthOtpDevicesRetrieveFilter value,
+          $Res Function(AuthOtpDevicesRetrieveFilter) then) =
+      _$AuthOtpDevicesRetrieveFilterCopyWithImpl<$Res,
+          AuthOtpDevicesRetrieveFilter>;
+  @useResult
+  $Res call({String id, String type});
+}
+
+/// @nodoc
+class _$AuthOtpDevicesRetrieveFilterCopyWithImpl<$Res,
+        $Val extends AuthOtpDevicesRetrieveFilter>
+    implements $AuthOtpDevicesRetrieveFilterCopyWith<$Res> {
+  _$AuthOtpDevicesRetrieveFilterCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? type = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AuthOtpDevicesRetrieveFilterImplCopyWith<$Res>
+    implements $AuthOtpDevicesRetrieveFilterCopyWith<$Res> {
+  factory _$$AuthOtpDevicesRetrieveFilterImplCopyWith(
+          _$AuthOtpDevicesRetrieveFilterImpl value,
+          $Res Function(_$AuthOtpDevicesRetrieveFilterImpl) then) =
+      __$$AuthOtpDevicesRetrieveFilterImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id, String type});
+}
+
+/// @nodoc
+class __$$AuthOtpDevicesRetrieveFilterImplCopyWithImpl<$Res>
+    extends _$AuthOtpDevicesRetrieveFilterCopyWithImpl<$Res,
+        _$AuthOtpDevicesRetrieveFilterImpl>
+    implements _$$AuthOtpDevicesRetrieveFilterImplCopyWith<$Res> {
+  __$$AuthOtpDevicesRetrieveFilterImplCopyWithImpl(
+      _$AuthOtpDevicesRetrieveFilterImpl _value,
+      $Res Function(_$AuthOtpDevicesRetrieveFilterImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? type = null,
+  }) {
+    return _then(_$AuthOtpDevicesRetrieveFilterImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AuthOtpDevicesRetrieveFilterImpl extends _AuthOtpDevicesRetrieveFilter
+    with DiagnosticableTreeMixin {
+  const _$AuthOtpDevicesRetrieveFilterImpl(
+      {required this.id, required this.type})
+      : super._();
+
+  factory _$AuthOtpDevicesRetrieveFilterImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$AuthOtpDevicesRetrieveFilterImplFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String type;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AuthOtpDevicesRetrieveFilter(id: $id, type: $type)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AuthOtpDevicesRetrieveFilter'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('type', type));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthOtpDevicesRetrieveFilterImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.type, type) || other.type == type));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, type);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthOtpDevicesRetrieveFilterImplCopyWith<
+          _$AuthOtpDevicesRetrieveFilterImpl>
+      get copyWith => __$$AuthOtpDevicesRetrieveFilterImplCopyWithImpl<
+          _$AuthOtpDevicesRetrieveFilterImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AuthOtpDevicesRetrieveFilterImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AuthOtpDevicesRetrieveFilter
+    extends AuthOtpDevicesRetrieveFilter {
+  const factory _AuthOtpDevicesRetrieveFilter(
+      {required final String id,
+      required final String type}) = _$AuthOtpDevicesRetrieveFilterImpl;
+  const _AuthOtpDevicesRetrieveFilter._() : super._();
+
+  factory _AuthOtpDevicesRetrieveFilter.fromJson(Map<String, dynamic> json) =
+      _$AuthOtpDevicesRetrieveFilterImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get type;
+  @override
+  @JsonKey(ignore: true)
+  _$$AuthOtpDevicesRetrieveFilterImplCopyWith<
+          _$AuthOtpDevicesRetrieveFilterImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+AuthUsersRetrieveFilter _$AuthUsersRetrieveFilterFromJson(
+    Map<String, dynamic> json) {
+  return _AuthUsersRetrieveFilter.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AuthUsersRetrieveFilter {
+  String get id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AuthUsersRetrieveFilterCopyWith<AuthUsersRetrieveFilter> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthUsersRetrieveFilterCopyWith<$Res> {
+  factory $AuthUsersRetrieveFilterCopyWith(AuthUsersRetrieveFilter value,
+          $Res Function(AuthUsersRetrieveFilter) then) =
+      _$AuthUsersRetrieveFilterCopyWithImpl<$Res, AuthUsersRetrieveFilter>;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class _$AuthUsersRetrieveFilterCopyWithImpl<$Res,
+        $Val extends AuthUsersRetrieveFilter>
+    implements $AuthUsersRetrieveFilterCopyWith<$Res> {
+  _$AuthUsersRetrieveFilterCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AuthUsersRetrieveFilterImplCopyWith<$Res>
+    implements $AuthUsersRetrieveFilterCopyWith<$Res> {
+  factory _$$AuthUsersRetrieveFilterImplCopyWith(
+          _$AuthUsersRetrieveFilterImpl value,
+          $Res Function(_$AuthUsersRetrieveFilterImpl) then) =
+      __$$AuthUsersRetrieveFilterImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$$AuthUsersRetrieveFilterImplCopyWithImpl<$Res>
+    extends _$AuthUsersRetrieveFilterCopyWithImpl<$Res,
+        _$AuthUsersRetrieveFilterImpl>
+    implements _$$AuthUsersRetrieveFilterImplCopyWith<$Res> {
+  __$$AuthUsersRetrieveFilterImplCopyWithImpl(
+      _$AuthUsersRetrieveFilterImpl _value,
+      $Res Function(_$AuthUsersRetrieveFilterImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$AuthUsersRetrieveFilterImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AuthUsersRetrieveFilterImpl extends _AuthUsersRetrieveFilter
+    with DiagnosticableTreeMixin {
+  const _$AuthUsersRetrieveFilterImpl({required this.id}) : super._();
+
+  factory _$AuthUsersRetrieveFilterImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AuthUsersRetrieveFilterImplFromJson(json);
+
+  @override
+  final String id;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AuthUsersRetrieveFilter(id: $id)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AuthUsersRetrieveFilter'))
+      ..add(DiagnosticsProperty('id', id));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthUsersRetrieveFilterImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthUsersRetrieveFilterImplCopyWith<_$AuthUsersRetrieveFilterImpl>
+      get copyWith => __$$AuthUsersRetrieveFilterImplCopyWithImpl<
+          _$AuthUsersRetrieveFilterImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AuthUsersRetrieveFilterImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AuthUsersRetrieveFilter extends AuthUsersRetrieveFilter {
+  const factory _AuthUsersRetrieveFilter({required final String id}) =
+      _$AuthUsersRetrieveFilterImpl;
+  const _AuthUsersRetrieveFilter._() : super._();
+
+  factory _AuthUsersRetrieveFilter.fromJson(Map<String, dynamic> json) =
+      _$AuthUsersRetrieveFilterImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  @JsonKey(ignore: true)
+  _$$AuthUsersRetrieveFilterImplCopyWith<_$AuthUsersRetrieveFilterImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+AuthUsersTwoFaRetrieveFilter _$AuthUsersTwoFaRetrieveFilterFromJson(
+    Map<String, dynamic> json) {
+  return _AuthUsersTwoFaRetrieveFilter.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AuthUsersTwoFaRetrieveFilter {
+  String get id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AuthUsersTwoFaRetrieveFilterCopyWith<AuthUsersTwoFaRetrieveFilter>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthUsersTwoFaRetrieveFilterCopyWith<$Res> {
+  factory $AuthUsersTwoFaRetrieveFilterCopyWith(
+          AuthUsersTwoFaRetrieveFilter value,
+          $Res Function(AuthUsersTwoFaRetrieveFilter) then) =
+      _$AuthUsersTwoFaRetrieveFilterCopyWithImpl<$Res,
+          AuthUsersTwoFaRetrieveFilter>;
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class _$AuthUsersTwoFaRetrieveFilterCopyWithImpl<$Res,
+        $Val extends AuthUsersTwoFaRetrieveFilter>
+    implements $AuthUsersTwoFaRetrieveFilterCopyWith<$Res> {
+  _$AuthUsersTwoFaRetrieveFilterCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AuthUsersTwoFaRetrieveFilterImplCopyWith<$Res>
+    implements $AuthUsersTwoFaRetrieveFilterCopyWith<$Res> {
+  factory _$$AuthUsersTwoFaRetrieveFilterImplCopyWith(
+          _$AuthUsersTwoFaRetrieveFilterImpl value,
+          $Res Function(_$AuthUsersTwoFaRetrieveFilterImpl) then) =
+      __$$AuthUsersTwoFaRetrieveFilterImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$$AuthUsersTwoFaRetrieveFilterImplCopyWithImpl<$Res>
+    extends _$AuthUsersTwoFaRetrieveFilterCopyWithImpl<$Res,
+        _$AuthUsersTwoFaRetrieveFilterImpl>
+    implements _$$AuthUsersTwoFaRetrieveFilterImplCopyWith<$Res> {
+  __$$AuthUsersTwoFaRetrieveFilterImplCopyWithImpl(
+      _$AuthUsersTwoFaRetrieveFilterImpl _value,
+      $Res Function(_$AuthUsersTwoFaRetrieveFilterImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$AuthUsersTwoFaRetrieveFilterImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AuthUsersTwoFaRetrieveFilterImpl extends _AuthUsersTwoFaRetrieveFilter
+    with DiagnosticableTreeMixin {
+  const _$AuthUsersTwoFaRetrieveFilterImpl({required this.id}) : super._();
+
+  factory _$AuthUsersTwoFaRetrieveFilterImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$AuthUsersTwoFaRetrieveFilterImplFromJson(json);
+
+  @override
+  final String id;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AuthUsersTwoFaRetrieveFilter(id: $id)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AuthUsersTwoFaRetrieveFilter'))
+      ..add(DiagnosticsProperty('id', id));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthUsersTwoFaRetrieveFilterImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthUsersTwoFaRetrieveFilterImplCopyWith<
+          _$AuthUsersTwoFaRetrieveFilterImpl>
+      get copyWith => __$$AuthUsersTwoFaRetrieveFilterImplCopyWithImpl<
+          _$AuthUsersTwoFaRetrieveFilterImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AuthUsersTwoFaRetrieveFilterImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AuthUsersTwoFaRetrieveFilter
+    extends AuthUsersTwoFaRetrieveFilter {
+  const factory _AuthUsersTwoFaRetrieveFilter({required final String id}) =
+      _$AuthUsersTwoFaRetrieveFilterImpl;
+  const _AuthUsersTwoFaRetrieveFilter._() : super._();
+
+  factory _AuthUsersTwoFaRetrieveFilter.fromJson(Map<String, dynamic> json) =
+      _$AuthUsersTwoFaRetrieveFilterImpl.fromJson;
+
+  @override
+  String get id;
+  @override
+  @JsonKey(ignore: true)
+  _$$AuthUsersTwoFaRetrieveFilterImplCopyWith<
+          _$AuthUsersTwoFaRetrieveFilterImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

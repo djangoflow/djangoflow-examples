@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   djangoflow_auth: ^0.3.0+5
-  djangoflow_openapi: ^0.0.29
+  djangoflow_openapi: ^0.1.21
   dio: ^5.4.2
   flutter_bloc: ^8.1.5
   flutter_list_bloc: ^4.1.4
