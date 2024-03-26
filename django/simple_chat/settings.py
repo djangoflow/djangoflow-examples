@@ -23,6 +23,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.google.GoogleOAuth2",
+    "social_core.backends.facebook.FacebookOAuth2",
+    "social_core.backends.apple.AppleIdAuth",
+    "social_core.backends.twitter.TwitterOAuth",
+    "social_core.backends.discord.DiscordOAuth2",
+    "df_auth.backends.TestEmailBackend",
+    "df_auth.backends.TwilioSMSOTPBackend",
+    "df_auth.backends.EmailOTPBackend",
 ]
 
 INSTALLED_APPS = [
