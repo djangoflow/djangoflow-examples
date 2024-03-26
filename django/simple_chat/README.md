@@ -1,4 +1,4 @@
-## Simple Auth Backend for Django
+## Simple Chat Backend for Django
 
 Running the example:
 
