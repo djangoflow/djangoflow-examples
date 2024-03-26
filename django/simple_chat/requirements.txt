@@ -1,5 +1,5 @@
 django
-django-df-chat==0.1.6
+django-df-chat==0.1.7
 django-rest-framework
 django-df-api-drf==1.0.4
 django-df-auth==1.0.9
