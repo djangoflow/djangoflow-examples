@@ -1,6 +1,9 @@
 from df_api_drf.defaults import (
     DF_API_DRF_INSTALLED_APPS,
 )
+from df_auth.defaults import (
+    DF_AUTH_INSTALLED_APPS,
+)
 from df_api_drf.defaults import (
     REST_FRAMEWORK as DEFAULT_REST_FRAMEWORK,
 )
@@ -32,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     *DF_API_DRF_INSTALLED_APPS,
     *DF_CHAT_INSTALLED_APPS,
+    *DF_AUTH_INSTALLED_APPS,
     "django.contrib.staticfiles",
 ]
 
