@@ -1,5 +1,7 @@
 django
-django-df-chat==0.1.7
+# temp fix while pypi doesnt work for us
+# django-df-chat==0.1.8
+git+https://github.com/djangoflow/django-df-chat.git@0.1.8
 django-rest-framework
 django-df-api-drf==1.0.4
 django-df-auth==1.0.10
