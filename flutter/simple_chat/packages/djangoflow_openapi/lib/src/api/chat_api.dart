@@ -61,13 +61,8 @@ class ChatApi {
         'secure': <Map<String, String>>[
           {
             'type': 'http',
-            'scheme': 'basic',
-            'name': 'basicAuth',
-          },{
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -161,13 +156,8 @@ _responseData = rawData == null ? null : deserialize<ChatRoom, ChatRoom>(rawData
         'secure': <Map<String, String>>[
           {
             'type': 'http',
-            'scheme': 'basic',
-            'name': 'basicAuth',
-          },{
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -245,13 +235,8 @@ _responseData = rawData == null ? null : deserialize<Object, Object>(rawData, 'O
         'secure': <Map<String, String>>[
           {
             'type': 'http',
-            'scheme': 'basic',
-            'name': 'basicAuth',
-          },{
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -335,13 +320,8 @@ _responseData = rawData == null ? null : deserialize<PaginatedChatRoomList, Pagi
         'secure': <Map<String, String>>[
           {
             'type': 'http',
-            'scheme': 'basic',
-            'name': 'basicAuth',
-          },{
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -435,13 +415,8 @@ _responseData = rawData == null ? null : deserialize<ChatRoomMembers, ChatRoomMe
         'secure': <Map<String, String>>[
           {
             'type': 'http',
-            'scheme': 'basic',
-            'name': 'basicAuth',
-          },{
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -518,15 +493,9 @@ _responseData = rawData == null ? null : deserialize<ChatRoomMemberList, ChatRoo
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -621,15 +590,9 @@ _responseData = rawData == null ? null : deserialize<ChatMessage, ChatMessage>(r
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -708,15 +671,9 @@ _responseData = rawData == null ? null : deserialize<Object, Object>(rawData, 'O
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -801,15 +758,9 @@ _responseData = rawData == null ? null : deserialize<PaginatedChatMessageList, P
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -904,15 +855,9 @@ _responseData = rawData == null ? null : deserialize<ChatMessage, ChatMessage>(r
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -991,15 +936,9 @@ _responseData = rawData == null ? null : deserialize<ChatMessage, ChatMessage>(r
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -1095,13 +1034,8 @@ _responseData = rawData == null ? null : deserialize<ChatMessage, ChatMessage>(r
         'secure': <Map<String, String>>[
           {
             'type': 'http',
-            'scheme': 'basic',
-            'name': 'basicAuth',
-          },{
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -1195,13 +1129,8 @@ _responseData = rawData == null ? null : deserialize<ChatRoom, ChatRoom>(rawData
         'secure': <Map<String, String>>[
           {
             'type': 'http',
-            'scheme': 'basic',
-            'name': 'basicAuth',
-          },{
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -1279,13 +1208,8 @@ _responseData = rawData == null ? null : deserialize<ChatRoom, ChatRoom>(rawData
         'secure': <Map<String, String>>[
           {
             'type': 'http',
-            'scheme': 'basic',
-            'name': 'basicAuth',
-          },{
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,

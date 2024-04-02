@@ -37,14 +37,6 @@ Method | HTTP request | Description
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final OTPObtainRequest oTPObtainRequest = ; // OTPObtainRequest | 
@@ -69,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -86,14 +78,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
@@ -121,7 +105,7 @@ void (empty response body)
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -138,14 +122,6 @@ void (empty response body)
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final OTPDeviceRequest oTPDeviceRequest = ; // OTPDeviceRequest | 
@@ -170,7 +146,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -187,14 +163,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
@@ -221,7 +189,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -238,14 +206,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final int limit = 56; // int | Number of results to return per page.
@@ -272,7 +232,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -289,14 +249,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
@@ -323,7 +275,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -340,14 +292,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final SocialTokenObtainRequest socialTokenObtainRequest = ; // SocialTokenObtainRequest | 
@@ -372,7 +316,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -389,14 +333,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final SocialTokenObtainRequest socialTokenObtainRequest = ; // SocialTokenObtainRequest | 
@@ -421,7 +357,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -438,14 +374,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final TokenBlacklistRequest tokenBlacklistRequest = ; // TokenBlacklistRequest | 
@@ -470,7 +398,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -487,14 +415,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final TokenObtainRequest tokenObtainRequest = ; // TokenObtainRequest | 
@@ -519,7 +439,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -536,14 +456,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final TokenRefreshRequest tokenRefreshRequest = ; // TokenRefreshRequest | 
@@ -568,7 +480,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -585,14 +497,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final TokenVerifyRequest tokenVerifyRequest = ; // TokenVerifyRequest | 
@@ -617,7 +521,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -634,14 +538,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final UserIdentityRequest userIdentityRequest = ; // UserIdentityRequest | 
@@ -666,7 +562,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -683,14 +579,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
@@ -717,7 +605,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -734,14 +622,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
@@ -766,7 +646,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -783,14 +663,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
@@ -816,7 +688,7 @@ void (empty response body)
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -833,14 +705,6 @@ void (empty response body)
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
@@ -867,7 +731,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 
@@ -884,14 +748,6 @@ Name | Type | Description  | Notes
 ### Example
 ```dart
 import 'package:djangoflow_openapi/api.dart';
-// TODO Configure API key authorization: cookieAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('cookieAuth').apiKeyPrefix = 'Bearer';
-// TODO Configure API key authorization: tokenAuth
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKey = 'YOUR_API_KEY';
-// uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//defaultApiClient.getAuthentication<ApiKeyAuth>('tokenAuth').apiKeyPrefix = 'Bearer';
 
 final api = DjangoflowOpenapi().getAuthApi();
 final String id = id_example; // String | 
@@ -916,7 +772,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [tokenAuth](../README.md#tokenAuth)
+[jwtAuth](../README.md#jwtAuth)
 
 ### HTTP request headers
 

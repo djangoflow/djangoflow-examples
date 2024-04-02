@@ -144,21 +144,9 @@ Class | Method | HTTP request | Description
 
 
 Authentication schemes defined for the API:
-### basicAuth
+### jwtAuth
 
-- **Type**: HTTP basic authentication
-
-### cookieAuth
-
-- **Type**: API key
-- **API key parameter name**: sessionid
-- **Location**: 
-
-### tokenAuth
-
-- **Type**: API key
-- **API key parameter name**: Authorization
-- **Location**: HTTP header
+- **Type**: HTTP Bearer Token authentication (JWT)
 
 
 ## Author

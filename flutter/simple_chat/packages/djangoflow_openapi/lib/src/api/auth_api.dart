@@ -67,15 +67,9 @@ class AuthApi {
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -172,15 +166,9 @@ _responseData = rawData == null ? null : deserialize<OTPObtain, OTPObtain>(rawDa
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -255,15 +243,9 @@ _bodyData=jsonEncode(oTPDeviceConfirmRequest);
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -358,15 +340,9 @@ _responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawDa
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -448,15 +424,9 @@ _responseData = rawData == null ? null : deserialize<Object, Object>(rawData, 'O
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -539,15 +509,9 @@ _responseData = rawData == null ? null : deserialize<PaginatedOTPDeviceList, Pag
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -627,15 +591,9 @@ _responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawDa
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -728,15 +686,9 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -829,15 +781,9 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -930,15 +876,9 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -1031,15 +971,9 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -1132,15 +1066,9 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -1233,15 +1161,9 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -1336,15 +1258,9 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -1437,15 +1353,9 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -1522,15 +1432,9 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -1601,15 +1505,9 @@ _bodyData=jsonEncode(changePasswordRequest);
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
@@ -1702,15 +1600,9 @@ _responseData = rawData == null ? null : deserialize<User2FA, User2FA>(rawData, 
       extra: <String, dynamic>{
         'secure': <Map<String, String>>[
           {
-            'type': 'apiKey',
-            'name': 'cookieAuth',
-            'keyName': 'sessionid',
-            'where': '',
-          },{
-            'type': 'apiKey',
-            'name': 'tokenAuth',
-            'keyName': 'Authorization',
-            'where': 'header',
+            'type': 'http',
+            'scheme': 'bearer',
+            'name': 'jwtAuth',
           },
         ],
         ...?extra,
