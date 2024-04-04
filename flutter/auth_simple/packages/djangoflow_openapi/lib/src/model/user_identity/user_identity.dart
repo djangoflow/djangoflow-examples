@@ -16,11 +16,15 @@ part 'user_identity.g.dart';
 class UserIdentity {
   /// Returns a new [UserIdentity] instance.
   UserIdentity({
+    required this.id,
     this.firstName,
     this.lastName,
     this.username,
     this.email,
   });
+
+  @JsonKey(name: r'id', required: true, includeIfNull: false)
+  final String id;
 
   @JsonKey(name: r'first_name', required: false, includeIfNull: false)
   final String? firstName;
@@ -41,6 +45,7 @@ class UserIdentity {
           other.firstName == firstName &&
           other.lastName == lastName &&
           other.username == username &&
+          other.id == id &&
           other.email == email;
 
   @override
@@ -48,6 +53,7 @@ class UserIdentity {
       firstName.hashCode +
       lastName.hashCode +
       username.hashCode +
+      id.hashCode +
       email.hashCode;
 
   factory UserIdentity.fromJson(Map<String, dynamic> json) =>

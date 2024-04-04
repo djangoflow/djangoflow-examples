@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:djangoflow_auth/djangoflow_auth.dart';
 import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
@@ -22,10 +23,16 @@ class ChatCubit extends Cubit<chatState.ChatState> {
     loadData();
   }
 
+  final _authApi = DjangoflowOpenapi(
+    interceptors: [JwtAuthInterceptor()],
+  ).getAuthApi();
+
   Future<void> loadData() async {
     startLoading();
     final room = await _chatApi.chatRoomsRetrieve(roomId: roomId);
     final result = await _chatApi.chatRoomsUsersList(roomId: roomId);
+    // get current user
+    final currentUser = await _authApi.authUsersRetrieve(id: '0');
     final roomUsers = Map<String, MemberEntity>.fromEntries(
       result.members.map(
         (e) => MapEntry(e.id.toString(), e),
@@ -37,7 +44,7 @@ class ChatCubit extends Cubit<chatState.ChatState> {
         loading: true,
         roomUsers: roomUsers,
         me: types.User(
-          id: roomUsers.keys.first,
+          id: currentUser.data!.id,
         ),
         room: room,
       ),
