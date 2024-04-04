@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:auto_route/annotations.dart';
 import 'package:djangoflow_auth/djangoflow_auth.dart';
 import 'package:djangoflow_auth_google/djangoflow_auth_google.dart';
 import 'package:djangoflow_openapi/djangoflow_openapi.dart';
@@ -12,6 +14,10 @@ import 'package:progress_builder/progress_builder.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
+import '../../core/routes/app_router.gr.dart';
+import '../../core/routes/router.dart';
+
+@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -27,6 +33,10 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _selectedAuthOption.dispose();
     super.dispose();
+  }
+
+  Future<void> onNavigate() async {
+    await router.replace(const DashboardRoute());
   }
 
   @override
@@ -147,6 +157,10 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: const Text('Logout'),
                   ),
+                  ElevatedButton(
+                    onPressed: onNavigate,
+                    child: const Text('Go dashboard'),
+                  ),
                 ],
               ],
             );
@@ -176,11 +190,15 @@ class _HomePageState extends State<HomePage> {
         password: password,
       ),
     );
+
+    // Navigate to dashboard
+    onNavigate();
   }
 }
 
 class _AuthOptionList extends StatelessWidget {
   const _AuthOptionList({required this.onSelected});
+
   final Function(_AuthOptions selectedAuthOption) onSelected;
 
   @override
@@ -239,11 +257,11 @@ class _UsernamePasswordInputs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ReactiveFormBuilder(
-      form: () => _form,
-      builder: (context, form, child) {
-        return Column(
-          children: [
-            ReactiveTextField(
+        form: () => _form,
+        builder: (context, form, child) {
+          return Column(
+            children: [
+              ReactiveTextField(
                 formControlName: 'username',
                 keyboardType: TextInputType.text,
                 decoration: const InputDecoration(
@@ -252,24 +270,27 @@ class _UsernamePasswordInputs extends StatelessWidget {
                 validationMessages: {
                   ValidationMessage.required: (_) =>
                       'Username must not be empty',
-                }),
-            const SizedBox(
-              height: 8,
-            ),
-            ReactiveTextField(
-              formControlName: 'password',
-              keyboardType: TextInputType.visiblePassword,
-              decoration: const InputDecoration(
-                labelText: 'Password',
+                },
               ),
-              validationMessages: {
-                ValidationMessage.required: (_) => 'Password must not be empty',
-              },
-            ),
-            actionButtonBuilder.call(context, form),
-          ],
-        );
-      });
+              const SizedBox(
+                height: 8,
+              ),
+              ReactiveTextField(
+                formControlName: 'password',
+                keyboardType: TextInputType.visiblePassword,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                ),
+                validationMessages: {
+                  ValidationMessage.required: (_) =>
+                      'Password must not be empty',
+                },
+              ),
+              actionButtonBuilder.call(context, form),
+            ],
+          );
+        },
+      );
 }
 
 class _OtpLogin extends StatefulWidget {
@@ -305,85 +326,86 @@ class _OtpLoginState extends State<_OtpLogin> {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormBuilder(
-        form: () => _form,
-        builder: (context, form, child) {
-          return Column(
-            children: [
-              ReactiveTextField(
-                  formControlName: 'username',
-                  keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                    labelText: 'Username',
-                  ),
-                  validationMessages: {
-                    ValidationMessage.required: (_) =>
-                        'Username must not be empty',
-                  }),
-              const SizedBox(
-                height: 8,
+      form: () => _form,
+      builder: (context, form, child) {
+        return Column(
+          children: [
+            ReactiveTextField(
+              formControlName: 'username',
+              keyboardType: TextInputType.text,
+              decoration: const InputDecoration(
+                labelText: 'Username',
               ),
-              ValueListenableBuilder(
-                valueListenable: _hasRequestedOtp,
-                builder: (context, value, child) => value == true
-                    ? ReactiveTextField(
-                        formControlName: 'otp',
-                        keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'OTP',
-                        ),
-                      )
-                    : const SizedBox(),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              ValueListenableBuilder<bool>(
-                valueListenable: _hasRequestedOtp,
-                builder: (context, value, child) => value == true
-                    ? LinearProgressBuilder(
-                        action: (_) async {
-                          final username = form.control('username').value;
-                          final otp = form.control('otp').value;
-
-                          final authCubit = context.read<AuthCubit>();
-                          if (username != null && otp != null) {
-                            await authCubit.obtainTokenAndLogin(
-                              tokenObtainRequest: TokenObtainRequest(
-                                username: username,
-                                otp: otp,
-                              ),
-                            );
-                          }
-                        },
-                        builder: (context, action, error) => ElevatedButton(
-                          onPressed: action,
-                          child: const Text('Login'),
-                        ),
-                      )
-                    : LinearProgressBuilder(
-                        action: (_) async {
-                          if (form.valid) {
-                            final username = form.control('username').value;
-                            if (username != null) {
-                              await context.read<AuthCubit>().requestOTP(
-                                    otpObtainRequest:
-                                        OTPObtainRequest(username: username),
-                                  );
-                              _hasRequestedOtp.value = true;
-                            }
-                          } else {
-                            form.markAllAsTouched();
-                          }
-                        },
-                        builder: (context, action, error) => ElevatedButton(
-                          onPressed: action,
-                          child: const Text('Request OTP'),
-                        ),
+              validationMessages: {
+                ValidationMessage.required: (_) => 'Username must not be empty',
+              },
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            ValueListenableBuilder(
+              valueListenable: _hasRequestedOtp,
+              builder: (context, value, child) => value == true
+                  ? ReactiveTextField(
+                      formControlName: 'otp',
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        labelText: 'OTP',
                       ),
-              ),
-            ],
-          );
-        });
+                    )
+                  : const SizedBox(),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            ValueListenableBuilder<bool>(
+              valueListenable: _hasRequestedOtp,
+              builder: (context, value, child) => value == true
+                  ? LinearProgressBuilder(
+                      action: (_) async {
+                        final username = form.control('username').value;
+                        final otp = form.control('otp').value;
+
+                        final authCubit = context.read<AuthCubit>();
+                        if (username != null && otp != null) {
+                          await authCubit.obtainTokenAndLogin(
+                            tokenObtainRequest: TokenObtainRequest(
+                              username: username,
+                              otp: otp,
+                            ),
+                          );
+                        }
+                      },
+                      builder: (context, action, error) => ElevatedButton(
+                        onPressed: action,
+                        child: const Text('Login'),
+                      ),
+                    )
+                  : LinearProgressBuilder(
+                      action: (_) async {
+                        if (form.valid) {
+                          final username = form.control('username').value;
+                          if (username != null) {
+                            await context.read<AuthCubit>().requestOTP(
+                                  otpObtainRequest:
+                                      OTPObtainRequest(username: username),
+                                );
+                            _hasRequestedOtp.value = true;
+                          }
+                        } else {
+                          form.markAllAsTouched();
+                        }
+                      },
+                      builder: (context, action, error) => ElevatedButton(
+                        onPressed: action,
+                        child: const Text('Request OTP'),
+                      ),
+                    ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 

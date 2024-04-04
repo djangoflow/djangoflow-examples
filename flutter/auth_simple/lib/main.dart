@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:djangoflow_auth/djangoflow_auth.dart';
 import 'package:djangoflow_auth_apple/djangoflow_auth_apple.dart';
 import 'package:djangoflow_auth_discord/djangoflow_auth_discord.dart';
-import 'package:djangoflow_auth_google/djangoflow_auth_google.dart';
 import 'package:djangoflow_auth_facebook/djangoflow_auth_facebook.dart';
+import 'package:djangoflow_auth_google/djangoflow_auth_google.dart';
 import 'package:djangoflow_openapi/djangoflow_openapi.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -15,10 +15,11 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:auth_simple/home_page.dart';
 
-import 'api_repository.dart';
-import 'firebase_options.dart';
+import 'core/config.dart';
+import 'core/firebase/firebase_options.dart';
+import 'core/routes/router.dart';
+import 'http/repositories/api_repository.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -81,20 +82,21 @@ Future<void> main() async {
             oAuth2Configuration: const OAuth2Configuration(
               clientId: 'your_discord_client_id',
               redirectUri: 'https://your_redirect_uri',
-              scope: 'identify email', // adjust according to your need
+              scope: 'identify email',
+              // adjust according to your need
               responseType: 'token',
               customUriScheme:
                   'your_custom_uri_scheme', // could https/http, complete custom uri redirect does not support on Discord
             ),
           ),
         ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        title: 'Auth Simple',
+        title: appName,
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         themeMode: ThemeMode.system,
-        home: const HomePage(),
+        routerConfig: router.config(),
       ),
     ),
   );

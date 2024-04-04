@@ -31,6 +31,18 @@ dependencies:
   reactive_forms: ^16.0.4
   sign_in_with_apple: ^5.0.0
 
+  # A flutter package for control routing
+  auto_route: ^8.0.3
+
+  # A flutter package for chat ui
+  flutter_chat_ui: ^1.6.12
+
+  # A Flutter package for scroll controlling
+  scroll_to_index: ^3.0.1
+
+  # A Flutter package for socket connection
+  djangoflow_websocket: ^0.1.0+6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -40,7 +52,10 @@ dev_dependencies:
   json_serializable: ^6.7.1
   icons_launcher: ^2.1.3
   openapi_repository: ^3.3.0
-  
+  # A flutter package for generate routes
+  auto_route_generator: ^8.0.0
+
+
 dependency_overrides:
   # use local dependency for djangoflow_openapi to override the one from pub.dev
   djangoflow_openapi:
