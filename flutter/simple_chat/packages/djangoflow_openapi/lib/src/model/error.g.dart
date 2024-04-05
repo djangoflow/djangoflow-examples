@@ -13,7 +13,7 @@ abstract class _$ErrorCWProxy {
 
   Error field(String? field);
 
-  Error extraData(Map<String, Object>? extraData);
+  Error extraData(Object? extraData);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `Error(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -25,7 +25,7 @@ abstract class _$ErrorCWProxy {
     String? message,
     String? code,
     String? field,
-    Map<String, Object>? extraData,
+    Object? extraData,
   });
 }
 
@@ -45,7 +45,7 @@ class _$ErrorCWProxyImpl implements _$ErrorCWProxy {
   Error field(String? field) => this(field: field);
 
   @override
-  Error extraData(Map<String, Object>? extraData) => this(extraData: extraData);
+  Error extraData(Object? extraData) => this(extraData: extraData);
 
   @override
 
@@ -77,7 +77,7 @@ class _$ErrorCWProxyImpl implements _$ErrorCWProxy {
       extraData: extraData == const $CopyWithPlaceholder()
           ? _value.extraData
           // ignore: cast_nullable_to_non_nullable
-          : extraData as Map<String, Object>?,
+          : extraData as Object?,
     );
   }
 }
@@ -104,11 +104,7 @@ Error _$ErrorFromJson(Map<String, dynamic> json) => $checkedCreate(
           message: $checkedConvert('message', (v) => v as String),
           code: $checkedConvert('code', (v) => v as String),
           field: $checkedConvert('field', (v) => v as String?),
-          extraData: $checkedConvert(
-              'extra_data',
-              (v) => (v as Map<String, dynamic>?)?.map(
-                    (k, e) => MapEntry(k, e as Object),
-                  )),
+          extraData: $checkedConvert('extra_data', (v) => v),
         );
         return val;
       },

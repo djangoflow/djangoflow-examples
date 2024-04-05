@@ -8,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:simple_chat/home_page.dart';
+import 'package:simple_chat/pages/home_page/home_page.dart';
 
-import 'api_repository.dart';
+import 'api/api_repository.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

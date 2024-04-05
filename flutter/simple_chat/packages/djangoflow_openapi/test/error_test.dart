@@ -22,7 +22,7 @@ void main() {
       // TODO
     });
 
-    // Map<String, Object> extraData
+    // Object extraData
     test('to test the property `extraData`', () async {
       // TODO
     });

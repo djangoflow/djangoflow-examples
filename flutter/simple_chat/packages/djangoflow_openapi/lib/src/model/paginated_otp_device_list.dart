@@ -21,24 +21,24 @@ class PaginatedOTPDeviceList {
   /// Returns a new [PaginatedOTPDeviceList] instance.
   PaginatedOTPDeviceList({
 
-     this.count,
+    required  this.count,
 
      this.next,
 
      this.previous,
 
-     this.results,
+    required  this.results,
   });
 
   @JsonKey(
     
     name: r'count',
-    required: false,
+    required: true,
     includeIfNull: false
   )
 
 
-  final int? count;
+  final int count;
 
 
 
@@ -69,12 +69,12 @@ class PaginatedOTPDeviceList {
   @JsonKey(
     
     name: r'results',
-    required: false,
+    required: true,
     includeIfNull: false
   )
 
 
-  final List<OTPDevice>? results;
+  final List<OTPDevice> results;
 
 
 

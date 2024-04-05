@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **message** | **String** |  | 
 **code** | **String** |  | 
 **field** | **String** |  | [optional] 
-**extraData** | **Map&lt;String, Object&gt;** |  | [optional] 
+**extraData** | **Object** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

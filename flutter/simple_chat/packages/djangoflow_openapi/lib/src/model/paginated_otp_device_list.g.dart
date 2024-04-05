@@ -7,13 +7,13 @@ part of 'paginated_otp_device_list.dart';
 // **************************************************************************
 
 abstract class _$PaginatedOTPDeviceListCWProxy {
-  PaginatedOTPDeviceList count(int? count);
+  PaginatedOTPDeviceList count(int count);
 
   PaginatedOTPDeviceList next(String? next);
 
   PaginatedOTPDeviceList previous(String? previous);
 
-  PaginatedOTPDeviceList results(List<OTPDevice>? results);
+  PaginatedOTPDeviceList results(List<OTPDevice> results);
 
   /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `PaginatedOTPDeviceList(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
   ///
@@ -37,7 +37,7 @@ class _$PaginatedOTPDeviceListCWProxyImpl
   final PaginatedOTPDeviceList _value;
 
   @override
-  PaginatedOTPDeviceList count(int? count) => this(count: count);
+  PaginatedOTPDeviceList count(int count) => this(count: count);
 
   @override
   PaginatedOTPDeviceList next(String? next) => this(next: next);
@@ -46,7 +46,7 @@ class _$PaginatedOTPDeviceListCWProxyImpl
   PaginatedOTPDeviceList previous(String? previous) => this(previous: previous);
 
   @override
-  PaginatedOTPDeviceList results(List<OTPDevice>? results) =>
+  PaginatedOTPDeviceList results(List<OTPDevice> results) =>
       this(results: results);
 
   @override
@@ -64,10 +64,10 @@ class _$PaginatedOTPDeviceListCWProxyImpl
     Object? results = const $CopyWithPlaceholder(),
   }) {
     return PaginatedOTPDeviceList(
-      count: count == const $CopyWithPlaceholder()
+      count: count == const $CopyWithPlaceholder() || count == null
           ? _value.count
           // ignore: cast_nullable_to_non_nullable
-          : count as int?,
+          : count as int,
       next: next == const $CopyWithPlaceholder()
           ? _value.next
           // ignore: cast_nullable_to_non_nullable
@@ -76,10 +76,10 @@ class _$PaginatedOTPDeviceListCWProxyImpl
           ? _value.previous
           // ignore: cast_nullable_to_non_nullable
           : previous as String?,
-      results: results == const $CopyWithPlaceholder()
+      results: results == const $CopyWithPlaceholder() || results == null
           ? _value.results
           // ignore: cast_nullable_to_non_nullable
-          : results as List<OTPDevice>?,
+          : results as List<OTPDevice>,
     );
   }
 }
@@ -101,14 +101,18 @@ PaginatedOTPDeviceList _$PaginatedOTPDeviceListFromJson(
       'PaginatedOTPDeviceList',
       json,
       ($checkedConvert) {
+        $checkKeys(
+          json,
+          requiredKeys: const ['count', 'results'],
+        );
         final val = PaginatedOTPDeviceList(
-          count: $checkedConvert('count', (v) => v as int?),
+          count: $checkedConvert('count', (v) => v as int),
           next: $checkedConvert('next', (v) => v as String?),
           previous: $checkedConvert('previous', (v) => v as String?),
           results: $checkedConvert(
               'results',
-              (v) => (v as List<dynamic>?)
-                  ?.map((e) => OTPDevice.fromJson(e as Map<String, dynamic>))
+              (v) => (v as List<dynamic>)
+                  .map((e) => OTPDevice.fromJson(e as Map<String, dynamic>))
                   .toList()),
         );
         return val;
@@ -117,7 +121,9 @@ PaginatedOTPDeviceList _$PaginatedOTPDeviceListFromJson(
 
 Map<String, dynamic> _$PaginatedOTPDeviceListToJson(
     PaginatedOTPDeviceList instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'count': instance.count,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -125,9 +131,8 @@ Map<String, dynamic> _$PaginatedOTPDeviceListToJson(
     }
   }
 
-  writeNotNull('count', instance.count);
   writeNotNull('next', instance.next);
   writeNotNull('previous', instance.previous);
-  writeNotNull('results', instance.results?.map((e) => e.toJson()).toList());
+  val['results'] = instance.results.map((e) => e.toJson()).toList();
   return val;
 }

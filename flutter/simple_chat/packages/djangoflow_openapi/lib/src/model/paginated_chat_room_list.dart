@@ -21,24 +21,24 @@ class PaginatedChatRoomList {
   /// Returns a new [PaginatedChatRoomList] instance.
   PaginatedChatRoomList({
 
-     this.count,
+    required  this.count,
 
      this.next,
 
      this.previous,
 
-     this.results,
+    required  this.results,
   });
 
   @JsonKey(
     
     name: r'count',
-    required: false,
+    required: true,
     includeIfNull: false
   )
 
 
-  final int? count;
+  final int count;
 
 
 
@@ -69,12 +69,12 @@ class PaginatedChatRoomList {
   @JsonKey(
     
     name: r'results',
-    required: false,
+    required: true,
     includeIfNull: false
   )
 
 
-  final List<ChatRoom>? results;
+  final List<ChatRoom> results;
 
 
 

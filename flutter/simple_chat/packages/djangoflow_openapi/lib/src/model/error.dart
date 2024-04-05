@@ -73,7 +73,7 @@ class Error {
   )
 
 
-  final Map<String, Object>? extraData;
+  final Object? extraData;
 
 
 
@@ -89,7 +89,7 @@ class Error {
     message.hashCode +
     code.hashCode +
     field.hashCode +
-    extraData.hashCode;
+    (extraData == null ? 0 : extraData.hashCode);
 
   factory Error.fromJson(Map<String, dynamic> json) => _$ErrorFromJson(json);
 
