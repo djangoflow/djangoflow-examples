@@ -9,37 +9,36 @@ import 'dart:convert';
 import 'package:djangoflow_openapi/src/deserialize.dart';
 import 'package:dio/dio.dart';
 
-import 'package:djangoflow_openapi/src/model/change_password_request.dart';
-import 'package:djangoflow_openapi/src/model/error_response.dart';
-import 'package:djangoflow_openapi/src/model/otp_device.dart';
-import 'package:djangoflow_openapi/src/model/otp_device_confirm_request.dart';
-import 'package:djangoflow_openapi/src/model/otp_device_request.dart';
-import 'package:djangoflow_openapi/src/model/otp_obtain.dart';
-import 'package:djangoflow_openapi/src/model/otp_obtain_request.dart';
-import 'package:djangoflow_openapi/src/model/paginated_otp_device_list.dart';
-import 'package:djangoflow_openapi/src/model/patched_user2_fa_request.dart';
-import 'package:djangoflow_openapi/src/model/patched_user_identity_request.dart';
-import 'package:djangoflow_openapi/src/model/social_token_obtain_request.dart';
-import 'package:djangoflow_openapi/src/model/token.dart';
-import 'package:djangoflow_openapi/src/model/token_blacklist_request.dart';
-import 'package:djangoflow_openapi/src/model/token_obtain_request.dart';
-import 'package:djangoflow_openapi/src/model/token_refresh_request.dart';
-import 'package:djangoflow_openapi/src/model/token_verify_request.dart';
-import 'package:djangoflow_openapi/src/model/user2_fa.dart';
-import 'package:djangoflow_openapi/src/model/user_identity.dart';
-import 'package:djangoflow_openapi/src/model/user_identity_request.dart';
+import 'package:djangoflow_openapi/src/model/change_password_request/change_password_request.dart';
+import 'package:djangoflow_openapi/src/model/otp_device/otp_device.dart';
+import 'package:djangoflow_openapi/src/model/otp_device_confirm_request/otp_device_confirm_request.dart';
+import 'package:djangoflow_openapi/src/model/otp_device_request/otp_device_request.dart';
+import 'package:djangoflow_openapi/src/model/otp_obtain/otp_obtain.dart';
+import 'package:djangoflow_openapi/src/model/otp_obtain_request/otp_obtain_request.dart';
+import 'package:djangoflow_openapi/src/model/patched_user2_fa_request/patched_user2_fa_request.dart';
+import 'package:djangoflow_openapi/src/model/patched_user_identity_request/patched_user_identity_request.dart';
+import 'package:djangoflow_openapi/src/model/social_token_obtain_request/social_token_obtain_request.dart';
+import 'package:djangoflow_openapi/src/model/token/token.dart';
+import 'package:djangoflow_openapi/src/model/token_blacklist_request/token_blacklist_request.dart';
+import 'package:djangoflow_openapi/src/model/token_obtain_request/token_obtain_request.dart';
+import 'package:djangoflow_openapi/src/model/token_refresh_request/token_refresh_request.dart';
+import 'package:djangoflow_openapi/src/model/token_verify_request/token_verify_request.dart';
+import 'package:djangoflow_openapi/src/model/user2_fa/user2_fa.dart';
+import 'package:djangoflow_openapi/src/model/user_identity/user_identity.dart';
+import 'package:djangoflow_openapi/src/model/user_identity_request/user_identity_request.dart';
+
+import '../model/paginated_otp_device_list/paginated_otp_device_list.dart';
 
 class AuthApi {
-
   final Dio _dio;
 
   const AuthApi(this._dio);
 
   /// authOtpCreate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [oTPObtainRequest] 
+  /// * [oTPObtainRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -49,7 +48,7 @@ class AuthApi {
   ///
   /// Returns a [Future] containing a [Response] with a [OTPObtain] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<OTPObtain>> authOtpCreate({ 
+  Future<Response<OTPObtain>> authOtpCreate({
     OTPObtainRequest? oTPObtainRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -71,7 +70,8 @@ class AuthApi {
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -86,10 +86,10 @@ class AuthApi {
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(oTPObtainRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(oTPObtainRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -111,8 +111,11 @@ _bodyData=jsonEncode(oTPObtainRequest);
     OTPObtain? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<OTPObtain, OTPObtain>(rawData, 'OTPObtain', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<OTPObtain, OTPObtain>(rawData, 'OTPObtain',
+              growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -136,12 +139,12 @@ _responseData = rawData == null ? null : deserialize<OTPObtain, OTPObtain>(rawDa
   }
 
   /// authOtpDevicesConfirmCreate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [type] - OTP Device type
-  /// * [oTPDeviceConfirmRequest] 
+  /// * [oTPDeviceConfirmRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -151,7 +154,7 @@ _responseData = rawData == null ? null : deserialize<OTPObtain, OTPObtain>(rawDa
   ///
   /// Returns a [Future]
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<void>> authOtpDevicesConfirmCreate({ 
+  Future<Response<void>> authOtpDevicesConfirmCreate({
     required String id,
     required String type,
     required OTPDeviceConfirmRequest oTPDeviceConfirmRequest,
@@ -162,7 +165,8 @@ _responseData = rawData == null ? null : deserialize<OTPObtain, OTPObtain>(rawDa
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/v1/auth/otp-devices/{id}/confirm/'.replaceAll('{' r'id' '}', id.toString());
+    final _path = r'/api/v1/auth/otp-devices/{id}/confirm/'
+        .replaceAll('{' r'id' '}', id.toString());
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{
@@ -175,7 +179,8 @@ _responseData = rawData == null ? null : deserialize<OTPObtain, OTPObtain>(rawDa
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -194,10 +199,10 @@ _responseData = rawData == null ? null : deserialize<OTPObtain, OTPObtain>(rawDa
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(oTPDeviceConfirmRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(oTPDeviceConfirmRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
           queryParameters: _queryParameters,
@@ -222,10 +227,10 @@ _bodyData=jsonEncode(oTPDeviceConfirmRequest);
   }
 
   /// authOtpDevicesCreate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [oTPDeviceRequest] 
+  /// * [oTPDeviceRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -235,7 +240,7 @@ _bodyData=jsonEncode(oTPDeviceConfirmRequest);
   ///
   /// Returns a [Future] containing a [Response] with a [OTPDevice] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<OTPDevice>> authOtpDevicesCreate({ 
+  Future<Response<OTPDevice>> authOtpDevicesCreate({
     required OTPDeviceRequest oTPDeviceRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -257,7 +262,8 @@ _bodyData=jsonEncode(oTPDeviceConfirmRequest);
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -272,10 +278,10 @@ _bodyData=jsonEncode(oTPDeviceConfirmRequest);
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(oTPDeviceRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(oTPDeviceRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -297,8 +303,11 @@ _bodyData=jsonEncode(oTPDeviceRequest);
     OTPDevice? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawData, 'OTPDevice', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<OTPDevice, OTPDevice>(rawData, 'OTPDevice',
+              growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -322,10 +331,10 @@ _responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawDa
   }
 
   /// authOtpDevicesDestroy
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [type] - OTP Device type
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -336,7 +345,7 @@ _responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawDa
   ///
   /// Returns a [Future] containing a [Response] with a [Object] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Object>> authOtpDevicesDestroy({ 
+  Future<Response<Object>> authOtpDevicesDestroy({
     required String id,
     required String type,
     CancelToken? cancelToken,
@@ -346,7 +355,8 @@ _responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawDa
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/v1/auth/otp-devices/{id}/'.replaceAll('{' r'id' '}', id.toString());
+    final _path = r'/api/v1/auth/otp-devices/{id}/'
+        .replaceAll('{' r'id' '}', id.toString());
     final _options = Options(
       method: r'DELETE',
       headers: <String, dynamic>{
@@ -359,7 +369,8 @@ _responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawDa
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -386,8 +397,10 @@ _responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawDa
     Object? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<Object, Object>(rawData, 'Object', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<Object, Object>(rawData, 'Object', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -411,7 +424,7 @@ _responseData = rawData == null ? null : deserialize<Object, Object>(rawData, 'O
   }
 
   /// authOtpDevicesList
-  /// 
+  ///
   ///
   /// Parameters:
   /// * [limit] - Number of results to return per page.
@@ -425,7 +438,7 @@ _responseData = rawData == null ? null : deserialize<Object, Object>(rawData, 'O
   ///
   /// Returns a [Future] containing a [Response] with a [PaginatedOTPDeviceList] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<PaginatedOTPDeviceList>> authOtpDevicesList({ 
+  Future<Response<PaginatedOTPDeviceList>> authOtpDevicesList({
     int? limit,
     int? offset,
     CancelToken? cancelToken,
@@ -448,7 +461,8 @@ _responseData = rawData == null ? null : deserialize<Object, Object>(rawData, 'O
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -476,8 +490,12 @@ _responseData = rawData == null ? null : deserialize<Object, Object>(rawData, 'O
     PaginatedOTPDeviceList? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<PaginatedOTPDeviceList, PaginatedOTPDeviceList>(rawData, 'PaginatedOTPDeviceList', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<PaginatedOTPDeviceList, PaginatedOTPDeviceList>(
+              rawData, 'PaginatedOTPDeviceList',
+              growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -501,10 +519,10 @@ _responseData = rawData == null ? null : deserialize<PaginatedOTPDeviceList, Pag
   }
 
   /// authOtpDevicesRetrieve
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [type] - OTP Device type
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
@@ -515,7 +533,7 @@ _responseData = rawData == null ? null : deserialize<PaginatedOTPDeviceList, Pag
   ///
   /// Returns a [Future] containing a [Response] with a [OTPDevice] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<OTPDevice>> authOtpDevicesRetrieve({ 
+  Future<Response<OTPDevice>> authOtpDevicesRetrieve({
     required String id,
     required String type,
     CancelToken? cancelToken,
@@ -525,7 +543,8 @@ _responseData = rawData == null ? null : deserialize<PaginatedOTPDeviceList, Pag
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/v1/auth/otp-devices/{id}/'.replaceAll('{' r'id' '}', id.toString());
+    final _path = r'/api/v1/auth/otp-devices/{id}/'
+        .replaceAll('{' r'id' '}', id.toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -538,7 +557,8 @@ _responseData = rawData == null ? null : deserialize<PaginatedOTPDeviceList, Pag
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -565,8 +585,11 @@ _responseData = rawData == null ? null : deserialize<PaginatedOTPDeviceList, Pag
     OTPDevice? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawData, 'OTPDevice', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<OTPDevice, OTPDevice>(rawData, 'OTPDevice',
+              growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -590,10 +613,10 @@ _responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawDa
   }
 
   /// authSocialConnectCreate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [socialTokenObtainRequest] 
+  /// * [socialTokenObtainRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -603,7 +626,7 @@ _responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawDa
   ///
   /// Returns a [Future] containing a [Response] with a [Token] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Token>> authSocialConnectCreate({ 
+  Future<Response<Token>> authSocialConnectCreate({
     required SocialTokenObtainRequest socialTokenObtainRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -625,7 +648,8 @@ _responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawDa
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -640,10 +664,10 @@ _responseData = rawData == null ? null : deserialize<OTPDevice, OTPDevice>(rawDa
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(socialTokenObtainRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(socialTokenObtainRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -665,8 +689,10 @@ _bodyData=jsonEncode(socialTokenObtainRequest);
     Token? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -690,10 +716,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   }
 
   /// authSocialCreate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [socialTokenObtainRequest] 
+  /// * [socialTokenObtainRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -703,7 +729,7 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   ///
   /// Returns a [Future] containing a [Response] with a [Token] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Token>> authSocialCreate({ 
+  Future<Response<Token>> authSocialCreate({
     required SocialTokenObtainRequest socialTokenObtainRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -725,7 +751,8 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -740,10 +767,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(socialTokenObtainRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(socialTokenObtainRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -765,8 +792,10 @@ _bodyData=jsonEncode(socialTokenObtainRequest);
     Token? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -790,10 +819,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   }
 
   /// authTokenBlacklistCreate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [tokenBlacklistRequest] 
+  /// * [tokenBlacklistRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -803,7 +832,7 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   ///
   /// Returns a [Future] containing a [Response] with a [Token] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Token>> authTokenBlacklistCreate({ 
+  Future<Response<Token>> authTokenBlacklistCreate({
     required TokenBlacklistRequest tokenBlacklistRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -825,7 +854,8 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -840,10 +870,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(tokenBlacklistRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(tokenBlacklistRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -865,8 +895,10 @@ _bodyData=jsonEncode(tokenBlacklistRequest);
     Token? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -890,10 +922,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   }
 
   /// authTokenCreate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [tokenObtainRequest] 
+  /// * [tokenObtainRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -903,7 +935,7 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   ///
   /// Returns a [Future] containing a [Response] with a [Token] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Token>> authTokenCreate({ 
+  Future<Response<Token>> authTokenCreate({
     TokenObtainRequest? tokenObtainRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -925,7 +957,8 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -940,10 +973,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(tokenObtainRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(tokenObtainRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -965,8 +998,10 @@ _bodyData=jsonEncode(tokenObtainRequest);
     Token? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -990,10 +1025,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   }
 
   /// authTokenRefreshCreate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [tokenRefreshRequest] 
+  /// * [tokenRefreshRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1003,7 +1038,7 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   ///
   /// Returns a [Future] containing a [Response] with a [Token] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Token>> authTokenRefreshCreate({ 
+  Future<Response<Token>> authTokenRefreshCreate({
     required TokenRefreshRequest tokenRefreshRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1025,7 +1060,8 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -1040,10 +1076,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(tokenRefreshRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(tokenRefreshRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -1065,8 +1101,10 @@ _bodyData=jsonEncode(tokenRefreshRequest);
     Token? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1090,10 +1128,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   }
 
   /// authTokenVerifyCreate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [tokenVerifyRequest] 
+  /// * [tokenVerifyRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1103,7 +1141,7 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   ///
   /// Returns a [Future] containing a [Response] with a [Token] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<Token>> authTokenVerifyCreate({ 
+  Future<Response<Token>> authTokenVerifyCreate({
     required TokenVerifyRequest tokenVerifyRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1125,7 +1163,8 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -1140,10 +1179,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(tokenVerifyRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(tokenVerifyRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -1165,8 +1204,10 @@ _bodyData=jsonEncode(tokenVerifyRequest);
     Token? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Token', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<Token, Token>(rawData, 'Token', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1190,10 +1231,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   }
 
   /// authUsersCreate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [userIdentityRequest] 
+  /// * [userIdentityRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1203,7 +1244,7 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
   ///
   /// Returns a [Future] containing a [Response] with a [UserIdentity] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<UserIdentity>> authUsersCreate({ 
+  Future<Response<UserIdentity>> authUsersCreate({
     UserIdentityRequest? userIdentityRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1225,7 +1266,8 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -1240,10 +1282,10 @@ _responseData = rawData == null ? null : deserialize<Token, Token>(rawData, 'Tok
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(userIdentityRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(userIdentityRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -1265,8 +1307,11 @@ _bodyData=jsonEncode(userIdentityRequest);
     UserIdentity? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>(rawData, 'UserIdentity', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<UserIdentity, UserIdentity>(rawData, 'UserIdentity',
+              growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1290,11 +1335,11 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
   }
 
   /// authUsersPartialUpdate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [id] 
-  /// * [patchedUserIdentityRequest] 
+  /// * [id]
+  /// * [patchedUserIdentityRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1304,7 +1349,7 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
   ///
   /// Returns a [Future] containing a [Response] with a [UserIdentity] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<UserIdentity>> authUsersPartialUpdate({ 
+  Future<Response<UserIdentity>> authUsersPartialUpdate({
     required String id,
     PatchedUserIdentityRequest? patchedUserIdentityRequest,
     CancelToken? cancelToken,
@@ -1314,7 +1359,8 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/v1/auth/users/{id}/'.replaceAll('{' r'id' '}', id.toString());
+    final _path =
+        r'/api/v1/auth/users/{id}/'.replaceAll('{' r'id' '}', id.toString());
     final _options = Options(
       method: r'PATCH',
       headers: <String, dynamic>{
@@ -1327,7 +1373,8 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -1342,10 +1389,10 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(patchedUserIdentityRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(patchedUserIdentityRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -1367,8 +1414,11 @@ _bodyData=jsonEncode(patchedUserIdentityRequest);
     UserIdentity? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>(rawData, 'UserIdentity', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<UserIdentity, UserIdentity>(rawData, 'UserIdentity',
+              growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1392,10 +1442,10 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
   }
 
   /// authUsersRetrieve
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1405,7 +1455,7 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
   ///
   /// Returns a [Future] containing a [Response] with a [UserIdentity] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<UserIdentity>> authUsersRetrieve({ 
+  Future<Response<UserIdentity>> authUsersRetrieve({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1414,7 +1464,8 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/v1/auth/users/{id}/'.replaceAll('{' r'id' '}', id.toString());
+    final _path =
+        r'/api/v1/auth/users/{id}/'.replaceAll('{' r'id' '}', id.toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -1427,7 +1478,8 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -1449,8 +1501,11 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
     UserIdentity? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>(rawData, 'UserIdentity', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<UserIdentity, UserIdentity>(rawData, 'UserIdentity',
+              growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1474,11 +1529,11 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
   }
 
   /// authUsersSetPasswordCreate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [id] 
-  /// * [changePasswordRequest] 
+  /// * [id]
+  /// * [changePasswordRequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1488,7 +1543,7 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
   ///
   /// Returns a [Future]
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<void>> authUsersSetPasswordCreate({ 
+  Future<Response<void>> authUsersSetPasswordCreate({
     required String id,
     required ChangePasswordRequest changePasswordRequest,
     CancelToken? cancelToken,
@@ -1498,7 +1553,8 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/v1/auth/users/{id}/set-password/'.replaceAll('{' r'id' '}', id.toString());
+    final _path = r'/api/v1/auth/users/{id}/set-password/'
+        .replaceAll('{' r'id' '}', id.toString());
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{
@@ -1511,7 +1567,8 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -1526,10 +1583,10 @@ _responseData = rawData == null ? null : deserialize<UserIdentity, UserIdentity>
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(changePasswordRequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(changePasswordRequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -1552,11 +1609,11 @@ _bodyData=jsonEncode(changePasswordRequest);
   }
 
   /// authUsersTwoFaPartialUpdate
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [id] 
-  /// * [patchedUser2FARequest] 
+  /// * [id]
+  /// * [patchedUser2FARequest]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1566,7 +1623,7 @@ _bodyData=jsonEncode(changePasswordRequest);
   ///
   /// Returns a [Future] containing a [Response] with a [User2FA] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<User2FA>> authUsersTwoFaPartialUpdate({ 
+  Future<Response<User2FA>> authUsersTwoFaPartialUpdate({
     required String id,
     PatchedUser2FARequest? patchedUser2FARequest,
     CancelToken? cancelToken,
@@ -1576,7 +1633,8 @@ _bodyData=jsonEncode(changePasswordRequest);
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/v1/auth/users/{id}/two-fa/'.replaceAll('{' r'id' '}', id.toString());
+    final _path = r'/api/v1/auth/users/{id}/two-fa/'
+        .replaceAll('{' r'id' '}', id.toString());
     final _options = Options(
       method: r'PATCH',
       headers: <String, dynamic>{
@@ -1589,7 +1647,8 @@ _bodyData=jsonEncode(changePasswordRequest);
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -1604,10 +1663,10 @@ _bodyData=jsonEncode(changePasswordRequest);
     dynamic _bodyData;
 
     try {
-_bodyData=jsonEncode(patchedUser2FARequest);
-    } catch(error, stackTrace) {
+      _bodyData = jsonEncode(patchedUser2FARequest);
+    } catch (error, stackTrace) {
       throw DioError(
-         requestOptions: _options.compose(
+        requestOptions: _options.compose(
           _dio.options,
           _path,
         ),
@@ -1629,8 +1688,10 @@ _bodyData=jsonEncode(patchedUser2FARequest);
     User2FA? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<User2FA, User2FA>(rawData, 'User2FA', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<User2FA, User2FA>(rawData, 'User2FA', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1654,10 +1715,10 @@ _responseData = rawData == null ? null : deserialize<User2FA, User2FA>(rawData, 
   }
 
   /// authUsersTwoFaRetrieve
-  /// 
+  ///
   ///
   /// Parameters:
-  /// * [id] 
+  /// * [id]
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -1667,7 +1728,7 @@ _responseData = rawData == null ? null : deserialize<User2FA, User2FA>(rawData, 
   ///
   /// Returns a [Future] containing a [Response] with a [User2FA] as data
   /// Throws [DioError] if API call or serialization fails
-  Future<Response<User2FA>> authUsersTwoFaRetrieve({ 
+  Future<Response<User2FA>> authUsersTwoFaRetrieve({
     required String id,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -1676,7 +1737,8 @@ _responseData = rawData == null ? null : deserialize<User2FA, User2FA>(rawData, 
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api/v1/auth/users/{id}/two-fa/'.replaceAll('{' r'id' '}', id.toString());
+    final _path = r'/api/v1/auth/users/{id}/two-fa/'
+        .replaceAll('{' r'id' '}', id.toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -1689,7 +1751,8 @@ _responseData = rawData == null ? null : deserialize<User2FA, User2FA>(rawData, 
             'name': 'cookieAuth',
             'keyName': 'sessionid',
             'where': '',
-          },{
+          },
+          {
             'type': 'http',
             'scheme': 'bearer',
             'name': 'jwtAuth',
@@ -1711,8 +1774,10 @@ _responseData = rawData == null ? null : deserialize<User2FA, User2FA>(rawData, 
     User2FA? _responseData;
 
     try {
-final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<User2FA, User2FA>(rawData, 'User2FA', growable: true);
+      final rawData = _response.data;
+      _responseData = rawData == null
+          ? null
+          : deserialize<User2FA, User2FA>(rawData, 'User2FA', growable: true);
     } catch (error, stackTrace) {
       throw DioError(
         requestOptions: _response.requestOptions,
@@ -1734,5 +1799,4 @@ _responseData = rawData == null ? null : deserialize<User2FA, User2FA>(rawData, 
       extra: _response.extra,
     );
   }
-
 }
