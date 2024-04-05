@@ -73,7 +73,7 @@ class ChatCubit extends Cubit<chatState.ChatState> {
         .map(
           (e) => types.TextMessage(
             author: types.User(
-              id: e.id.toString(),
+              id: e.createdBy.id.toString(),
             ),
             createdAt: e.created.millisecondsSinceEpoch,
             id: e.id.toString(),
