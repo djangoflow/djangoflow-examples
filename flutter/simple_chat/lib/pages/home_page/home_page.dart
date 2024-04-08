@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progress_builder/progress_builder.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import '../rooms_page/rooms_page.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -73,6 +75,16 @@ class _HomePageState extends State<HomePage> {
                       await context.read<AuthCubit>().logout();
                     },
                     child: const Text('Logout'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute<void>(
+                          builder: (_) => const RoomsPage(),
+                        ),
+                      );
+                    },
+                    child: const Text('Start'),
                   ),
                 ],
               ],

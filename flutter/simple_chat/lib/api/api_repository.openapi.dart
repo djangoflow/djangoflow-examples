@@ -35,7 +35,9 @@ class ApiRepository {
   );
 
   DjangoflowOpenapi get api => _openapi;
+
   AuthApi get auth => api.getAuthApi();
+
   ChatApi get chat => api.getChatApi();
 }
 
@@ -50,6 +52,7 @@ class ChatRoomsListFilter
     with _$ChatRoomsListFilter
     implements OffsetLimitFilter {
   static const kPageSize = 25;
+
   const ChatRoomsListFilter._();
 
   @Implements<OffsetLimitFilter>()
@@ -337,6 +340,7 @@ class ChatRoomsMessagesListFilter
     with _$ChatRoomsMessagesListFilter
     implements OffsetLimitFilter {
   static const kPageSize = 25;
+
   const ChatRoomsMessagesListFilter._();
 
   @Implements<OffsetLimitFilter>()
@@ -611,6 +615,7 @@ class AuthOtpDevicesListFilter
     with _$AuthOtpDevicesListFilter
     implements OffsetLimitFilter {
   static const kPageSize = 25;
+
   const AuthOtpDevicesListFilter._();
 
   @Implements<OffsetLimitFilter>()

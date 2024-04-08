@@ -28,6 +28,11 @@ Future<void> main() async {
     kIsWeb || Platform.isIOS ? baseUrl : baseUrlForAndroid,
   );
 
+  // Add JwtAuthInterceptor
+  ApiRepository.instance.api.dio.interceptors.add(
+    JwtAuthInterceptor(),
+  );
+
   runApp(
     BlocProvider<AuthCubit>(
       create: (context) =>

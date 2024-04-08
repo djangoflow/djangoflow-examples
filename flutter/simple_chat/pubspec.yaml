@@ -23,6 +23,18 @@ dependencies:
   progress_builder: ^1.1.3
   reactive_forms: ^16.1.1
 
+  # A Flutter package with chat state functional
+  djangoflow_chat: ^0.1.0+1
+
+  # A Flutter package with chat ui
+  flutter_chat_ui: ^1.6.12
+
+  # A Flutter package for socket connection
+  djangoflow_websocket: ^0.1.0+6
+
+  # A Flutter package for scroll controlling
+  scroll_to_index: ^3.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
