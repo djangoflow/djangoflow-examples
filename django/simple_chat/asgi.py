@@ -12,10 +12,10 @@ import os
 import sys
 from pathlib import Path
 
-from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 from django.core.asgi import get_asgi_application
+from df_chat.middleware import JWTAuthMiddlewareStack
 
 # This allows easy placement of apps within the interior
 # df_chat directory.
@@ -34,8 +34,6 @@ application = ProtocolTypeRouter(
         # Django's ASGI application to handle traditional HTTP requests
         "http": django_application,
         # WebSocket chat handler
-        "websocket": AllowedHostsOriginValidator(
-            AuthMiddlewareStack(URLRouter(websocket_urlpatterns))
-        ),
+        "websocket": JWTAuthMiddlewareStack(URLRouter(websocket_urlpatterns)),
     }
 )
