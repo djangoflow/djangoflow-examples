@@ -2,13 +2,16 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:djangoflow_auth/djangoflow_auth.dart';
+import 'package:djangoflow_websocket/djangoflow_websocket.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:simple_chat/chat_room/chat_room.dart';
 import 'package:simple_chat/home_page.dart';
+import 'package:simple_chat/simple_chat_routes.dart';
 
 import 'api_repository.dart';
 
@@ -28,17 +31,39 @@ Future<void> main() async {
     kIsWeb || Platform.isIOS ? baseUrl : baseUrlForAndroid,
   );
 
+  ApiRepository.instance.interceptors.add(JwtAuthInterceptor());
+
   runApp(
-    BlocProvider<AuthCubit>(
-      create: (context) =>
-          AuthCubit.instance..authApi = ApiRepository.instance.auth,
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>(
+          create: (_) =>
+              AuthCubit.instance..authApi = ApiRepository.instance.auth,
+        ),
+        BlocProvider<ChatRoomsListBloc>(
+          create: (context) => ChatRoomsListBloc(),
+        ),
+        BlocProvider<ChatRoomsDataBloc>(
+          create: (context) => ChatRoomsDataBloc(),
+        ),
+        BlocProvider<DjangoflowWebsocketCubit>.value(
+          value: DjangoflowWebsocketCubit(
+            config: const DjangoflowWebsocketConfig(),
+          ),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Auth Simple',
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         themeMode: ThemeMode.system,
-        home: const HomePage(),
+        initialRoute: '/',
+        routes: {
+          SimpleChatRoutes.home.route: (_) => const HomePage(),
+          SimpleChatRoutes.chatRooms.route: (_) => const ChatRoomsPage(),
+          SimpleChatRoutes.chatRoom.route: (_) => const ChatRoomPage(),
+          SimpleChatRoutes.chatRoomInfo.route: (_) => const ChatRoomInfoPage(),
+        },
       ),
     ),
   );
