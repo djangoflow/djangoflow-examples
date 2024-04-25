@@ -33,3 +33,11 @@ This will create/update the local`djangoflow_openapi` package in [djangoflow_ope
 - run `make run`
 
 The example app should now be running on your local machine. You can explore the Simple Chat feature.
+
+## Diagram
+
+![til](./docs/diagram.png)
+
+## Demo
+
+![til](./docs/demo.gif)
