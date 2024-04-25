@@ -2,7 +2,7 @@ from df_api_drf.defaults import (
     DF_API_DRF_INSTALLED_APPS,
 )
 from df_auth.defaults import (
-    DF_AUTH_INSTALLED_APPS,
+    DF_AUTH_INSTALLED_APPS, SIMPLE_JWT
 )
 from df_api_drf.defaults import (
     REST_FRAMEWORK as DEFAULT_REST_FRAMEWORK,
