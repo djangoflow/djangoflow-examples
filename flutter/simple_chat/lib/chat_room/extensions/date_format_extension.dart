@@ -8,7 +8,7 @@ extension DateTimeFormatting on DateTime? {
 
   String formatWithTime() {
     if (this == null) return '';
-    Duration difference = DateTime.now().difference(this!);
+    final difference = DateTime.now().difference(this!);
     if (difference.inDays > 0) {
       return 'Created ${difference.inDays} day${difference.inDays == 1 ? '' : 's'} ago';
     } else if (difference.inHours > 0) {
