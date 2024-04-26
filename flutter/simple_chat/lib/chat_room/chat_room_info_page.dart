@@ -16,9 +16,9 @@ class ChatRoomInfoPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: BlocProvider.value(
-          value: context.read<ChatRoomsDataBloc>()
-            ..load(ChatRoomsRetrieveFilter(id: id)),
+        child: BlocProvider<ChatRoomsDataBloc>(
+          create: (context) =>
+              ChatRoomsDataBloc()..load(ChatRoomsRetrieveFilter(id: id)),
           child: BlocBuilder<ChatRoomsDataBloc, ChatRoomsRetrieveState>(
             builder: (context, state) {
               return Column(

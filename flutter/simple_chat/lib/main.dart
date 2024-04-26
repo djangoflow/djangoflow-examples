@@ -40,11 +40,13 @@ Future<void> main() async {
           create: (_) =>
               AuthCubit.instance..authApi = ApiRepository.instance.auth,
         ),
+        // TODO: There's a backend issue when retrieving the user id
+        // BlocProvider<AuthUsersDataBloc>(
+        //   create: (_) => AuthUsersDataBloc()
+        //     ..load(const AuthUsersRetrieveFilter(id: '0')), // Current user
+        // ),
         BlocProvider<ChatRoomsListBloc>(
           create: (context) => ChatRoomsListBloc(),
-        ),
-        BlocProvider<ChatRoomsDataBloc>(
-          create: (context) => ChatRoomsDataBloc(),
         ),
         BlocProvider<DjangoflowWebsocketCubit>.value(
           value: DjangoflowWebsocketCubit(

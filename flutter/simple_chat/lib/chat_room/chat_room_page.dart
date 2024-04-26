@@ -20,11 +20,6 @@ class ChatRoomPage extends StatelessWidget {
     final (roomId, name) =
         ModalRoute.of(context)!.settings.arguments as (int, String);
 
-    final authCubit = context.read<AuthCubit>();
-    final myId = authCubit.state.token != null
-        ? Jwt.parseJwt(authCubit.state.token!)['user_id'] ?? 0
-        : 0;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(name),
@@ -40,7 +35,7 @@ class ChatRoomPage extends StatelessWidget {
         ],
       ),
       body: BlocListener(
-        bloc: authCubit,
+        bloc: context.read<AuthCubit>(),
         listener: (BuildContext context, AuthState state) {
           if (state.isUnauthenticated) {
             Navigator.pushReplacementNamed(
@@ -48,15 +43,29 @@ class ChatRoomPage extends StatelessWidget {
           }
         },
         child: BlocProvider<ChatCubit>(
-          create: (_) => ChatCubit(
+          create: (context) => ChatCubit(
             ApiRepository.instance.chat,
             roomId: roomId,
-            myId: myId,
+            myId: _getCurrentUserId(context),
           ),
           child: _ChatRoom(roomId),
         ),
       ),
     );
+  }
+
+  int _getCurrentUserId(BuildContext context) {
+    // TODO: There's a backend issue when retrieving the user id
+    // The id state is null so we must retrieve it from the jwt token.
+    // final authUsersCubit = context.read<AuthUsersDataBloc>();
+    // final userId = authUsersCubit.state.data?.id;
+
+    final authCubit = context.read<AuthCubit>();
+    final userId = authCubit.state.token != null
+        ? Jwt.parseJwt(authCubit.state.token!)['user_id'] ?? 0
+        : 0;
+
+    return userId;
   }
 
   void _navigateToChatRoomInfoPage(
@@ -83,9 +92,6 @@ class _ChatRoomState extends State<_ChatRoom> {
   List<types.Message> _messages = [];
   late types.User _user;
 
-  late StreamSubscription<DjangoflowWebsocketState>
-      _websocketStreamSubscription;
-
   /// It is required due to Android Emulator can't access localhost directly,
   /// if you are running on Real Android Device then use 127.0.0.1
   static const _webSocketUrl = 'ws://10.0.2.2:8000/ws/chat/?token=';
@@ -95,7 +101,6 @@ class _ChatRoomState extends State<_ChatRoom> {
     super.initState();
     _loadInitialChatData();
     _connectToWebSocket();
-    _createStreamSubscription();
   }
 
   Future<void> _loadInitialChatData() async {
@@ -120,51 +125,47 @@ class _ChatRoomState extends State<_ChatRoom> {
     webSocketCubit.connectToUri(Uri.parse('$_webSocketUrl$jwtToken'));
   }
 
-  void _createStreamSubscription() {
-    final webSocketCubit = context.read<DjangoflowWebsocketCubit>();
-
-    _websocketStreamSubscription = webSocketCubit.stream
-        .distinct()
-        .where((event) => event.message != null)
-        .listen((state) {
-      final messages = Map<String, dynamic>.fromEntries(state.message!.entries);
-      final message = ChatMessage.fromJson(messages);
-      final chatCubit = context.read<ChatCubit>();
-      chatCubit.addMessage(message);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ChatCubit, ChatState>(
-      listener: (context, state) => _loadMessages(state.messages),
-      builder: (context, state) {
-        if (state.loading) {
-          return const Center(
-            child: SizedBox(
-              height: 25,
-              width: 25,
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
+    return DjangoflowWebsocketBlocListener(
+      bloc: context.read<DjangoflowWebsocketCubit>(),
+      listener: (context, state) {
+        final messages =
+            Map<String, dynamic>.fromEntries(state.message!.entries);
+        final message = ChatMessage.fromJson(messages);
+        final chatCubit = context.read<ChatCubit>();
+        chatCubit.addMessage(message);
+      },
+      child: BlocConsumer<ChatCubit, ChatState>(
+        listener: (context, state) => _loadMessages(state.messages),
+        builder: (context, state) {
+          if (state.loading) {
+            return const Center(
+              child: SizedBox(
+                height: 25,
+                width: 25,
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
 
-        return chat_ui.Chat(
-          messages: _messages,
-          onSendPressed: _handleSendPressed,
-          showUserAvatars: true,
-          showUserNames: true,
-          user: _user,
-          theme: const chat_ui.DefaultChatTheme(
-            seenIcon: Text(
-              'read',
-              style: TextStyle(
-                fontSize: 10.0,
+          return chat_ui.Chat(
+            messages: _messages,
+            onSendPressed: _handleSendPressed,
+            showUserAvatars: true,
+            showUserNames: true,
+            user: _user,
+            theme: const chat_ui.DefaultChatTheme(
+              seenIcon: Text(
+                'read',
+                style: TextStyle(
+                  fontSize: 10.0,
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
@@ -207,11 +208,5 @@ class _ChatRoomState extends State<_ChatRoom> {
           ),
         )
         .toList();
-  }
-
-  @override
-  void dispose() {
-    _websocketStreamSubscription.cancel();
-    super.dispose();
   }
 }
